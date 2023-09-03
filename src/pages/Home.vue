@@ -1,7 +1,9 @@
 <template>
   <section class="introduction">
     <span class="introduction__text">O sabor que faz você voltar sempre</span>
-    <button class="introduction__button">Cardápio</button>
+    <router-link :to="'/acais'" class="introduction__link"
+      >Cardápio</router-link
+    >
   </section>
   <section class="statistics">
     <div class="stat">

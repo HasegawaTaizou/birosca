@@ -1,21 +1,29 @@
 <template>
   <div id="body">
     <header>
-      <div class="birosca-introduction-container">
+      <router-link :to="'/'" class="birosca-introduction-container">
         <img
           class="birosca-introduction__logo"
           src="../assets/img/birosca-logo.png"
           alt="Birosca Logo"
         />
         <span class="birosca-introduction__name">Birosca do Açaí</span>
-      </div>
+      </router-link>
       <nav class="birosca-navigation-container">
         <ul class="navigations">
-          <li class="navigation"><a href="">Home</a></li>
-          <li class="navigation"><a href="">Açaís</a></li>
-          <li class="navigation"><a href="">Lanches</a></li>
-          <li class="navigation"><a href="">Diversos</a></li>
-          <li class="navigation"><a href="">Bebidas</a></li>
+          <li class="navigation"><router-link :to="'/'">Home</router-link></li>
+          <li class="navigation">
+            <router-link :to="'/acais'">Açaís</router-link>
+          </li>
+          <li class="navigation">
+            <router-link :to="'/snacks'">Lanches</router-link>
+          </li>
+          <li class="navigation">
+            <router-link :to="'/diverses'">Diversos</router-link>
+          </li>
+          <li class="navigation">
+            <router-link :to="'/drinks'">Bebidas</router-link>
+          </li>
         </ul>
       </nav>
     </header>

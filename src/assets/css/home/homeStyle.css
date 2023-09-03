@@ -20,14 +20,18 @@
   text-align: center;
 }
 
-.introduction__button {
+.introduction__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 2.25rem;
   height: 56px;
   width: 176px;
   font-family: "Bebas Neue", sans-serif;
+  border: var(--button-border);
 }
 
-.introduction__button:hover {
+.introduction__link:hover {
   background-color: #ffffff;
   transition: all 0.5s;
   color: #000000;
