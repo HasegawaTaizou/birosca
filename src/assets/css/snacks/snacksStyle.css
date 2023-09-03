@@ -1,0 +1,39 @@
+.snacks {
+  font-family: "Cabin", sans-serif;
+  height: 80vh;
+  background: linear-gradient(to bottom, var(--section-background-color) 70%, transparent 30%);
+  border-radius: var(--border-radius);
+}
+
+.snacks__introduction-container {
+  background-image: url("../../img/snacks-image.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 628px;
+  display: flex;
+  flex-direction: column;
+}
+
+.introduction__title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 8rem;
+  line-height: 1;
+  margin: 120px 0px 36px 102px;
+  position: relative;
+}
+
+.introduction__title::after {
+  content: "";
+  display: block;
+  border-bottom: 2px solid #ffffff;
+  width: 35%;
+  left: 30%;
+  position: absolute;
+}
+
+.introduction__text {
+  font-size: 1.5rem;
+  max-width: 332px;
+  text-align: center;
+  margin-left: 102px;
+}
