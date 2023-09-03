@@ -12,6 +12,7 @@ li {
 
 a {
   text-decoration: none;
+  color: var(--text-color);
 }
 
 html {
@@ -20,8 +21,11 @@ html {
 
 button {
   outline: 0;
-  border: 0;
   cursor: pointer;
+  border: var(--button-border);
+  color: var(--text-color);
+  background-color: transparent;
+  font-family: "Cabin", sans-serif;
 }
 
 input {
