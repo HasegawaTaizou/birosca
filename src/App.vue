@@ -1,7 +1,3 @@
-<script setup></script>
-
 <template>
-  <p>teste</p>
+    <router-view></router-view>
 </template>
-
-<style scoped></style>

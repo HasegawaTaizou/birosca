@@ -2,3 +2,7 @@
 font-family: 'Cabin', sans-serif;
 font-family: 'Dancing Script', cursive;
 font-family: 'Pacifico', cursive; */
+
+@import url('./css/variables.css');
+@import url('./css/reset.css');
+@import url('./css/generalStyle.css');
