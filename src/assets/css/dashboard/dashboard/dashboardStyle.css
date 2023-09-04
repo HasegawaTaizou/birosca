@@ -1,0 +1,49 @@
+#dashboard {
+  padding: 0px 86px 52px 86px;
+  background-color: var(--section-background-color);
+  color: var(--text-color);
+  font-family: "Cabin", sans-serif;
+  min-height: 100vh;
+  height: fit-content;
+}
+
+/* HEADER STYLE */
+
+header {
+  padding-top: 40px;
+  padding-bottom: 32px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  border-bottom: 1px solid #ffffff;
+}
+
+.birosca-introduction-container {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.birosca-introduction__name {
+  font-family: "Pacifico", cursive;
+  font-size: 2rem;
+}
+
+.navigations {
+  display: flex;
+  gap: 64px;
+  font-size: 2.25rem;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.navigation a::after {
+  content: "";
+  border-bottom: 2px solid transparent;
+  margin: 0px 10px;
+  display: block;
+}
+
+.navigation a:hover::after {
+  border-bottom: 2px solid #ffffff;
+  transition: all 0.5s;
+}
