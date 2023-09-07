@@ -13,20 +13,25 @@
         </div>
         <div class="snack__ingredients-container">
           <span class="ingredients__title">INGREDIENTES</span>
-          <ul class="ingredients__ingredients">
-            <li class="ingredient">Cheddar</li>
-            <li class="ingredient">2 hambúrgueres</li>
-            <li class="ingredient">Alface</li>
-            <li class="ingredient">Tomate</li>
-            <li class="ingredient">Cebola</li>
-            <li class="ingredient">Picles</li>
-          </ul>
+          <table class="ingredients__ingredients-table">
+            <tbody class="ingredients-body">
+              <tr class="ingredients-container">
+                <td class="ingredient">Cheddar</td>
+                <td class="ingredient">2 hambúrgueres</td>
+                <td class="ingredient">Alface</td>
+              </tr>
+              <tr class="ingredients-container">
+                <td class="ingredient">Tomate</td>
+                <td class="ingredient">Cebola</td>
+                <td class="ingredient">Picles</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <img
-          src="../../assets/img/snack-hamburguer-logo.png"
-          alt="Snack Logo"
-          class="snack__logo"
-        />
+        <div class="snack__actions">
+          <i class="fa-solid fa-pen action__edit"></i>
+          <i class="fa-solid fa-trash action__delete"></i>
+        </div>
       </div>
     </div>
   </section>

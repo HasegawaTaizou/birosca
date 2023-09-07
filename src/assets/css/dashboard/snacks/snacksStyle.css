@@ -26,12 +26,12 @@
   display: grid;
   grid-template-areas:
     "image main"
-    "ingredients .";
+    "ingredients ingredients"
+    "actions actions";
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 1fr auto;
   padding: 24px 34px;
   gap: 32px;
-  position: relative;
 }
 
 .snack__image {
@@ -74,12 +74,15 @@
   font-size: 1.25rem;
 }
 
-.ingredients__ingredients {
-  display: inline-grid;
-  grid-template-rows: repeat(3, auto);
-  grid-auto-flow: column;
-  align-content: center;
-  column-gap: 24px;
+.ingredients-body {
+  display: flex;
+  gap: 18px;
+}
+
+.ingredients-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 160px;
 }
 
 .ingredient::before {
@@ -92,8 +95,27 @@
   margin-right: 8px;
 }
 
-.snack__logo {
-  position: absolute;
-  right: 24px;
-  bottom: 24px;
+.snack__actions {
+  grid-area: actions;
+  display: flex;
+  gap: 24px;
+  justify-content: flex-end;
+}
+
+.action__edit {
+  color: #fff;
+  font-size: 1.125rem;
+  background-color: var(--yellow-color);
+  border-radius: 100%;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.action__delete {
+  color: #fff;
+  font-size: 1.125rem;
+  background-color: var(--red-color);
+  border-radius: 100%;
+  padding: 12px;
+  cursor: pointer;
 }
