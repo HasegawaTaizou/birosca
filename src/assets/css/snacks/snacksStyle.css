@@ -24,14 +24,15 @@
   line-height: 1;
   margin: 120px 0px 36px 102px;
   position: relative;
+  width: fit-content;
 }
 
 .introduction__title::after {
   content: "";
   display: block;
   border-bottom: 2px solid #ffffff;
-  width: 35%;
-  left: 30%;
+  width: 115%;
+  left: -8%;
   position: absolute;
 }
 
@@ -49,7 +50,6 @@
   row-gap: 48px;
   column-gap: 64px;
   margin-top: 64px;
-
 }
 
 .snack {
@@ -60,12 +60,18 @@
   display: grid;
   grid-template-areas:
     "image main"
-    "ingredients .";
+    "ingredients ingredients";
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   padding: 24px 34px;
   gap: 32px;
   position: relative;
+}
+
+.snack:hover {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  transform: scale(1.02);
+  transition: .2s all;
 }
 
 .snack__image {
@@ -108,12 +114,25 @@
   font-size: 1.25rem;
 }
 
-.ingredients__ingredients {
-  display: inline-grid;
-  grid-template-rows: repeat(3, auto);
-  grid-auto-flow: column;
-  align-content: center;
-  column-gap: 24px;
+.ingredients-body {
+  display: flex;
+  gap: 18px;
+}
+
+.ingredients-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 160px;
+}
+
+.ingredient::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 100%;
+  margin-right: 8px;
 }
 
 .ingredient::before {
