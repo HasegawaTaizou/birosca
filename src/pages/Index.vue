@@ -28,7 +28,7 @@
       </nav>
     </header>
     <main>
-      <router-view></router-view>
+      <!-- <router-view></router-view> -->
     </main>
     <footer>
       <div class="birosca__logo-container">
@@ -73,4 +73,5 @@ export default {
 
 <style scoped>
 @import url("../assets/css/index/indexStyle.css");
+@import url("../assets/css/index/indexResponsiveStyle.css");
 </style>;

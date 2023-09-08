@@ -1,0 +1,46 @@
+@media (max-width: 1272px) {
+  /* INTRODUCTION RESPONSIVE STYLE */
+  .introduction__text {
+    font-size: 4.68vw;
+  }
+
+  .introduction__link {
+    font-size: 2.1vw;
+  }
+
+  /* STATISTICS RESPONSIVE STYLE */
+  .number__text {
+    font-size: 4.56vw;
+  }
+
+  .number__icon {
+    font-size: 2.46vw;
+  }
+
+  .stat__text {
+    font-size: 2.1vw;
+  }
+
+  /* INSTAGRAM RESPONSIVE STYLE */
+  .instagram__title {
+    font-size: 5.62vw;
+    padding: 0;
+  }
+
+  .instagram img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .instagram__image1 {
+    height: 70%;
+  }
+
+  .birosca-image__image {
+    width: 50%;
+  }
+
+  .birosca-image__text {
+    font-size: 5.62vw;
+  }
+}

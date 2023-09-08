@@ -64,4 +64,5 @@ export default {
 
 <style scoped>
 @import url("../assets/css/home/homeStyle.css");
+@import url("../assets/css/home/homeResponsiveStyle.css");
 </style>;

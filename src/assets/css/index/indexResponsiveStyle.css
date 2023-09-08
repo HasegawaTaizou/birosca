@@ -1,0 +1,122 @@
+@media (max-width: 1246px) {
+  /* HEADER RESPONSIVE STYLE */
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .birosca-introduction__name {
+    display: none;
+  }
+
+  .navigations {
+    font-size: 1.75rem;
+    gap: 32px;
+  }
+
+  /* FOOTER RESPONSIVE STYLE */
+  footer {
+    display: grid;
+    grid-template-areas:
+      "logo informations"
+      "copyright copyright";
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    padding: 24px;
+    height: fit-content;
+  }
+
+  .birosca__logo-container {
+    grid-area: logo;
+  }
+
+  .birosca__copyright {
+    grid-area: copyright;
+    margin-top: 32px;
+  }
+
+  .birosca__informations {
+    grid-area: informations;
+  }
+}
+
+@media (max-width: 816px) {
+  /* FOOTER RESPONSIVE STYLE */
+  .birosca-logo__logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .birosca-logo__name {
+    font-size: 1rem;
+  }
+  .information__text {
+    font-size: 0.875rem;
+  }
+
+  .birosca__copyright {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 720px) {
+  /* HEADER RESPONSIVE STYLE */
+  header {
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .birosca-introduction__name {
+    display: block;
+    font-size: 1.375rem;
+  }
+
+  .navigations {
+    font-size: 1.125rem;
+  }
+
+  .navigation:first-child {
+    display: none;
+  }
+
+  /* FOOTER RESPONSISE STYLE */
+  footer {
+    grid-template-areas:
+      "logo"
+      "informations"
+      "copyright";
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  .birosca__copyright {
+    margin: 0;
+  }
+}
+
+@media (max-width: 476px) {
+  /* BODY RESPONSIVE STYLE */
+  #body {
+    padding: 0px 24px 52px 24px;
+  }
+
+  /* FOOTER RESPONSIVE STYLE */
+  .birosca__informations {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .birosca__copyright {
+    text-align: center;
+  }
+}
+
+@media (max-width: 336px) {
+  /* HEADER RESPONSIVE STYLE */
+  .navigations {
+    gap: 18px;
+  }
+}
