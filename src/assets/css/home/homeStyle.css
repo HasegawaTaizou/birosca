@@ -90,7 +90,7 @@
     "title image1"
     "image2 image1"
     "image3 birosca";
-  grid-template-columns: auto auto;
+  grid-template-columns: auto 1fr;
   grid-template-rows: auto auto auto;
   row-gap: 42px;
   justify-items: center;
@@ -100,7 +100,6 @@
 .instagram__title {
   grid-area: title;
   font-size: 6rem;
-  padding-left: 64px;
 }
 
 .instagram__image1 {

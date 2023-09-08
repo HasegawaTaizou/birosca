@@ -28,7 +28,7 @@
       </nav>
     </header>
     <main>
-      <!-- <router-view></router-view> -->
+      <router-view></router-view>
     </main>
     <footer>
       <div class="birosca__logo-container">

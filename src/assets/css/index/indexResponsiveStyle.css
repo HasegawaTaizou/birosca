@@ -60,7 +60,7 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 740px) {
   /* HEADER RESPONSIVE STYLE */
   header {
     flex-direction: column;
@@ -72,8 +72,13 @@
     font-size: 1.375rem;
   }
 
+  .birosca-navigation-container {
+    width: 80%;
+  }
+
   .navigations {
     font-size: 1.125rem;
+    justify-content: space-evenly;
   }
 
   .navigation:first-child {
