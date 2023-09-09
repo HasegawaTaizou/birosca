@@ -63,7 +63,6 @@ main {
 footer {
   max-width: 1440px;
   width: 100%;
-  margin-top: 128px;
   display: flex;
   justify-content: space-between;
   background-color: var(--section-background-color);

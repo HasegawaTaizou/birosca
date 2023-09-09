@@ -39,6 +39,7 @@
 .introduction__text {
   font-size: 1.5rem;
   max-width: 332px;
+  width: 80%;
   text-align: center;
   margin-left: 102px;
 }
@@ -50,6 +51,7 @@
   row-gap: 48px;
   column-gap: 64px;
   margin-top: 64px;
+  margin-bottom: 72px;
 }
 
 .snack {

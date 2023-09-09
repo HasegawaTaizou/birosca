@@ -110,11 +110,6 @@
 }
 
 @media (max-width: 476px) {
-  /* BODY RESPONSIVE STYLE */
-  #body {
-    padding: 0px 24px 52px 24px;
-  }
-
   /* FOOTER RESPONSIVE STYLE */
   .birosca__informations {
     display: flex;
@@ -130,5 +125,12 @@
   /* HEADER RESPONSIVE STYLE */
   .navigations {
     gap: 18px;
+  }
+}
+
+@media (max-width: 412px) {
+  /* BODY RESPONSIVE STYLE  */
+   #body {
+    padding: 0px 24px 52px 24px;
   }
 }

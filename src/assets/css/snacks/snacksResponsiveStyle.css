@@ -74,3 +74,110 @@
     height: 6px;
   }
 }
+
+@media (max-width: 520px) {
+  .introduction__title {
+    font-size: 2.75rem;
+  }
+
+  .introduction__text {
+    font-size: 1.25rem;
+  }
+
+  .snack {
+    width: 292px;
+    padding: 24px;
+    gap: 22px;
+    margin: 0px 24px;
+  }
+
+  .snack__image {
+    width: 86px;
+    height: 86px;
+  }
+
+  .snack__name {
+    font-size: 1rem;
+  }
+
+  .snack__price {
+    font-size: 1rem;
+  }
+
+  .ingredients__title {
+    font-size: 0.875rem;
+  }
+
+  .snack__ingredients-container {
+    gap: 12px;
+  }
+
+  .ingredient {
+    font-size: 0.5rem;
+  }
+
+  .ingredient::before {
+    width: 4px;
+    height: 4px;
+  }
+
+  .snack__logo {
+    width: 26px;
+    height: 22px;
+    right: 12px;
+    bottom: 12px;
+  }
+}
+
+@media (max-width: 376px) {
+  .introduction__title {
+    font-size: 2.5rem;
+  }
+
+  .introduction__text {
+    font-size: 1rem;
+  }
+
+  .snack {
+    width: 226px;
+    padding: 12px;
+    gap: 22px;
+  }
+
+  .snack__image {
+    width: 86px;
+    height: 86px;
+  }
+
+  .snack__name {
+    font-size: 0.875rem;
+  }
+
+  .snack__price {
+    font-size: 0.875rem;
+  }
+
+  .ingredients__title {
+    font-size: 0.625rem;
+  }
+
+  .snack__ingredients-container {
+    gap: 12px;
+  }
+
+  .ingredient {
+    font-size: 0.5rem;
+  }
+
+  .ingredient::before {
+    width: 4px;
+    height: 4px;
+  }
+
+  .snack__logo {
+    width: 26px;
+    height: 22px;
+    right: 12px;
+    bottom: 12px;
+  }
+}
