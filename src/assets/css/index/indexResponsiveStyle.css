@@ -102,6 +102,13 @@
   }
 }
 
+@media (max-width: 618px) {
+  /* BODY RESPONSIVE STYLE */
+  #body {
+    padding: 0px 48px 52px 48px;
+  }
+}
+
 @media (max-width: 476px) {
   /* BODY RESPONSIVE STYLE */
   #body {

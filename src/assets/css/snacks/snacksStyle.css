@@ -71,7 +71,7 @@
 .snack:hover {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
   transform: scale(1.02);
-  transition: .2s all;
+  transition: 0.2s all;
 }
 
 .snack__image {
@@ -125,14 +125,9 @@
   max-width: 160px;
 }
 
-.ingredient::before {
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: #fff;
-  border-radius: 100%;
-  margin-right: 8px;
+.ingredient {
+  display: flex;
+  align-items: center;
 }
 
 .ingredient::before {

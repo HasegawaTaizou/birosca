@@ -152,5 +152,6 @@ export default {
   
 <style scoped>
 @import url("../assets/css/snacks/snacksStyle.css");
+@import url("../assets/css/snacks/snacksResponsiveStyle.css");
 </style>;
   
