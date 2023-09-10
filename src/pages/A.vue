@@ -1,18 +1,21 @@
 <template>
   <div id="alo">
-    <DeleteFoodPopUp :acceptFunction="foi" /> 
+    <!-- <DeleteFoodPopUp :acceptFunction="foi" />  -->
+    <ManageFoodPopUp>
+      
+    </ManageFoodPopUp>
   </div>
 </template>
     
 <script>
-// import ManageFoodPopUp from "../assets/components/ManageFoodPopUp.vue";
-import DeleteFoodPopUp from "../assets/components/DeleteFoodPopUp.vue";
+import ManageFoodPopUp from "../assets/components/ManageFoodPopUp.vue";
+// import DeleteFoodPopUp from "../assets/components/DeleteFoodPopUp.vue";
 
 export default {
   name: "A",
   components: {
-    // ManageFoodPopUp,
-    DeleteFoodPopUp,
+    ManageFoodPopUp,
+    // DeleteFoodPopUp,
   },
   methods: {
     foi() {
