@@ -107,7 +107,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 58px;
+  padding: 32px;
 }
 
 .popup__food-container {
@@ -118,14 +118,15 @@ export default {
     "ingredients ingredients"
     "buttons buttons";
   grid-template-columns: auto 1fr;
+  align-items: center;
 }
 
 .food__image {
   grid-area: image;
   background-color: var(--background-color);
   border-radius: 100%;
-  width: 362px;
-  height: 362px;
+  width: 224px;
+  height: 224px;
   margin-right: 42px;
 }
 
@@ -133,20 +134,20 @@ export default {
   grid-area: title;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
 }
 
 .title__label {
-  font-size: 2.625rem;
+  font-size: 1.75rem;
 }
 
 .title__input {
-  font-size: 2.625rem;
+  font-size: 1.75rem;
   color: var(--text-color);
   font-family: "Cabin", sans-serif;
   background-color: transparent;
   border: var(--input-border);
-  width: 436px;
+  width: 356px;
   padding: 12px;
 }
 
@@ -154,20 +155,21 @@ export default {
   grid-area: price;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
+  margin-top: 18px;
 }
 
 .price__label {
-  font-size: 2.625rem;
+  font-size: 1.75rem;
 }
 
 .price__input {
-  font-size: 2.625rem;
+  font-size: 1.75rem;
   color: var(--text-color);
   font-family: "Cabin", sans-serif;
   background-color: transparent;
   border: var(--input-border);
-  width: 272px;
+  width: 178px;
   padding: 12px;
 }
 
@@ -179,8 +181,8 @@ export default {
 }
 
 .ingredients__title {
-  font-size: 3rem;
-  margin: 52px 0px;
+  font-size: 1.75rem;
+  margin-top: 24px;
 }
 
 .ingredients-body {
@@ -202,7 +204,7 @@ export default {
 }
 
 .ingredient__name {
-  font-size: 2rem;
+  font-size: 1.25rem;
   color: var(--text-color);
   font-family: "Cabin", sans-serif;
   background-color: transparent;
@@ -232,8 +234,8 @@ export default {
   border-color: var(--yellow-color);
   color: var(--yellow-color);
   width: 100%;
-  height: 56px;
-  font-size: 2rem;
+  height: 42px;
+  font-size: 1.25rem;
 }
 
 .add__button:hover {
@@ -246,12 +248,13 @@ export default {
   grid-area: buttons;
   display: flex;
   gap: 32px;
-  margin-top: 72px;
+  margin-top: 42px;
+  justify-content: center;
 }
 
 .button__deny {
-  width: 272px;
-  height: 76px;
+  width: 156px;
+  height: 52px;
   border: 2px solid var(--red-color);
   color: var(--red-color);
 }
@@ -263,12 +266,12 @@ export default {
 }
 
 .deny__text {
-  font-size: 3rem;
+  font-size: 1.75rem;
 }
 
 .button__accept {
-  width: 272px;
-  height: 76px;
+  width: 156px;
+  height: 52px;
   border: 2px solid var(--green-color);
   color: var(--green-color);
 }
@@ -280,7 +283,7 @@ export default {
 }
 
 .accept__text {
-  font-size: 3rem;
+  font-size: 1.75rem;
 }
 
 .hidden {
