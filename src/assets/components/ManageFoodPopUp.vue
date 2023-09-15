@@ -7,54 +7,67 @@
     }"
   >
     <div class="popup__food-container">
-      <div class="food__image">AA</div>
+      <div v-if="!isSelectedImage" class="food__photo-container">
+        <input
+          type="file"
+          class="photo__label"
+          id="photo"
+          @change="uploadImage"
+        />
+        <label for="photo">
+          <i class="fas fa-camera photo__icon"></i>
+        </label>
+      </div>
+      <div v-else class="food__photo-selected-container">
+        <img :src="downloadURL" alt="Food Photo" class="photo__photo" />
+      </div>
       <div class="food__title-container">
         <label for="title" class="title__label">TÍTULO</label>
         <input type="text" class="title__input" value="aaaaaa" />
       </div>
       <div class="food__price-container">
         <label for="price" class="price__label">PREÇO</label>
-        <input type="text" class="price__input" value="aaaaaa" />
+        <input type="text" class="price__input" v-model="price" />
       </div>
       <div class="food__ingredients-container">
         <span class="ingredients__title">INGREDIENTES</span>
         <table class="ingredients__ingredients-table">
           <tbody class="ingredients-body">
-            <tr class="ingredients-container">
-              <td class="ingredient-container">
-                <span class="ingredient__name">Tomate</span>
-                <div class="ingredient__icon-container">
-                  <i class="fa-solid fa-x"></i>
-                </div>
-              </td>
-              <td class="ingredient-container">
-                <span class="ingredient__name">Tomate</span>
-                <div class="ingredient__icon-container">
-                  <i class="fa-solid fa-x"></i>
-                </div>
-              </td>
-              <td class="ingredient-container">
-                <span class="ingredient__name">Tomate</span>
-                <div class="ingredient__icon-container">
+            <tr
+              class="ingredients-container"
+              v-for="(group, index) in groupedIngredients"
+              :key="index"
+            >
+              <td
+                class="ingredient-container"
+                v-for="(ingredient, i) in group"
+                :key="i"
+                :data-ingredient-id="i"
+              >
+                <input class="ingredient__name" v-model="ingredient.name" />
+                <div
+                  class="ingredient__icon-container"
+                  @click="removeIngredient(i)"
+                >
                   <i class="fa-solid fa-x"></i>
                 </div>
               </td>
             </tr>
             <tr class="ingredients-container">
               <td class="ingredient-container">
-                <span class="ingredient__name">Tomate</span>
-                <div class="ingredient__icon-container">
-                  <i class="fa-solid fa-x"></i>
-                </div>
-              </td>
-              <td class="ingredient-container">
-                <input class="ingredient__name" value="Tesdawdwwate" />
+                <input
+                  class="ingredient__name"
+                  v-model="newIngredient"
+                  @input="updateNewIngredient"
+                />
                 <div class="ingredient__icon-container">
                   <i class="fa-solid fa-x"></i>
                 </div>
               </td>
               <td class="ingredient-add">
-                <button class="add__button">Adicionar</button>
+                <button class="add__button" @click="addIngredient">
+                  Adicionar
+                </button>
               </td>
             </tr>
           </tbody>
@@ -81,6 +94,41 @@ export default {
       required: true,
     },
   },
+  filters: {
+    currency(value) {
+      if (!value) {
+        return "";
+      }
+      return parseFloat(value).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    },
+  },
+  computed: {
+    groupedIngredients() {
+      const groupSize = 3;
+      const result = [];
+
+      for (let i = 0; i < this.ingredients.length; i += groupSize) {
+        result.push(this.ingredients.slice(i, i + groupSize));
+      }
+
+      return result;
+    },
+  },
+  data() {
+    return {
+      price: "321",
+      ingredients: [
+        { name: "Tomate1" },
+        { name: "Tomate2" },
+        { name: "Tomate3" },
+      ],
+      newIngredient: "",
+      isSelectedImage: false,
+    };
+  },
   methods: {
     closePopup() {
       this.$store.state.showManageFoodPopUp = false;
@@ -91,6 +139,21 @@ export default {
       this.acceptFunction();
       this.closePopup();
     },
+    addIngredient() {
+      if (this.newIngredient.trim() !== "") {
+        this.ingredients.push({ name: this.newIngredient });
+        this.newIngredient = ""; // Limpa o campo de entrada após a adição
+      }
+    },
+    removeIngredient(ingredientId) {
+      const tdToRemove = document.querySelector(
+        `.ingredient-container[data-ingredient-id="${ingredientId}"]`
+      );
+
+      if (tdToRemove) {
+        tdToRemove.parentNode.removeChild(tdToRemove);
+      }
+    },
   },
 };
 </script>
@@ -99,7 +162,7 @@ export default {
 .popup-container {
   background-color: var(--card-background-color);
   width: 768px;
-  height: 678px;
+  height: 768px;
   color: var(--text-color);
   border-radius: var(--border-radius);
   font-family: "Cabin", sans-serif;
@@ -113,21 +176,57 @@ export default {
 .popup__food-container {
   display: grid;
   grid-template-areas:
-    "image title"
-    "image price"
+    "photo title"
+    "photo price"
     "ingredients ingredients"
     "buttons buttons";
   grid-template-columns: auto 1fr;
   align-items: center;
 }
 
-.food__image {
-  grid-area: image;
-  background-color: var(--background-color);
+.food__photo-container {
+  grid-area: photo;
+}
+
+.food__photo-container input[type="file"] {
+  display: none;
+}
+
+.food__photo-container label {
+  padding: 90px 90px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--input-border);
+  position: relative;
   border-radius: 100%;
-  width: 224px;
-  height: 224px;
-  margin-right: 42px;
+}
+
+.food__photo-container label::after {
+  content: "";
+}
+
+.photo__icon {
+  font-size: 2.5rem;
+}
+
+.food__photo-selected-container {
+  grid-area: photo;
+  max-width: 300px;
+  height: 300px;
+  width: 300px;
+  max-height: 300px;
+}
+
+.photo__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  overflow: hidden;
 }
 
 .food__title-container {
@@ -153,8 +252,8 @@ export default {
 
 .food__price-container {
   grid-area: price;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  place-self: start;
   gap: 12px;
   margin-top: 18px;
 }
@@ -208,6 +307,7 @@ export default {
   color: var(--text-color);
   font-family: "Cabin", sans-serif;
   background-color: transparent;
+  width: 100%;
 }
 
 .ingredient__icon-container {
@@ -248,7 +348,7 @@ export default {
   grid-area: buttons;
   display: flex;
   gap: 32px;
-  margin-top: 42px;
+  margin-top: 52px;
   justify-content: center;
 }
 
