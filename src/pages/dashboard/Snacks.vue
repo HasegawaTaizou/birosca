@@ -17,11 +17,25 @@
           <span class="ingredients__title">INGREDIENTES</span>
           <table class="ingredients__ingredients-table">
             <tbody class="ingredients-body">
-              <tr class="ingredients-container">
+              <!-- <tr class="ingredients-container">
                 <td
                   v-for="(ingredient, index) in snack.ingredients"
                   :key="index"
                   class="ingredient"
+                >
+                  {{ ingredient }}
+                </td>
+              </tr> -->
+              <tr
+                class="ingredients-container"
+                v-for="(group, index) in groupedIngredients"
+                :key="index"
+              >
+                <td
+                  class="ingredient"
+                  v-for="(ingredient, i) in group"
+                  :key="i"
+                  :data-ingredient-id="i"
                 >
                   {{ ingredient }}
                 </td>
@@ -74,6 +88,23 @@ export default {
       snackId: "",
     };
   },
+  computed: {
+    groupedIngredients(snack) {
+      const groupSize = 3;
+      const result = [];
+
+      for (
+        let i = 0;
+        i < snack.snackData[0].ingredients.length;
+        i += groupSize
+      ) {
+        result.push(snack.snackData[0].ingredients.slice(i, i + groupSize));
+      }
+
+      console.log(result);
+      return result;
+    },
+  },
   methods: {
     getSnacks() {
       axios.get(`${BASE_URL}/foods/SNACK`).then((response) => {
@@ -98,6 +129,7 @@ export default {
       };
       console.log(foodData);
       axios.post(`${BASE_URL}/food-registration/`, foodData).then(() => {
+        console.log(foodData);
         this.getSnacks();
       });
     },

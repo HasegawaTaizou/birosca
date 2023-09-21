@@ -128,11 +128,8 @@ export default {
     return {
       isSelectedImage: false,
       title: "",
-      price: "321",
+      price: 0.0,
       ingredients: [
-        { name: "Tomate1" },
-        { name: "Tomate2" },
-        { name: "Tomate3" },
       ],
       newIngredient: "",
       isPopUpOpen: this.$store.state.showManageFoodPopUp,
