@@ -42,10 +42,16 @@
             class="fa-solid fa-trash action__delete"
           ></i>
         </div>
-        <DeleteFoodPopUpVue :acceptFunction="deleteSnack" />
       </div>
     </div>
-    <ManageFoodPopUp :acceptFunction="editSnack" />
+    <button
+      @click="this.$store.commit('SET_SHOW_MANAGE_FOOD_POP_UP', true)"
+      class="snacks__add-button"
+    >
+      ADICIONAR LANCHE
+    </button>
+    <DeleteFoodPopUpVue :acceptFunction="deleteSnack" />
+    <ManageFoodPopUp :acceptFunction="addSnack" />
   </section>
 </template>
     
@@ -74,14 +80,26 @@ export default {
         this.snackData = response.data.foods;
       });
     },
+    editSnack() {
+      console.log("alo");
+    },
     deleteSnack() {
       axios.delete(`${BASE_URL}/food-delete/${this.snackId}`).then(() => {
         this.getSnacks();
       });
-      console.log("id do deleteSnack: ", this.snackId);
     },
-    editSnack() {
-      console.log("alo");
+    addSnack() {
+      const foodData = {
+        image: this.$store.state.newFoodData.image,
+        title: this.$store.state.newFoodData.title,
+        price: this.$store.state.newFoodData.price,
+        foodType: "SNACK",
+        ingredients: this.$store.state.newFoodData.ingredients,
+      };
+      console.log(foodData);
+      axios.post(`${BASE_URL}/food-registration/`, foodData).then(() => {
+        this.getSnacks();
+      });
     },
     formatPrice(price) {
       const formattedPrice = price.toLocaleString("pt-BR", {

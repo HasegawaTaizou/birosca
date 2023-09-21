@@ -1,5 +1,4 @@
 .snacks {
-  margin-top: 36px;
   font-family: "Cabin", sans-serif;
   background: linear-gradient(
     to bottom,
@@ -7,6 +6,8 @@
     transparent 10%
   );
   border-radius: var(--border-radius);
+  display: grid;
+  justify-items: center;
 }
 
 .snacks__snacks-container {
@@ -118,4 +119,21 @@
   border-radius: 100%;
   padding: 12px;
   cursor: pointer;
+}
+
+.snacks__add-button {
+  margin-top: 178px;
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 306px;
+  height: 76px;
+  font-size: 1.75rem;
+}
+
+.snacks__add-button:hover {
+  background-color: #fff;
+  transition: .5s all;
+  color: #000;
 }

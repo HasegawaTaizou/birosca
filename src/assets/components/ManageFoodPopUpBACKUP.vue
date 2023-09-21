@@ -23,7 +23,7 @@
       </div>
       <div class="food__title-container">
         <label for="title" class="title__label">TÍTULO</label>
-        <input type="text" class="title__input" v-model="title" />
+        <input type="text" class="title__input" value="aaaaaa" />
       </div>
       <div class="food__price-container">
         <label for="price" class="price__label">PREÇO</label>
@@ -89,6 +89,26 @@
 export default {
   name: "ManageFoodPopUp",
   props: {
+    image: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    foodType: {
+      type: String,
+      required: true,
+    },
+    ingredients: {
+      type: Array,
+      required: true,
+    },
     acceptFunction: {
       type: Function,
       required: true,
@@ -119,8 +139,6 @@ export default {
   },
   data() {
     return {
-      isSelectedImage: false,
-      title: "",
       price: "321",
       ingredients: [
         { name: "Tomate1" },
@@ -128,6 +146,7 @@ export default {
         { name: "Tomate3" },
       ],
       newIngredient: "",
+      isSelectedImage: false,
     };
   },
   methods: {
@@ -135,18 +154,6 @@ export default {
       this.$store.commit("SET_SHOW_MANAGE_FOOD_POP_UP", false);
     },
     executeAcceptAction() {
-      const ingredientsArray = this.ingredients.map((ingredient) => {
-        return ingredient.name;
-      });
-
-      const newFoodData = {
-        image: "",
-        title: this.title,
-        price: this.price,
-        ingredients: ingredientsArray,
-      };
-      this.$store.commit("SET_FOOD_DATA", newFoodData);
-
       console.log("Ação executada");
       this.acceptFunction();
       this.closePopup();
