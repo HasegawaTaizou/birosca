@@ -21,6 +21,12 @@
       </button>
     </div>
   </div>
+  <div
+    :class="{
+      'popup-background': this.$store.state.showDeleteFoodPopUp,
+      hidden: !this.$store.state.showDeleteFoodPopUp,
+    }"
+  ></div>
 </template>
   
 <script>
@@ -50,7 +56,6 @@ export default {
       this.$store.commit("SET_SHOW_DELETE_FOOD_POP_UP", false);
     },
     executeAcceptAction() {
-      console.log("Ação executada");
       this.acceptFunction();
       this.closePopup();
     },
@@ -75,6 +80,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 .popup__title {
@@ -150,6 +156,17 @@ export default {
   opacity: 0;
   transition: opacity 0.5s ease-out;
   display: none;
+}
+
+.popup-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1;
 }
 </style>
     

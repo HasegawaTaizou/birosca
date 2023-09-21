@@ -83,6 +83,12 @@
       </button>
     </div>
   </div>
+  <div
+    :class="{
+      'popup-background': this.$store.state.showManageFoodPopUp,
+      hidden: !this.$store.state.showManageFoodPopUp,
+    }"
+  ></div>
 </template>
   
 <script>
@@ -95,7 +101,7 @@ export default {
     },
   },
   watch: {
-    '$store.state.showManageFoodPopUp'(newValue) {
+    "$store.state.showManageFoodPopUp"(newValue) {
       if (newValue == true) {
         this.scrollToTop();
       }
@@ -129,8 +135,7 @@ export default {
       isSelectedImage: false,
       title: "",
       price: 0.0,
-      ingredients: [
-      ],
+      ingredients: [],
       newIngredient: "",
       isPopUpOpen: this.$store.state.showManageFoodPopUp,
     };
@@ -194,6 +199,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 32px;
+  z-index: 2;
 }
 
 .popup__food-container {
@@ -413,6 +419,17 @@ export default {
   opacity: 0;
   transition: opacity 0.5s ease-out;
   display: none;
+}
+
+.popup-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1;
 }
 </style>
     
