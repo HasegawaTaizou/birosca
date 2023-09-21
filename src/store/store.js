@@ -9,10 +9,10 @@ export default new Vuex.Store({
     showDeleteFoodPopUp: true,
   },
   mutations: {
-    setShowManageFoodPopUp(state, value) {
+    SET_SHOW_MANAGE_FOOD_POP_UP(state, value) {
       state.showManageFoodPopUp = value;
     },
-    setShowDeleteFoodPopUp(state, value) {
+    SET_SHOW_DELETE_FOOD_POP_UP(state, value) {
       state.showDeleteFoodPopUp = value;
     },
   },

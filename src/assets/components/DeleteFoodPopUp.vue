@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     closePopup() {
-      this.$store.commit("setShowDeleteFoodPopUp", false);
+      this.$store.commit("SET_SHOW_DELETE_FOOD_POP_UP", false);
     },
     executeAcceptAction() {
       console.log("Ação executada");
@@ -95,7 +95,7 @@ export default {
 .button__deny:hover {
   color: var(--text-color);
   background-color: var(--red-color);
-  transition: .5s all;
+  transition: 0.5s all;
 }
 
 .deny__text {
@@ -120,8 +120,8 @@ export default {
 
 .button__accept:hover {
   color: var(--text-color);
-  background-color: rgba(172,233,73, 0.8);
-  transition: .5s all;
+  background-color: rgba(172, 233, 73, 0.8);
+  transition: 0.5s all;
 }
 
 .accept__text {
