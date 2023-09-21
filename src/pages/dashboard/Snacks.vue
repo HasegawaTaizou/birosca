@@ -30,23 +30,32 @@
           </table>
         </div>
         <div class="snack__actions">
-          <i class="fa-solid fa-pen action__edit"></i>
-          <i @click="this.$store.commit('SET_SHOW_DELETE_FOOD_POP_UP', true)" class="fa-solid fa-trash action__delete"></i>
+          <i
+            @click="this.$store.commit('SET_SHOW_MANAGE_FOOD_POP_UP', true)"
+            class="fa-solid fa-pen action__edit"
+          ></i>
+          <i
+            @click="this.$store.commit('SET_SHOW_DELETE_FOOD_POP_UP', true)"
+            class="fa-solid fa-trash action__delete"
+          ></i>
         </div>
       </div>
     </div>
     <DeleteFoodPopUpVue :acceptFunction="deleteSnack" />
+    <ManageFoodPopUp :acceptFunction="editSnack" />
   </section>
 </template>
     
 <script>
 import axios from "axios";
 import DeleteFoodPopUpVue from "../../assets/components/DeleteFoodPopUp.vue";
+import ManageFoodPopUp from "../../assets/components/ManageFoodPopUp.vue";
 
 export default {
   name: "Snacks",
   components: {
     DeleteFoodPopUpVue,
+    ManageFoodPopUp,
   },
   data() {
     return {
@@ -60,7 +69,10 @@ export default {
       });
     },
     deleteSnack() {
-      console.log('alo');
+      console.log("alo");
+    },
+    editSnack() {
+      console.log("alo");
     },
     formatPrice(price) {
       const formattedPrice = price.toLocaleString("pt-BR", {

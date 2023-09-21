@@ -136,6 +136,7 @@ export default {
 .hidden {
   opacity: 0;
   transition: opacity 0.5s ease-out;
+  display: none;
 }
 </style>
     

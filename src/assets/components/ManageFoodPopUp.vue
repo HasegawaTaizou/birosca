@@ -131,8 +131,7 @@ export default {
   },
   methods: {
     closePopup() {
-      this.$store.state.showManageFoodPopUp = false;
-      this.$store.commit("setShowManageFoodPopUp", false);
+      this.$store.commit("SET_SHOW_MANAGE_FOOD_POP_UP", false);
     },
     executeAcceptAction() {
       console.log("Ação executada");
@@ -389,6 +388,7 @@ export default {
 .hidden {
   opacity: 0;
   transition: opacity 0.5s ease-out;
+  display: none;
 }
 </style>
     

@@ -3,10 +3,10 @@ import Vuex from "vuex";
 export default new Vuex.Store({
   state: {
     //MANAGE FOOD POPUP STATUS
-    showManageFoodPopUp: true,
+    showManageFoodPopUp: false,
 
     //DELETE FOOD POPUP STATUS
-    showDeleteFoodPopUp: true,
+    showDeleteFoodPopUp: false,
   },
   mutations: {
     SET_SHOW_MANAGE_FOOD_POP_UP(state, value) {
