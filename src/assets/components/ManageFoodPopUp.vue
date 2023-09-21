@@ -94,6 +94,13 @@ export default {
       required: true,
     },
   },
+  watch: {
+    '$store.state.showManageFoodPopUp'(newValue) {
+      if (newValue == true) {
+        this.scrollToTop();
+      }
+    },
+  },
   filters: {
     currency(value) {
       if (!value) {
@@ -128,9 +135,16 @@ export default {
         { name: "Tomate3" },
       ],
       newIngredient: "",
+      isPopUpOpen: this.$store.state.showManageFoodPopUp,
     };
   },
   methods: {
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
     closePopup() {
       this.$store.commit("SET_SHOW_MANAGE_FOOD_POP_UP", false);
     },

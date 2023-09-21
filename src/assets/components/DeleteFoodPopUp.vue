@@ -32,7 +32,20 @@ export default {
       required: true,
     },
   },
+  watch: {
+    "$store.state.showDeleteFoodPopUp"(newValue) {
+      if (newValue == true) {
+        this.scrollToTop();
+      }
+    },
+  },
   methods: {
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
     closePopup() {
       this.$store.commit("SET_SHOW_DELETE_FOOD_POP_UP", false);
     },
