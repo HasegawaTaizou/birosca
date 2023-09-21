@@ -35,19 +35,24 @@
             class="fa-solid fa-pen action__edit"
           ></i>
           <i
-            @click="this.$store.commit('SET_SHOW_DELETE_FOOD_POP_UP', true)"
+            @click="
+              this.$store.commit('SET_SHOW_DELETE_FOOD_POP_UP', true);
+              snackId = snack.id;
+            "
             class="fa-solid fa-trash action__delete"
           ></i>
         </div>
+        <DeleteFoodPopUpVue :acceptFunction="deleteSnack" />
       </div>
     </div>
-    <DeleteFoodPopUpVue :acceptFunction="deleteSnack" />
     <ManageFoodPopUp :acceptFunction="editSnack" />
   </section>
 </template>
     
 <script>
+import { BASE_URL } from "@/assets/js/config.js";
 import axios from "axios";
+
 import DeleteFoodPopUpVue from "../../assets/components/DeleteFoodPopUp.vue";
 import ManageFoodPopUp from "../../assets/components/ManageFoodPopUp.vue";
 
@@ -60,16 +65,20 @@ export default {
   data() {
     return {
       snackData: "",
+      snackId: "",
     };
   },
   methods: {
     getSnacks() {
-      axios.get("http://localhost:8080/api/v1/foods/SNACK").then((response) => {
+      axios.get(`${BASE_URL}/foods/SNACK`).then((response) => {
         this.snackData = response.data.foods;
       });
     },
     deleteSnack() {
-      console.log("alo");
+      axios.delete(`${BASE_URL}/food-delete/${this.snackId}`).then(() => {
+        this.getSnacks();
+      });
+      console.log("id do deleteSnack: ", this.snackId);
     },
     editSnack() {
       console.log("alo");
