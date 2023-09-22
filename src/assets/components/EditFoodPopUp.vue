@@ -2,8 +2,8 @@
   <div
     class="popup-container"
     :class="{
-      'popup-container': this.$store.state.showManageFoodPopUp,
-      hidden: !this.$store.state.showManageFoodPopUp,
+      'popup-container': this.$store.state.showEditFoodPopUp,
+      hidden: !this.$store.state.showEditFoodPopUp,
     }"
   >
     <div class="popup__food-container">
@@ -23,11 +23,11 @@
       </div>
       <div class="food__title-container">
         <label for="title" class="title__label">TÍTULO</label>
-        <input type="text" class="title__input" value="aaaaaa" />
+        <input type="text" class="title__input" :value="this.title" />
       </div>
       <div class="food__price-container">
         <label for="price" class="price__label">PREÇO</label>
-        <input type="text" class="price__input" v-model="price" />
+        <input type="text" class="price__input" :value="price" />
       </div>
       <div class="food__ingredients-container">
         <span class="ingredients__title">INGREDIENTES</span>
@@ -83,14 +83,21 @@
       </button>
     </div>
   </div>
+
+  <div
+    :class="{
+      'popup-background': this.$store.state.showEditFoodPopUp,
+      hidden: !this.$store.state.showEditFoodPopUp,
+    }"
+  ></div>
 </template>
   
 <script>
 export default {
-  name: "ManageFoodPopUp",
+  name: "EditFoodPopUp",
   props: {
-    image: {
-      type: String,
+    acceptFunction: {
+      type: Function,
       required: true,
     },
     title: {
@@ -101,17 +108,16 @@ export default {
       type: Number,
       required: true,
     },
-    foodType: {
-      type: String,
-      required: true,
-    },
     ingredients: {
       type: Array,
       required: true,
     },
-    acceptFunction: {
-      type: Function,
-      required: true,
+  },
+  watch: {
+    "$store.state.showEditFoodPopUp"(newValue) {
+      if (newValue == true) {
+        this.scrollToTop();
+      }
     },
   },
   filters: {
@@ -130,6 +136,7 @@ export default {
       const groupSize = 3;
       const result = [];
 
+      console.log(this.ingredients);
       for (let i = 0; i < this.ingredients.length; i += groupSize) {
         result.push(this.ingredients.slice(i, i + groupSize));
       }
@@ -139,21 +146,34 @@ export default {
   },
   data() {
     return {
-      price: "321",
-      ingredients: [
-        { name: "Tomate1" },
-        { name: "Tomate2" },
-        { name: "Tomate3" },
-      ],
-      newIngredient: "",
       isSelectedImage: false,
+      newIngredient: "",
+      isPopUpOpen: this.$store.state.showEditFoodPopUp,
     };
   },
   methods: {
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
     closePopup() {
-      this.$store.commit("SET_SHOW_MANAGE_FOOD_POP_UP", false);
+      this.$store.commit("SET_SHOW_EDIT_FOOD_POP_UP", false);
     },
     executeAcceptAction() {
+      const ingredientsArray = this.ingredients.map((ingredient) => {
+        return ingredient.name;
+      });
+
+      const newFoodData = {
+        image: "",
+        title: this.title,
+        price: this.price,
+        ingredients: ingredientsArray,
+      };
+      this.$store.commit("SET_FOOD_DATA", newFoodData);
+
       console.log("Ação executada");
       this.acceptFunction();
       this.closePopup();
@@ -161,14 +181,13 @@ export default {
     addIngredient() {
       if (this.newIngredient.trim() !== "") {
         this.ingredients.push({ name: this.newIngredient });
-        this.newIngredient = ""; // Limpa o campo de entrada após a adição
+        this.newIngredient = "";
       }
     },
     removeIngredient(ingredientId) {
       const tdToRemove = document.querySelector(
         `.ingredient-container[data-ingredient-id="${ingredientId}"]`
       );
-
       if (tdToRemove) {
         tdToRemove.parentNode.removeChild(tdToRemove);
       }
@@ -190,6 +209,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 32px;
+  z-index: 2;
 }
 
 .popup__food-container {
@@ -409,6 +429,17 @@ export default {
   opacity: 0;
   transition: opacity 0.5s ease-out;
   display: none;
+}
+
+.popup-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 1;
 }
 </style>
     

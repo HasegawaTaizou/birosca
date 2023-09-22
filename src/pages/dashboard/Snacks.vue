@@ -1,7 +1,12 @@
 <template>
   <section class="snacks">
     <div class="snacks__snacks-container">
-      <div v-for="snack in snackData" :key="snack.id" class="snack">
+      <div
+        v-for="(snack, index) in snackData"
+        :key="snack.id"
+        @click="snackIndex = index; showEditFoodPopUp = true"
+        class="snack"
+      >
         <img
           src="../../assets/img/snack-image.png"
           alt="Snack Image"
@@ -17,9 +22,7 @@
           <span class="ingredients__title">INGREDIENTES</span>
           <table class="ingredients__ingredients-table">
             <tbody class="ingredients-body">
-              <tr
-                class="ingredients-container"
-              >
+              <tr class="ingredients-container">
                 <td
                   class="ingredient"
                   v-for="(ingredient, index) in snack.ingredients"
@@ -33,9 +36,10 @@
             </tbody>
           </table>
         </div>
+
         <div class="snack__actions">
           <i
-            @click="this.$store.commit('SET_SHOW_MANAGE_FOOD_POP_UP', true)"
+            @click="this.$store.commit('SET_SHOW_EDIT_FOOD_POP_UP', true)"
             class="fa-solid fa-pen action__edit"
           ></i>
           <i
@@ -48,12 +52,20 @@
         </div>
       </div>
     </div>
+    <EditFoodPopUp
+      v-if="showEditFoodPopUp"
+      :acceptFunction="addSnack"
+      :title="snackData[snackIndex].title"
+      :price="snackData[snackIndex].price"
+      :ingredients="[]"
+    />
     <button
       @click="this.$store.commit('SET_SHOW_MANAGE_FOOD_POP_UP', true)"
       class="snacks__add-button"
     >
       ADICIONAR LANCHE
     </button>
+
     <DeleteFoodPopUpVue :acceptFunction="deleteSnack" />
     <ManageFoodPopUp :acceptFunction="addSnack" />
   </section>
@@ -65,17 +77,21 @@ import axios from "axios";
 
 import DeleteFoodPopUpVue from "../../assets/components/DeleteFoodPopUp.vue";
 import ManageFoodPopUp from "../../assets/components/ManageFoodPopUp.vue";
+import EditFoodPopUp from "../../assets/components/EditFoodPopUp.vue";
 
 export default {
   name: "Snacks",
   components: {
     DeleteFoodPopUpVue,
     ManageFoodPopUp,
+    EditFoodPopUp,
   },
   data() {
     return {
       snackData: "",
       snackId: "",
+      snackIndex: 0,
+      showEditFoodPopUp: false,
     };
   },
   computed: {
@@ -96,6 +112,7 @@ export default {
     getSnacks() {
       axios.get(`${BASE_URL}/foods/SNACK`).then((response) => {
         this.snackData = response.data.foods;
+        console.log(this.snackData[this.snackIndex].title);
       });
     },
     editSnack() {
