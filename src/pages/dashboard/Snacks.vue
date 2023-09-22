@@ -17,29 +17,19 @@
           <span class="ingredients__title">INGREDIENTES</span>
           <table class="ingredients__ingredients-table">
             <tbody class="ingredients-body">
-              <!-- <tr class="ingredients-container">
-                <td
-                  v-for="(ingredient, index) in snack.ingredients"
-                  :key="index"
-                  class="ingredient"
-                >
-                  {{ ingredient }}
-                </td>
-              </tr> -->
               <tr
                 class="ingredients-container"
-                v-for="(group, index) in groupedIngredients"
-                :key="index"
               >
                 <td
                   class="ingredient"
-                  v-for="(ingredient, i) in group"
-                  :key="i"
-                  :data-ingredient-id="i"
+                  v-for="(ingredient, index) in snack.ingredients"
+                  :key="index"
+                  :data-ingredient-id="index"
                 >
                   {{ ingredient }}
                 </td>
               </tr>
+              <tr v-if="(index + 1) % 3 === 0"></tr>
             </tbody>
           </table>
         </div>
@@ -93,15 +83,12 @@ export default {
       const groupSize = 3;
       const result = [];
 
-      for (
-        let i = 0;
-        i < snack.snackData[0].ingredients.length;
-        i += groupSize
-      ) {
-        result.push(snack.snackData[0].ingredients.slice(i, i + groupSize));
+      for (let index = 0; index < snack.snackData.length; index++) {
+        const element = snack.snackData[index];
+        console.log(element);
+        result.push(element.ingredients.slice(index, index + groupSize));
       }
 
-      console.log(result);
       return result;
     },
   },
