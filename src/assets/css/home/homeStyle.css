@@ -101,6 +101,7 @@
 .instagram__title {
   grid-area: title;
   font-size: 6rem;
+  width: 70%;
 }
 
 .instagram__image1 {
