@@ -95,6 +95,7 @@
   row-gap: 42px;
   justify-items: center;
   align-items: center;
+  padding-bottom: 92px;
 }
 
 .instagram__title {
@@ -123,4 +124,16 @@
   font-size: 6rem;
   display: inline-block;
   transform: rotate(-30deg);
+}
+
+/* TRANSITIONS STYLES */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.fade-in-section.active {
+  opacity: 1;
+  transform: translateY(0);
 }

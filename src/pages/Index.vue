@@ -28,7 +28,9 @@
       </nav>
     </header>
     <main>
-      <router-view></router-view>
+      <transition name="page" mode="out-in">
+        <router-view />
+      </transition>
     </main>
     <footer>
       <div class="birosca__logo-container">
