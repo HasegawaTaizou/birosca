@@ -44,7 +44,7 @@
                 :key="i"
                 :data-ingredient-id="i"
               >
-                <input class="ingredient__name" v-model="ingredient.name" />
+                <input class="ingredient__name" :value="ingredient" />
                 <div
                   class="ingredient__icon-container"
                   @click="removeIngredient(i)"

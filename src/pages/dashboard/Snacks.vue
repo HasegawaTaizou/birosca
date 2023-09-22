@@ -57,7 +57,7 @@
       :acceptFunction="addSnack"
       :title="snackData[snackIndex].title"
       :price="snackData[snackIndex].price"
-      :ingredients="[]"
+      :ingredients="snackData[snackIndex].ingredients"
     />
     <button
       @click="this.$store.commit('SET_SHOW_MANAGE_FOOD_POP_UP', true)"
@@ -112,7 +112,6 @@ export default {
     getSnacks() {
       axios.get(`${BASE_URL}/foods/SNACK`).then((response) => {
         this.snackData = response.data.foods;
-        console.log(this.snackData[this.snackIndex].title);
       });
     },
     editSnack() {
