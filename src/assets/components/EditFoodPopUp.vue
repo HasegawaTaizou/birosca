@@ -23,11 +23,21 @@
       </div>
       <div class="food__title-container">
         <label for="title" class="title__label">TÍTULO</label>
-        <input type="text" class="title__input" :value="this.title" />
+        <input
+          type="text"
+          class="title__input"
+          :value="newTitle"
+          @blur="updateTitle"
+        />
       </div>
       <div class="food__price-container">
         <label for="price" class="price__label">PREÇO</label>
-        <input type="text" class="price__input" :value="price" />
+        <input
+          type="text"
+          class="price__input"
+          :value="newPrice"
+          @blur="updatePrice"
+        />
       </div>
       <div class="food__ingredients-container">
         <span class="ingredients__title">INGREDIENTES</span>
@@ -36,7 +46,7 @@
             <tr
               class="ingredients-container"
               v-for="(group, index) in groupedIngredients"
-              :key="index"
+              :key="`group-${group.length}-${index}`"
             >
               <td
                 class="ingredient-container"
@@ -55,11 +65,7 @@
             </tr>
             <tr class="ingredients-container">
               <td class="ingredient-container">
-                <input
-                  class="ingredient__name"
-                  v-model="newIngredient"
-                  @input="updateNewIngredient"
-                />
+                <input class="ingredient__name" v-model="newIngredient" />
                 <div class="ingredient__icon-container">
                   <i class="fa-solid fa-x"></i>
                 </div>
@@ -119,6 +125,19 @@ export default {
         this.scrollToTop();
       }
     },
+    ingredients: {
+      handler(newIngredients) {
+        const groupSize = 3;
+        const result = [];
+
+        for (let i = 0; i < newIngredients.length; i += groupSize) {
+          result.push(newIngredients.slice(i, i + groupSize));
+        }
+
+        this.groupedIngredients = result;
+      },
+      deep: true,
+    },
   },
   filters: {
     currency(value) {
@@ -131,24 +150,16 @@ export default {
       });
     },
   },
-  computed: {
-    groupedIngredients() {
-      const groupSize = 3;
-      const result = [];
-
-      console.log(this.ingredients);
-      for (let i = 0; i < this.ingredients.length; i += groupSize) {
-        result.push(this.ingredients.slice(i, i + groupSize));
-      }
-
-      return result;
-    },
-  },
   data() {
     return {
       isSelectedImage: false,
       newIngredient: "",
       isPopUpOpen: this.$store.state.showEditFoodPopUp,
+      // FOOD DATA
+      ingredients: this.ingredients,
+      groupedIngredients: [],
+      newTitle: this.title,
+      newPrice: this.price,
     };
   },
   methods: {
@@ -162,36 +173,55 @@ export default {
       this.$store.commit("SET_SHOW_EDIT_FOOD_POP_UP", false);
     },
     executeAcceptAction() {
-      const ingredientsArray = this.ingredients.map((ingredient) => {
-        return ingredient.name;
-      });
-
-      const newFoodData = {
+      const foodData = {
         image: "",
-        title: this.title,
-        price: this.price,
-        ingredients: ingredientsArray,
+        title: this.newTitle,
+        price: this.newPrice,
+        ingredients: this.ingredients,
       };
-      this.$store.commit("SET_FOOD_DATA", newFoodData);
 
-      console.log("Ação executada");
+      console.log(foodData);
+
+      this.$store.commit("SET_FOOD_DATA", foodData);
+
       this.acceptFunction();
       this.closePopup();
     },
     addIngredient() {
       if (this.newIngredient.trim() !== "") {
-        this.ingredients.push({ name: this.newIngredient });
+        this.ingredients.push(this.newIngredient);
         this.newIngredient = "";
       }
     },
     removeIngredient(ingredientId) {
+      const indexToRemove = this.ingredients.indexOf(
+        this.ingredients[ingredientId]
+      );
       const tdToRemove = document.querySelector(
         `.ingredient-container[data-ingredient-id="${ingredientId}"]`
       );
       if (tdToRemove) {
         tdToRemove.parentNode.removeChild(tdToRemove);
+        this.ingredients.splice(indexToRemove, 1);
+        this.groupedIngredients = this.ingredients
       }
     },
+    updateTitle(event) {
+      this.newTitle = event.target.value;
+    },
+    updatePrice(event) {
+      this.newPrice = event.target.value;
+    },
+    fillGroupedIngredients() {
+      const groupSize = 3;
+      for (let i = 0; i < this.ingredients.length; i += groupSize) {
+        this.groupedIngredients.push(this.ingredients.slice(i, i + groupSize));
+      }
+      return this.groupedIngredients;
+    },
+  },
+  mounted() {
+    this.fillGroupedIngredients();
   },
 };
 </script>

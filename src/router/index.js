@@ -9,8 +9,6 @@ import Drinks from "@/pages/Drinks.vue";
 // DASHBOARD
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
 import DashboardSnacks from "@/pages/dashboard/Snacks.vue";
-//TESTES
-import A from "@/pages/A.vue";
 
 const routes = [
   {
@@ -54,11 +52,6 @@ const routes = [
         component: DashboardSnacks,
       },
     ],
-  },
-  {
-    path: "/a",
-    name: "A",
-    component: A,
   },
 ];
 

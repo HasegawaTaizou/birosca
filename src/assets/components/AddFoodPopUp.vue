@@ -2,8 +2,8 @@
   <div
     class="popup-container"
     :class="{
-      'popup-container': this.$store.state.showManageFoodPopUp,
-      hidden: !this.$store.state.showManageFoodPopUp,
+      'popup-container': this.$store.state.showAddFoodPopUp,
+      hidden: !this.$store.state.showAddFoodPopUp,
     }"
   >
     <div class="popup__food-container">
@@ -85,15 +85,15 @@
   </div>
   <div
     :class="{
-      'popup-background': this.$store.state.showManageFoodPopUp,
-      hidden: !this.$store.state.showManageFoodPopUp,
+      'popup-background': this.$store.state.showAddFoodPopUp,
+      hidden: !this.$store.state.showAddFoodPopUp,
     }"
   ></div>
 </template>
   
 <script>
 export default {
-  name: "ManageFoodPopUp",
+  name: "AddFoodPopUp",
   props: {
     acceptFunction: {
       type: Function,
@@ -101,7 +101,7 @@ export default {
     },
   },
   watch: {
-    "$store.state.showManageFoodPopUp"(newValue) {
+    "$store.state.showAddFoodPopUp"(newValue) {
       if (newValue == true) {
         this.scrollToTop();
       }
@@ -137,7 +137,7 @@ export default {
       price: 0.0,
       ingredients: [],
       newIngredient: "",
-      isPopUpOpen: this.$store.state.showManageFoodPopUp,
+      isPopUpOpen: this.$store.state.showAddFoodPopUp,
     };
   },
   methods: {
@@ -148,7 +148,7 @@ export default {
       });
     },
     closePopup() {
-      this.$store.commit("SET_SHOW_MANAGE_FOOD_POP_UP", false);
+      this.$store.commit("SET_SHOW_ADD_FOOD_POP_UP", false);
     },
     executeAcceptAction() {
       const ingredientsArray = this.ingredients.map((ingredient) => {
@@ -161,7 +161,7 @@ export default {
         price: this.price,
         ingredients: ingredientsArray,
       };
-      this.$store.commit("SET_FOOD_DATA", newFoodData);
+      this.$store.commit("SET_NEW_FOOD_DATA", newFoodData);
 
       console.log("Ação executada");
       this.acceptFunction();

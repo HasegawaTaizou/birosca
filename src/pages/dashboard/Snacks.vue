@@ -1,12 +1,7 @@
 <template>
   <section class="snacks">
     <div class="snacks__snacks-container">
-      <div
-        v-for="(snack, index) in snackData"
-        :key="snack.id"
-        @click="snackIndex = index; showEditFoodPopUp = true"
-        class="snack"
-      >
+      <div v-for="(snack, index) in snackData" :key="snack.id" class="snack">
         <img
           src="../../assets/img/snack-image.png"
           alt="Snack Image"
@@ -39,7 +34,10 @@
 
         <div class="snack__actions">
           <i
-            @click="this.$store.commit('SET_SHOW_EDIT_FOOD_POP_UP', true)"
+            @click="
+              this.$store.commit('SET_SHOW_EDIT_FOOD_POP_UP', true);
+              openEditPopup(index, snack.id);
+            "
             class="fa-solid fa-pen action__edit"
           ></i>
           <i
@@ -52,22 +50,21 @@
         </div>
       </div>
     </div>
-    <EditFoodPopUp
-      v-if="showEditFoodPopUp"
-      :acceptFunction="addSnack"
-      :title="snackData[snackIndex].title"
-      :price="snackData[snackIndex].price"
-      :ingredients="snackData[snackIndex].ingredients"
-    />
     <button
       @click="this.$store.commit('SET_SHOW_MANAGE_FOOD_POP_UP', true)"
       class="snacks__add-button"
     >
       ADICIONAR LANCHE
     </button>
-
+    <EditFoodPopUp
+      v-if="showEditFoodPopUp"
+      :acceptFunction="editSnack"
+      :title="snackData[snackIndex].title"
+      :price="snackData[snackIndex].price"
+      :ingredients="snackData[snackIndex].ingredients"
+    />
     <DeleteFoodPopUpVue :acceptFunction="deleteSnack" />
-    <ManageFoodPopUp :acceptFunction="addSnack" />
+    <AddFoodPopUp :acceptFunction="addSnack" />
   </section>
 </template>
     
@@ -76,20 +73,20 @@ import { BASE_URL } from "@/assets/js/config.js";
 import axios from "axios";
 
 import DeleteFoodPopUpVue from "../../assets/components/DeleteFoodPopUp.vue";
-import ManageFoodPopUp from "../../assets/components/ManageFoodPopUp.vue";
+import AddFoodPopUp from "../../assets/components/AddFoodPopUp.vue";
 import EditFoodPopUp from "../../assets/components/EditFoodPopUp.vue";
 
 export default {
   name: "Snacks",
   components: {
     DeleteFoodPopUpVue,
-    ManageFoodPopUp,
+    AddFoodPopUp,
     EditFoodPopUp,
   },
   data() {
     return {
-      snackData: "",
-      snackId: "",
+      snackData: {},
+      snackId: 0,
       snackIndex: 0,
       showEditFoodPopUp: false,
     };
@@ -101,7 +98,6 @@ export default {
 
       for (let index = 0; index < snack.snackData.length; index++) {
         const element = snack.snackData[index];
-        console.log(element);
         result.push(element.ingredients.slice(index, index + groupSize));
       }
 
@@ -115,7 +111,17 @@ export default {
       });
     },
     editSnack() {
-      console.log("alo");
+      const foodData = {
+        image: this.$store.state.foodData.image,
+        title: this.$store.state.foodData.title,
+        price: this.$store.state.foodData.price,
+        ingredients: this.$store.state.foodData.ingredients,
+      };
+      axios
+        .put(`${BASE_URL}/food-update/${this.snackId}`, foodData)
+        .then(() => {
+          this.getSnacks();
+        });
     },
     deleteSnack() {
       axios.delete(`${BASE_URL}/food-delete/${this.snackId}`).then(() => {
@@ -123,16 +129,14 @@ export default {
       });
     },
     addSnack() {
-      const foodData = {
+      const newFoodData = {
         image: this.$store.state.newFoodData.image,
         title: this.$store.state.newFoodData.title,
         price: this.$store.state.newFoodData.price,
         foodType: "SNACK",
         ingredients: this.$store.state.newFoodData.ingredients,
       };
-      console.log(foodData);
-      axios.post(`${BASE_URL}/food-registration/`, foodData).then(() => {
-        console.log(foodData);
+      axios.post(`${BASE_URL}/food-registration/`, newFoodData).then(() => {
         this.getSnacks();
       });
     },
@@ -142,6 +146,11 @@ export default {
         currency: "BRL",
       });
       return formattedPrice;
+    },
+    openEditPopup(index, id) {
+      this.snackIndex = index;
+      this.snackId = id;
+      this.showEditFoodPopUp = true;
     },
   },
   mounted() {

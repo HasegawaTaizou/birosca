@@ -2,16 +2,24 @@ import Vuex from "vuex";
 
 export default new Vuex.Store({
   state: {
-    //MANAGE FOOD POPUP STATUS
-    showManageFoodPopUp: false,
+    //EDIT FOOD POPUP STATUS
+    showEditFoodPopUp: false,
 
     //DELETE FOOD POPUP STATUS
     showDeleteFoodPopUp: false,
 
-    //EDIT FOOD POPUP STATUS
-    showEditFoodPopUp: false,
+    //ADD FOOD POPUP STATUS
+    showAddFoodPopUp: false,
 
-    //FOOD DATA
+    //EDIT FOOD DATA
+    foodData: {
+      title: "",
+      image: "",
+      price: 0.0,
+      ingredients: [],
+    },
+
+    //ADD FOOD DATA
     newFoodData: {
       title: "",
       image: "",
@@ -21,16 +29,19 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    SET_SHOW_MANAGE_FOOD_POP_UP(state, value) {
-      state.showManageFoodPopUp = value;
-    },
     SET_SHOW_EDIT_FOOD_POP_UP(state, value) {
       state.showEditFoodPopUp = value;
     },
     SET_SHOW_DELETE_FOOD_POP_UP(state, value) {
       state.showDeleteFoodPopUp = value;
     },
+    SET_SHOW_ADD_FOOD_POP_UP(state, value) {
+      state.showAddFoodPopUp = value;
+    },
     SET_FOOD_DATA(state, value) {
+      state.foodData = value;
+    },
+    SET_NEW_FOOD_DATA(state, value) {
       state.newFoodData = value;
     },
   },
