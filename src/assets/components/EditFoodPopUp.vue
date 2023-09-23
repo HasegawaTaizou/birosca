@@ -45,19 +45,19 @@
           <tbody class="ingredients-body">
             <tr
               class="ingredients-container"
-              v-for="(group, index) in groupedIngredients"
-              :key="`group-${group.length}-${index}`"
+              v-for="(group, index1) in groupedIngredients"
+              :key="`group-${group.length}-${index1}`"
             >
               <td
                 class="ingredient-container"
-                v-for="(ingredient, i) in group"
-                :key="i"
-                :data-ingredient-id="i"
+                v-for="(ingredient, index2) in group"
+                :key="`group-${index1}-ingredient-${index2}`"
+                :data-ingredient-id="`${ingredient.id}`"
               >
-                <input class="ingredient__name" :value="ingredient" />
+                <input class="ingredient__name" :value="ingredient.name" />
                 <div
                   class="ingredient__icon-container"
-                  @click="removeIngredient(i)"
+                  @click="removeIngredient(ingredient.id)"
                 >
                   <i class="fa-solid fa-x"></i>
                 </div>
@@ -194,18 +194,25 @@ export default {
       }
     },
     removeIngredient(ingredientId) {
-      const indexToRemove = this.ingredients.indexOf(
-        this.ingredients[ingredientId]
-      );
       const tdToRemove = document.querySelector(
         `.ingredient-container[data-ingredient-id="${ingredientId}"]`
       );
+      console.log(tdToRemove);
+
       if (tdToRemove) {
         tdToRemove.parentNode.removeChild(tdToRemove);
-        this.ingredients.splice(indexToRemove, 1);
-        this.groupedIngredients = this.ingredients
+
+        const index = this.ingredients.findIndex(
+          (ingredient) => ingredient.id === ingredientId
+        );
+
+        if (index !== -1) {
+          this.ingredients.splice(index, 1);
+          this.groupedIngredients = this.ingredients;
+        }
       }
     },
+
     updateTitle(event) {
       this.newTitle = event.target.value;
     },
@@ -214,9 +221,22 @@ export default {
     },
     fillGroupedIngredients() {
       const groupSize = 3;
-      for (let i = 0; i < this.ingredients.length; i += groupSize) {
-        this.groupedIngredients.push(this.ingredients.slice(i, i + groupSize));
+
+      const objectsArray = this.ingredients.map((str, id) => ({
+        id,
+        name: str,
+      }));
+
+      for (let i = 0; i < objectsArray.length; i += groupSize) {
+        this.groupedIngredients.push(objectsArray.slice(i, i + groupSize));
       }
+
+      console.log(this.groupedIngredients);
+      this.groupedIngredients.forEach((item) => {
+        item.forEach((a) => {
+          console.log(a);
+        });
+      });
       return this.groupedIngredients;
     },
   },

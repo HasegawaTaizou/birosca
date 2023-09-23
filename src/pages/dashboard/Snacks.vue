@@ -27,7 +27,6 @@
                   {{ ingredient }}
                 </td>
               </tr>
-              <tr v-if="(index + 1) % 3 === 0"></tr>
             </tbody>
           </table>
         </div>
@@ -51,7 +50,7 @@
       </div>
     </div>
     <button
-      @click="this.$store.commit('SET_SHOW_MANAGE_FOOD_POP_UP', true)"
+      @click="this.$store.commit('SET_SHOW_ADD_FOOD_POP_UP', true)"
       class="snacks__add-button"
     >
       ADICIONAR LANCHE
