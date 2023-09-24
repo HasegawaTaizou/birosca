@@ -17,10 +17,10 @@
           <span class="ingredients__title">INGREDIENTES</span>
           <table class="ingredients__ingredients-table">
             <tbody class="ingredients-body">
-              <tr class="ingredients-container">
+              <tr v-for="(ingredients, index) in groupedArrayIngredients" :key="index" class="ingredients-container">
                 <td
                   class="ingredient"
-                  v-for="(ingredient, index) in snack.ingredients"
+                  v-for="(ingredient, index) in ingredients"
                   :key="index"
                   :data-ingredient-id="index"
                 >
@@ -87,25 +87,16 @@ export default {
       snackIndex: 0,
       showEditFoodPopUp: false,
       selectedItem: null,
+
+      groupedArrayIngredients: [],
     };
-  },
-  computed: {
-    groupedIngredients(snack) {
-      const groupSize = 3;
-      const result = [];
-
-      for (let index = 0; index < snack.snackData.length; index++) {
-        const element = snack.snackData[index];
-        result.push(element.ingredients.slice(index, index + groupSize));
-      }
-
-      return result;
-    },
   },
   methods: {
     getSnacks() {
       axios.get(`${BASE_URL}/foods/SNACK`).then((response) => {
         this.snackData = response.data.foods;
+        this.functionSplitArray(this.snackData[0].ingredients, 3);
+        console.log(this.groupedArrayIngredients);
       });
     },
     editSnack() {
@@ -149,6 +140,12 @@ export default {
       this.snackIndex = index;
       this.snackId = id;
       this.showEditFoodPopUp = true;
+    },
+    functionSplitArray(array, length) {
+      for (let i = 0; i < array.length; i += length) {
+        const subArray = array.slice(i, i + length);
+        this.groupedArrayIngredients.push(subArray);
+      }
     },
   },
   mounted() {
