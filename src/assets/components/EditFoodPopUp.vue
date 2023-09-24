@@ -26,7 +26,7 @@
         <input
           type="text"
           class="title__input"
-          :value="newTitle"
+          :value="this.selectedItem.title"
           @blur="updateTitle"
         />
       </div>
@@ -35,7 +35,7 @@
         <input
           type="text"
           class="price__input"
-          :value="newPrice"
+          :value="this.selectedItem.price"
           @blur="updatePrice"
         />
       </div>
@@ -106,15 +106,7 @@ export default {
       type: Function,
       required: true,
     },
-    title: {
-      type: String,
-      required: true,
-    },
-    price: {
-      type: Number,
-      required: true,
-    },
-    ingredients: {
+    selectedItem: {
       type: Array,
       required: true,
     },
@@ -125,16 +117,9 @@ export default {
         this.scrollToTop();
       }
     },
-    ingredients: {
-      handler(newIngredients) {
-        const groupSize = 3;
-        const result = [];
-
-        for (let i = 0; i < newIngredients.length; i += groupSize) {
-          result.push(newIngredients.slice(i, i + groupSize));
-        }
-
-        this.groupedIngredients = result;
+    selectedItem: {
+      handler(newValue) {
+        this.fillGroupedIngredients(newValue);
       },
       deep: true,
     },
@@ -156,10 +141,12 @@ export default {
       newIngredient: "",
       isPopUpOpen: this.$store.state.showEditFoodPopUp,
       // FOOD DATA
-      ingredients: this.ingredients,
+      ingredients: [],
       groupedIngredients: [],
-      newTitle: this.title,
-      newPrice: this.price,
+
+      //NEW FOOD DATA
+      newTitle: this.selectedItem.title,
+      newPrice: this.selectedItem.price,
     };
   },
   methods: {
@@ -212,31 +199,29 @@ export default {
         }
       }
     },
-
     updateTitle(event) {
       this.newTitle = event.target.value;
     },
     updatePrice(event) {
       this.newPrice = event.target.value;
+      console.log(this.newPrice);
     },
     fillGroupedIngredients() {
+      this.groupedIngredients = [];
+
       const groupSize = 3;
 
-      const objectsArray = this.ingredients.map((str, id) => ({
-        id,
-        name: str,
-      }));
+      const objectsArray = this.selectedItem.ingredients.map(
+        (ingredientName, id) => ({
+          id,
+          name: ingredientName,
+        })
+      );
 
       for (let i = 0; i < objectsArray.length; i += groupSize) {
         this.groupedIngredients.push(objectsArray.slice(i, i + groupSize));
       }
 
-      console.log(this.groupedIngredients);
-      this.groupedIngredients.forEach((item) => {
-        item.forEach((a) => {
-          console.log(a);
-        });
-      });
       return this.groupedIngredients;
     },
   },

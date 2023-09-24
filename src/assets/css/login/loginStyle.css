@@ -1,0 +1,130 @@
+#login {
+  height: 100vh;
+  background-color: var(--section-background-color);
+  font-family: 'Bebas Neue', sans-serif;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-enterprise {
+  margin: 48px;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+}
+
+.enterprise__image {
+  width: 126px;
+  height: 126px;
+}
+
+.enterprise__name {
+  font-family: 'Pacifico', cursive;
+  font-size: 4rem;
+  font-weight: normal;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  background-color: var(--card-background-color);
+  width: 658px;
+  height: 500px;
+  border-radius: var(--border-radius);
+  padding: 24px;
+}
+
+.form__title {
+  font-size: 3rem;
+  font-weight: normal;
+}
+
+.form__error {
+  font-size: 1.25rem;
+  background-color: #d9d9d9;
+  border-radius: 3px;
+  border-left: 4px solid var(--red-color);
+  border-radius: 4px;
+  padding: 12px;
+  color: #000;
+  font-family: 'Cabin', sans-serif;
+}
+
+.form__error::before {
+  content: "!";
+  display: inline-block;
+  background-color: var(--red-color);
+  color: var(--text-color);
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  margin-right: 8px;
+}
+
+.form__form {
+  display: grid;
+  gap: 24px;
+}
+
+.form__email-container {
+  display: grid;
+  gap: 8px;
+}
+
+.email__label {
+  font-size: 1.5rem;
+}
+
+.email__input {
+  font-size: 1.5rem;
+  font-family: 'Cabin', sans-serif;
+  border-radius: 3px;
+  padding: 8px;
+  width: 432px;
+}
+
+.form__password-container {
+  position: relative;
+  display: grid;
+  gap: 8px;
+}
+
+.password__label {
+  font-size: 1.5rem;
+}
+
+.password__input {
+  font-size: 1.5rem;
+  font-family: 'Cabin', sans-serif;
+  border-radius: 3px;
+  padding: 8px;
+  width: 432px;
+}
+
+.form__password-container > i {
+  position: absolute;
+  right: 12px;
+  top: 48px;
+  color: #000;
+  font-size: 1.5rem;
+}
+
+.form__button {
+  margin-top: 18px;
+  font-size: 1.5rem;
+  font-family: 'Bebas Neue', sans-serif;
+  border-radius: 3px;
+  padding: 8px;
+  width: 432px;
+}
+
+.form__button:hover {
+  color: #000;
+  background-color: #fff;
+  transition: all .5s;
+}

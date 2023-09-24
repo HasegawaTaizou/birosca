@@ -57,10 +57,8 @@
     </button>
     <EditFoodPopUp
       v-if="showEditFoodPopUp"
-      :acceptFunction="editSnack"
-      :title="snackData[snackIndex].title"
-      :price="snackData[snackIndex].price"
-      :ingredients="snackData[snackIndex].ingredients"
+      :accept-function="editSnack"
+      :selectedItem="snackData[snackIndex]"
     />
     <DeleteFoodPopUpVue :acceptFunction="deleteSnack" />
     <AddFoodPopUp :acceptFunction="addSnack" />
@@ -88,6 +86,7 @@ export default {
       snackId: 0,
       snackIndex: 0,
       showEditFoodPopUp: false,
+      selectedItem: null,
     };
   },
   computed: {
