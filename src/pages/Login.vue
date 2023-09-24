@@ -49,6 +49,7 @@
 <script>
 import { BASE_URL } from "@/assets/js/config.js";
 import axios from "axios";
+import store from '../store/store.js'
 
 export default {
   name: "Login",
@@ -62,17 +63,18 @@ export default {
   },
   methods: {
     login() {
-      console.log("login");
       const adminData = {
         email: this.email,
         password: this.password,
       };
       axios
         .post(`${BASE_URL}/login`, adminData)
-        .then(() => {
+        .then((response) => {
+          localStorage.setItem('token', response.data.userData.token)
           this.$router.push("/dashboard");
         })
         .catch((error) => {
+          console.log(error);
           this.showError = true;
         });
     },
