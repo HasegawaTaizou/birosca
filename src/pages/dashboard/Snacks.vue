@@ -17,10 +17,20 @@
           <span class="ingredients__title">INGREDIENTES</span>
           <table class="ingredients__ingredients-table">
             <tbody class="ingredients-body">
-              <tr v-for="(ingredients, index) in groupedArrayIngredients" :key="index" class="ingredients-container">
+              <!-- <tr v-for="(ingredients, index) in groupedArrayIngredients" :key="index" class="ingredients-container">
                 <td
                   class="ingredient"
                   v-for="(ingredient, index) in ingredients"
+                  :key="index"
+                  :data-ingredient-id="index"
+                >
+                  {{ ingredient }}
+                </td>
+              </tr> -->
+              <tr class="ingredients-container">
+                <td
+                  class="ingredient"
+                  v-for="(ingredient, index) in snackData[index].ingredients"
                   :key="index"
                   :data-ingredient-id="index"
                 >
@@ -56,7 +66,7 @@
       ADICIONAR LANCHE
     </button>
     <EditFoodPopUp
-      v-if="showEditFoodPopUp"
+      v-if="this.$store.state.showEditFoodPopUp"
       :accept-function="editSnack"
       :selectedItem="snackData[snackIndex]"
     />
@@ -95,7 +105,7 @@ export default {
     getSnacks() {
       axios.get(`${BASE_URL}/foods/SNACK`).then((response) => {
         this.snackData = response.data.foods;
-        this.functionSplitArray(this.snackData[0].ingredients, 3);
+        this.functionSplitArray(this.snackData[this.snackIndex].ingredients, 3);
         console.log(this.groupedArrayIngredients);
       });
     },
@@ -154,7 +164,7 @@ export default {
 };
 </script>
     
-  <style scoped>
+<style scoped>
 @import url("../../assets/css/dashboard/snacks/snacksStyle.css");
 </style>;
     
