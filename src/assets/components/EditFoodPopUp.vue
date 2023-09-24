@@ -107,7 +107,7 @@ export default {
       required: true,
     },
     selectedItem: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
@@ -141,7 +141,8 @@ export default {
       newIngredient: "",
       isPopUpOpen: this.$store.state.showEditFoodPopUp,
       // FOOD DATA
-      ingredients: [],
+      // ingredients: [],
+      ingredients: this.selectedItem.ingredients,
       groupedIngredients: [],
 
       //NEW FOOD DATA
@@ -157,6 +158,7 @@ export default {
       });
     },
     closePopup() {
+      this.ingredients = [];
       this.$store.commit("SET_SHOW_EDIT_FOOD_POP_UP", false);
     },
     executeAcceptAction() {
@@ -178,6 +180,9 @@ export default {
       if (this.newIngredient.trim() !== "") {
         this.ingredients.push(this.newIngredient);
         this.newIngredient = "";
+
+        console.log(this.newIngredient);
+        console.log(this.ingredients);
       }
     },
     removeIngredient(ingredientId) {
@@ -211,6 +216,7 @@ export default {
 
       const groupSize = 3;
 
+      console.log(this.selectedItem);
       const objectsArray = this.selectedItem.ingredients.map(
         (ingredientName, id) => ({
           id,
