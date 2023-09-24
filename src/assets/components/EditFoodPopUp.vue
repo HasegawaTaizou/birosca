@@ -23,36 +23,21 @@
       </div>
       <div class="food__title-container">
         <label for="title" class="title__label">TÍTULO</label>
-        <input
-          type="text"
-          class="title__input"
-          :value="this.selectedItem.title"
-          @blur="updateTitle"
-        />
+        <input type="text" class="title__input" v-model="newTitle" />
       </div>
       <div class="food__price-container">
         <label for="price" class="price__label">PREÇO</label>
-        <input
-          type="text"
-          class="price__input"
-          :value="this.selectedItem.price"
-          @blur="updatePrice"
-        />
+        <input type="text" class="price__input" v-model="newPrice" />
       </div>
       <div class="food__ingredients-container">
         <span class="ingredients__title">INGREDIENTES</span>
         <table class="ingredients__ingredients-table">
           <tbody class="ingredients-body">
-            <tr
-              class="ingredients-container"
-              v-for="(group, index1) in groupedIngredients"
-              :key="`group-${group.length}-${index1}`"
-            >
+            <tr class="ingredients-container">
               <td
                 class="ingredient-container"
-                v-for="(ingredient, index2) in group"
-                :key="`group-${index1}-ingredient-${index2}`"
-                :data-ingredient-id="`${ingredient.id}`"
+                v-for="(ingredient, index) in ingredientsObject"
+                :key="index"
               >
                 <input class="ingredient__name" :value="ingredient.name" />
                 <div
@@ -117,12 +102,6 @@ export default {
         this.scrollToTop();
       }
     },
-    selectedItem: {
-      handler(newValue) {
-        this.fillGroupedIngredients(newValue);
-      },
-      deep: true,
-    },
   },
   filters: {
     currency(value) {
@@ -138,16 +117,19 @@ export default {
   data() {
     return {
       isSelectedImage: false,
-      newIngredient: "",
       isPopUpOpen: this.$store.state.showEditFoodPopUp,
       // FOOD DATA
-      // ingredients: [],
+      newIngredient: "",
       ingredients: this.selectedItem.ingredients,
-      groupedIngredients: [],
 
       //NEW FOOD DATA
       newTitle: this.selectedItem.title,
       newPrice: this.selectedItem.price,
+
+      //INGREDIENT OBJECT
+      ingredientsObject: {},
+      ingredientsArray: [],
+      updatedIngredients: [],
     };
   },
   methods: {
@@ -158,15 +140,18 @@ export default {
       });
     },
     closePopup() {
-      this.ingredients = [];
       this.$store.commit("SET_SHOW_EDIT_FOOD_POP_UP", false);
     },
     executeAcceptAction() {
+      this.ingredientsArray = this.ingredientsObject.map(
+        (ingredient) => ingredient.name
+      );
+
       const foodData = {
         image: "",
-        title: this.newTitle,
         price: this.newPrice,
-        ingredients: this.ingredients,
+        title: this.newTitle,
+        ingredients: this.ingredientsArray,
       };
 
       console.log(foodData);
@@ -180,59 +165,34 @@ export default {
       if (this.newIngredient.trim() !== "") {
         this.ingredients.push(this.newIngredient);
         this.newIngredient = "";
-
-        console.log(this.newIngredient);
-        console.log(this.ingredients);
       }
+
+      this.ingredientsObject = this.ingredients.map((ingredientName, id) => ({
+        id,
+        name: ingredientName,
+      }));
     },
     removeIngredient(ingredientId) {
-      const tdToRemove = document.querySelector(
-        `.ingredient-container[data-ingredient-id="${ingredientId}"]`
-      );
-      console.log(tdToRemove);
-
-      if (tdToRemove) {
-        tdToRemove.parentNode.removeChild(tdToRemove);
-
-        const index = this.ingredients.findIndex(
-          (ingredient) => ingredient.id === ingredientId
-        );
-
-        if (index !== -1) {
-          this.ingredients.splice(index, 1);
-          this.groupedIngredients = this.ingredients;
-        }
-      }
-    },
-    updateTitle(event) {
-      this.newTitle = event.target.value;
-    },
-    updatePrice(event) {
-      this.newPrice = event.target.value;
-      console.log(this.newPrice);
-    },
-    fillGroupedIngredients() {
-      this.groupedIngredients = [];
-
-      const groupSize = 3;
-
-      console.log(this.selectedItem);
-      const objectsArray = this.selectedItem.ingredients.map(
-        (ingredientName, id) => ({
-          id,
-          name: ingredientName,
-        })
+      this.updatedIngredients = this.ingredientsObject.filter(
+        (ingredient) => ingredient.id !== ingredientId
       );
 
-      for (let i = 0; i < objectsArray.length; i += groupSize) {
-        this.groupedIngredients.push(objectsArray.slice(i, i + groupSize));
-      }
+      this.ingredientsArray = this.updatedIngredients.map(
+        (ingredient) => ingredient.name
+      );
 
-      return this.groupedIngredients;
+      this.ingredients = this.ingredientsArray;
+      this.ingredientsObject = this.updatedIngredients;
+    },
+    fillIngredientsObject() {
+      this.ingredientsObject = this.ingredients.map((ingredientName, id) => ({
+        id,
+        name: ingredientName,
+      }));
     },
   },
   mounted() {
-    this.fillGroupedIngredients();
+    this.fillIngredientsObject();
   },
 };
 </script>
