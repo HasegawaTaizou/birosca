@@ -39,7 +39,7 @@
                 v-for="(ingredient, index) in ingredientsObject"
                 :key="index"
               >
-                <input class="ingredient__name" :value="ingredient.name" />
+                <input class="ingredient__name" v-model="ingredient.name" />
                 <div
                   class="ingredient__icon-container"
                   @click="removeIngredient(ingredient.id)"
