@@ -2,11 +2,7 @@
   <section class="snacks">
     <div class="snacks__snacks-container">
       <div v-for="(snack, index) in snackData" :key="snack.id" class="snack">
-        <img
-          :src="snack.image"
-          alt="Snack Image"
-          class="snack__image"
-        />
+        <img :src="snack.image" alt="Snack Image" class="snack__image" />
         <div class="snack__main">
           <span class="snack__name">{{ snack.title }}</span>
           <span class="snack__price">{{
@@ -17,20 +13,20 @@
           <span class="ingredients__title">INGREDIENTES</span>
           <table class="ingredients__ingredients-table">
             <tbody class="ingredients-body">
-              <!-- <tr v-for="(ingredients, index) in groupedArrayIngredients" :key="index" class="ingredients-container">
+              <!-- <tr class="ingredients-container">
                 <td
                   class="ingredient"
-                  v-for="(ingredient, index) in ingredients"
+                  v-for="(ingredient, index) in snackData[index].ingredients"
                   :key="index"
                   :data-ingredient-id="index"
                 >
                   {{ ingredient }}
                 </td>
               </tr> -->
-              <tr class="ingredients-container">
+              <tr v-for="(ingredients, index) in groupedArrayIngredients[index]" :key="index" class="ingredients-container">
                 <td
                   class="ingredient"
-                  v-for="(ingredient, index) in snackData[index].ingredients"
+                  v-for="(ingredient, index) in ingredients"
                   :key="index"
                   :data-ingredient-id="index"
                 >
@@ -105,8 +101,7 @@ export default {
     getSnacks() {
       axios.get(`${BASE_URL}/foods/SNACK`).then((response) => {
         this.snackData = response.data.foods;
-        this.functionSplitArray(this.snackData[this.snackIndex].ingredients, 3);
-        console.log(this.groupedArrayIngredients);
+        this.functionSplitArray();
       });
     },
     editSnack() {
@@ -151,11 +146,20 @@ export default {
       this.snackId = id;
       this.showEditFoodPopUp = true;
     },
-    functionSplitArray(array, length) {
-      for (let i = 0; i < array.length; i += length) {
-        const subArray = array.slice(i, i + length);
-        this.groupedArrayIngredients.push(subArray);
-      }
+    functionSplitArray() {
+      this.snackData.forEach((item) => {
+        const ingredients = item.ingredients;
+        let currentSubArray = [];
+
+        for (let i = 0; i < ingredients.length; i += 3) {
+          const subArray = ingredients.slice(i, i + 3);
+          currentSubArray.push(subArray);
+        }
+
+        this.groupedArrayIngredients.push(currentSubArray);
+      });
+
+      console.log(this.groupedArrayIngredients);
     },
   },
   mounted() {
