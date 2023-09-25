@@ -3,8 +3,8 @@
 import { BASE_URL } from "@/assets/js/config.js";
 import axios from "axios";
 
-export default function getFoods(typeFood) {
-  axios.get(`${BASE_URL}/foods/${typeFood}`).then((response) => {
+export default function getFoods(foodType) {
+  axios.get(`${BASE_URL}/foods/${foodType}`).then((response) => {
     this.foodData = response.data.foods;
     this.splitArray();
   });

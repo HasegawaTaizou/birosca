@@ -8,10 +8,10 @@ export default function addFood() {
     image: this.$store.state.newFoodData.image,
     title: this.$store.state.newFoodData.title,
     price: this.$store.state.newFoodData.price,
-    foodType: "SNACK",
+    foodType: this.foodType,
     ingredients: this.$store.state.newFoodData.ingredients,
   };
   axios.post(`${BASE_URL}/food-registration/`, newFoodData).then(() => {
-    this.getFoods("SNACK");
+    this.getFoods(this.foodType);
   });
 }

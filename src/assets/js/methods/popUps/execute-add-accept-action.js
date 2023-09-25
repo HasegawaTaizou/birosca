@@ -16,7 +16,6 @@ export default function executeAcceptAction() {
 
   this.$store.commit("SET_NEW_FOOD_DATA", newFoodData);
 
-  console.log("Ação executada");
   this.acceptFunction();
   this.closePopUp("SET_SHOW_ADD_FOOD_POP_UP");
 

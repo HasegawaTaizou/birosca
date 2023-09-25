@@ -89,19 +89,19 @@
 
 <script>
 //METHODS
-import uploadImage from "../js/methods/popUps/input/upload-image.js";
-import fillIngredientsObject from "../js/methods/popUps/fill-ingredients-object.js";
-import splitArray from "../js/methods/popUps/split-array.js";
-import addIngredient from "../js/methods/popUps/input/editFoodPopUp/add-ingredient.js";
-import removeIngredient from "../js/methods/popUps/input/editFoodPopUp/remove-ingredient.js";
-import closePopUp from "../js/methods/popUps/close-popup.js";
-import executeAcceptAction from "../js/methods/popUps/execute-edit-accept-action.js";
+import uploadImage from "../../js/methods/popUps/input/upload-image.js";
+import fillIngredientsObject from "../../js/methods/popUps/fill-ingredients-object.js";
+import splitArray from "../../js/methods/popUps/split-array.js";
+import addIngredient from "../../js/methods/popUps/input/editFoodPopUp/add-ingredient.js";
+import removeIngredient from "../../js/methods/popUps/input/editFoodPopUp/remove-ingredient.js";
+import closePopUp from "../../js/methods/popUps/close-popup.js";
+import executeAcceptAction from "../../js/methods/popUps/execute-edit-accept-action.js";
 
 //DATA
-import foodData from "../js/data/popUps/edit-food-data.js";
+import foodData from "../../js/data/popUps/edit-food-data.js";
 
 //MOUNT
-import mountPopUp from "../js/methods/popUps/mount-popup.js";
+import mountPopUp from "../../js/methods/popUps/mount-popup.js";
 
 export default {
   name: "EditFoodPopUp",
@@ -142,5 +142,5 @@ export default {
 </script>
 
 <style scoped>
-@import url("../css/components/editFoodPopUpStyle.css");
+@import url("../../css/components/popUps/editFoodPopUpStyle.css");
 </style>

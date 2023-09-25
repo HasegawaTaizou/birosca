@@ -107,17 +107,17 @@
   
 <script>
 //METHODS
-import uploadImage from "../js/methods/popUps/input/upload-image.js";
-import closePopUp from "../js/methods/popUps/close-popup.js";
-import executeAcceptAction from "../js/methods/popUps/execute-add-accept-action.js";
-import addIngredient from "../js/methods/popUps/input/addFoodPopUp/add-ingredient.js";
-import removeIngredient from "../js/methods/popUps/input/addFoodPopUp/remove-ingredient.js";
+import uploadImage from "../../js/methods/popUps/input/upload-image.js";
+import closePopUp from "../../js/methods/popUps/close-popup.js";
+import executeAcceptAction from "../../js/methods/popUps/execute-add-accept-action.js";
+import addIngredient from "../../js/methods/popUps/input/addFoodPopUp/add-ingredient.js";
+import removeIngredient from "../../js/methods/popUps/input/addFoodPopUp/remove-ingredient.js";
 
 //DATA
-import foodData from "../js/data/popUps/add-food-data.js";
+import foodData from "../../js/data/popUps/add-food-data.js";
 
 //COMPUTED
-import groupedIngredients from '../js/computed/grouped-ingredients.js'
+import groupedIngredients from '../../js/computed/grouped-ingredients.js'
 
 export default {
   name: "AddFoodPopUp",
@@ -151,6 +151,6 @@ export default {
 </script>
     
 <style scoped>
-@import url("../css/components/addFoodPopUpStyle.css");
+@import url("../../css/components/popUps/addFoodPopUpStyle.css");
 </style>
     

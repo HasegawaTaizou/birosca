@@ -33,8 +33,8 @@
 </template>
   
 <script>
-import closePopUp from "../js/methods/popUps/close-popup.js";
-import executeAcceptAction from "../js/methods/popUps/execute-delete-accept-action.js";
+import closePopUp from "../../js/methods/popUps/close-popup.js";
+import executeAcceptAction from "../../js/methods/popUps/execute-delete-accept-action.js";
 
 export default {
   name: "DeleteFoodPopUp",
@@ -52,6 +52,6 @@ export default {
 </script>
     
 <style scoped>
-@import url("../css/components/deleteFoodPopUpStyle.css");
+@import url("../../css/components/popUps/deleteFoodPopUpStyle.css");
 </style>
     
