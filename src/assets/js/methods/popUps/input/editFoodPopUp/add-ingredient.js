@@ -11,6 +11,5 @@ export default function addIngredient() {
     name: ingredientName,
   }));
 
-  console.log(this.ingredientsObject);
   this.splitArray(this.ingredientsObject);
 }

@@ -12,8 +12,6 @@ export default function executeAcceptAction() {
     ingredients: this.ingredientsArray,
   };
 
-  console.log(newFoodData);
-
   this.$store.commit("SET_NEW_FOOD_DATA", newFoodData);
 
   this.acceptFunction();

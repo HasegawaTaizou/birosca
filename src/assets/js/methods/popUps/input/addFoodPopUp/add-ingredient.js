@@ -2,7 +2,6 @@
 
 export default function addIngredient() {
   if (this.newIngredient.trim() !== "") {
-    console.log(this.newIngredient);
     this.ingredients.push(this.newIngredient);
     this.newIngredient = "";
   }
@@ -12,6 +11,5 @@ export default function addIngredient() {
     name: ingredientName,
   }));
 
-  console.log(this.ingredientsObject);
   this.splitArray(this.ingredientsObject);
 }

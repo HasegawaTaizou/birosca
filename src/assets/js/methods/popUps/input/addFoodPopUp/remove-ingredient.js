@@ -1,7 +1,6 @@
 "use strict";
 
 export default function removeIngredient(ingredientId) {
-  console.log(ingredientId);
   this.updatedIngredients = this.ingredientsObject.filter(
     (ingredient) => ingredient.id !== ingredientId
   );
@@ -15,6 +14,4 @@ export default function removeIngredient(ingredientId) {
   this.splitArray(this.updatedIngredients);
 
   this.ingredientsObject = this.updatedIngredients;
-
-  console.log("ingredientsObject atualizado: ", this.updatedIngredients);
 }
