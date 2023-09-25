@@ -11,7 +11,10 @@
       Os dados serão excluídos e não terá como desfazer esta ação.
     </p>
     <div class="popup__buttons">
-      <button class="button__deny" @click="closePopup">
+      <button
+        class="button__deny"
+        @click="closePopUp('SET_SHOW_DELETE_FOOD_POP_UP')"
+      >
         <span class="deny__text">Não</span>
         <i class="fa-regular fa-circle-xmark deny__icon"></i>
       </button>
@@ -30,6 +33,9 @@
 </template>
   
 <script>
+import closePopUp from "../js/methods/close-popup.js";
+import executeAcceptAction from "../js/methods/execute-delete-accept-action.js";
+
 export default {
   name: "DeleteFoodPopUp",
   props: {
@@ -38,135 +44,14 @@ export default {
       required: true,
     },
   },
-  watch: {
-    "$store.state.showDeleteFoodPopUp"(newValue) {
-      if (newValue == true) {
-        this.scrollToTop();
-      }
-    },
-  },
   methods: {
-    scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    },
-    closePopup() {
-      this.$store.commit("SET_SHOW_DELETE_FOOD_POP_UP", false);
-    },
-    executeAcceptAction() {
-      this.acceptFunction();
-      this.closePopup();
-    },
+    closePopUp,
+    executeAcceptAction,
   },
 };
 </script>
     
 <style scoped>
-.popup-container {
-  background-color: var(--card-background-color);
-  width: 512px;
-  height: 412px;
-  color: var(--text-color);
-  border-radius: var(--border-radius);
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  justify-content: center;
-  align-items: center;
-  font-family: "Cabin", sans-serif;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-.popup__title {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 4rem;
-  font-weight: normal;
-}
-
-.popup__text {
-  font-size: 1.75rem;
-  width: 80%;
-  text-align: center;
-}
-
-.popup__buttons {
-  display: flex;
-  gap: 32px;
-}
-
-.button__deny {
-  width: 126px;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: 2px solid var(--red-color);
-  color: var(--red-color);
-}
-
-.button__deny:hover {
-  color: var(--text-color);
-  background-color: var(--red-color);
-  transition: 0.5s all;
-}
-
-.deny__text {
-  font-size: 1.5rem;
-}
-
-.deny__icon {
-  margin-top: 4px;
-  font-size: 1.125rem;
-}
-
-.button__accept {
-  width: 126px;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: 2px solid var(--green-color);
-  color: var(--green-color);
-}
-
-.button__accept:hover {
-  color: var(--text-color);
-  background-color: rgba(172, 233, 73, 0.8);
-  transition: 0.5s all;
-}
-
-.accept__text {
-  font-size: 1.5rem;
-}
-
-.accept__icon {
-  margin-top: 4px;
-  font-size: 1.125rem;
-}
-
-.hidden {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
-  display: none;
-}
-
-.popup-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  z-index: 1;
-}
+@import url("../css/components/deleteFoodPopUpStyle.css");
 </style>
     

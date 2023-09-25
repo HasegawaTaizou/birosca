@@ -70,7 +70,7 @@
       </div>
     </div>
     <div class="popup__buttons">
-      <button class="button__deny" @click="closePopUp">
+      <button class="button__deny" @click="closePopUp('SET_SHOW_EDIT_FOOD_POP_UP')">
         <span class="deny__text">Cancelar</span>
       </button>
       <button class="button__accept" @click="executeAcceptAction">
@@ -92,13 +92,13 @@
 import uploadImage from "../js/methods/input/upload-image.js";
 import fillIngredientsObject from "../js/methods/fill-ingredients-object.js";
 import splitArray from "../js/methods/split-array.js";
-import addIngredient from "../js/methods/input/add-ingredient.js";
-import removeIngredient from "../js/methods/input/remove-ingredient.js";
+import addIngredient from "../js/methods/input/editFoodPopUp/add-ingredient.js";
+import removeIngredient from "../js/methods/input/editFoodPopUp/remove-ingredient.js";
 import closePopUp from "../js/methods/close-popup.js";
-import executeAcceptAction from "../js/methods/execute-accept-action.js";
+import executeAcceptAction from "../js/methods/execute-edit-accept-action.js";
 
 //DATA
-import foodData from "../js/data/food-data.js";
+import foodData from "../js/data/edit-food-data.js";
 
 //MOUNT
 import mountPopUp from "../js/methods/mount-popup.js";
@@ -126,7 +126,6 @@ export default {
     };
   },
   methods: {
-    scrollToTop,
     uploadImage,
     fillIngredientsObject,
     splitArray,

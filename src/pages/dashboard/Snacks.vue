@@ -98,7 +98,17 @@ export default {
       if (newValue === false) {
         this.getSnacks();
       } else {
-        this.scrollToTop()
+        this.scrollToTop();
+      }
+    },
+    "$store.state.showAddFoodPopUp"(newValue) {
+      if (newValue == true) {
+        this.scrollToTop();
+      }
+    },
+    "$store.state.showDeleteFoodPopUp"(newValue) {
+      if (newValue == true) {
+        this.scrollToTop();
       }
     },
   },

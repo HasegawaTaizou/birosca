@@ -18,7 +18,7 @@ export default function executeAcceptAction() {
   this.$store.commit("SET_SHOW_EDIT_FOOD_POP_UP", false);
 
   this.acceptFunction();
-  this.closePopUp();
+  this.closePopUp("SET_SHOW_EDIT_FOOD_POP_UP");
 
   //PROVISORIO pois nao esta atualizando os ingredients ao clicar em this.acceptFunction();
   //FAZER NO POPUP DE ADD TAMBEM PORQUE TA DANDO O MESMO ERRO
