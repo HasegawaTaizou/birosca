@@ -7,7 +7,7 @@
     }"
   >
     <div class="popup__food-container">
-      <div v-if="!isSelectedImage" class="food__photo-container">
+      <div v-if="!isSelectedImage" class="food__photo-input-container">
         <input
           type="file"
           class="photo__label"
@@ -240,7 +240,15 @@ export default {
   grid-area: photo;
 }
 
+.food__photo-input-container {
+  grid-area: photo;
+}
+
 .food__photo-container input[type="file"] {
+  display: none;
+}
+
+.food__photo-input-container input[type="file"] {
   display: none;
 }
 
@@ -259,11 +267,33 @@ export default {
   right: -65px;
 }
 
+.food__photo-input-container label {
+  padding: 98px 98px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  background-color: transparent;
+  border: 2px solid var(--text-color);
+  margin-right: 42px;
+  margin-bottom: 32px;
+}
+
 .food__photo-container label::after {
   content: "";
 }
 
-.photo__icon {
+.food__photo-input-container label::after {
+  content: "";
+}
+
+.food__photo-input-container .photo__icon {
+  font-size: 3rem;
+  color: #fff;
+}
+ .photo__icon {
   font-size: 3rem;
   color: #262626;
 }
@@ -274,6 +304,7 @@ export default {
   height: 300px;
   width: 300px;
   max-height: 300px;
+  margin-right: 42px;
   position: relative;
 }
 
