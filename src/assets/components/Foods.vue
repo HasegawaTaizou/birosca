@@ -80,6 +80,7 @@ import addFood from "../../assets/js/methods/add-food.js";
 
 //MIXINS
 import watchShowEditFoodPopUps from "../../assets/js/mixins/watch-show-food-popups.js";
+import watchRouteParamsTypeFood from "../js/mixins/watch-route-params-type-food.js";
 
 //DATA
 import foodsData from "../../assets/js/data/foods-data.js";
@@ -106,26 +107,7 @@ export default {
       ...data,
     };
   },
-  mixins: [watchShowEditFoodPopUps],
-  watch: {
-    "$route.params.typeFood"(newValue, oldValue) {
-      console.log(newValue);
-      // Detecta mudanças nas props da rota
-      if (newValue !== oldValue) {
-        // Faz a chamada à API novamente quando as props mudam
-        axios
-          .get(`${BASE_URL}/foods/${newValue.toUpperCase()}`)
-          .then((response) => {
-            // Atualiza os dados
-            this.foodData = response.data.foods;
-          })
-          .catch((error) => {
-            console.error(error);
-            this.$router.push("/erro"); // Redireciona para uma página de erro, se necessário
-          });
-      }
-    },
-  },
+  mixins: [watchShowEditFoodPopUps, watchRouteParamsTypeFood],
   methods: {
     scrollToTop,
     openEditPopup,
