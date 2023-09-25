@@ -1,15 +1,15 @@
 "use strict";
 
 export default function executeAcceptAction() {
-  const ingredientsArray = this.ingredients.map((ingredient) => {
-    return ingredient.name;
-  });
+  this.ingredientsArray = this.ingredientsObject.map(
+    (ingredient) => ingredient.name
+  );
 
   const newFoodData = {
     image: this.downloadURL,
-    title: this.title,
-    price: this.price,
-    ingredients: ingredientsArray,
+    title: this.newTitle,
+    price: this.newPrice,
+    ingredients: this.ingredientsArray,
   };
 
   console.log(newFoodData);
