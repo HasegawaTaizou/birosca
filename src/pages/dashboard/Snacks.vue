@@ -1,15 +1,15 @@
 <template>
-  <section class="snacks">
-    <div class="snacks__snacks-container">
-      <div v-for="(food, index) in foodData" :key="food.id" class="snack">
-        <img :src="food.image" alt="Snack Image" class="snack__image" />
-        <div class="snack__main">
-          <span class="snack__name">{{ food.title }}</span>
-          <span class="snack__price">{{
+  <section class="foods">
+    <div class="foods__foods-container">
+      <div v-for="(food, index) in foodData" :key="food.id" class="food">
+        <img :src="food.image" alt="Food Image" class="food__image" />
+        <div class="food__main">
+          <span class="food__name">{{ food.title }}</span>
+          <span class="food__price">{{
             formatPrice(Number(food.price))
           }}</span>
         </div>
-        <div class="snack__ingredients-container">
+        <div class="food__ingredients-container">
           <span class="ingredients__title">INGREDIENTES</span>
           <table class="ingredients__ingredients-table">
             <tbody class="ingredients-body">
@@ -30,7 +30,7 @@
             </tbody>
           </table>
         </div>
-        <div class="snack__actions">
+        <div class="food__actions">
           <i
             @click="
               this.$store.commit('SET_SHOW_EDIT_FOOD_POP_UP', true);
@@ -50,7 +50,7 @@
     </div>
     <button
       @click="this.$store.commit('SET_SHOW_ADD_FOOD_POP_UP', true)"
-      class="snacks__add-button"
+      class="foods__add-button"
     >
       ADICIONAR LANCHE
     </button>
@@ -117,6 +117,6 @@ export default {
 </script>
     
 <style scoped>
-@import url("../../assets/css/dashboard/snacks/snacksStyle.css");
+@import url("../../assets/css/dashboard/foods/foodsStyle.css");
 </style>;
     
