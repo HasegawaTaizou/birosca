@@ -114,7 +114,7 @@ import addIngredient from "../js/methods/input/addFoodPopUp/add-ingredient.js";
 import removeIngredient from "../js/methods/input/addFoodPopUp/remove-ingredient.js";
 
 //DATA
-import foodData from "../js/data/add-food-data.js";
+import foodData from "../js/data/popUps/add-food-data.js";
 
 //COMPUTED
 import groupedIngredients from '../js/computed/grouped-ingredients.js'

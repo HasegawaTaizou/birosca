@@ -98,7 +98,7 @@ import closePopUp from "../js/methods/close-popup.js";
 import executeAcceptAction from "../js/methods/execute-edit-accept-action.js";
 
 //DATA
-import foodData from "../js/data/edit-food-data.js";
+import foodData from "../js/data/popUps/edit-food-data.js";
 
 //MOUNT
 import mountPopUp from "../js/methods/mount-popup.js";

@@ -66,14 +66,23 @@
 </template>
     
 <script>
+//API
 import { BASE_URL } from "@/assets/js/config.js";
 import axios from "axios";
 
+//POP UPS
 import DeleteFoodPopUpVue from "../../assets/components/DeleteFoodPopUp.vue";
 import AddFoodPopUp from "../../assets/components/AddFoodPopUp.vue";
 import EditFoodPopUp from "../../assets/components/EditFoodPopUp.vue";
 
+//METHODS
 import scrollToTop from "../../assets/js/methods/scroll-to-top.js";
+
+//MIXINS
+import watchShowEditFoodPopUps from "../../assets/js/mixins/watch-show-food-popups.js";
+
+//DATA
+import foodData from '../../assets/js/data/food-data.js';
 
 export default {
   name: "Snacks",
@@ -83,35 +92,14 @@ export default {
     EditFoodPopUp,
   },
   data() {
+    const data = foodData()
     return {
-      snackData: {},
-      snackId: 0,
-      snackIndex: 0,
-      showEditFoodPopUp: false,
-      selectedItem: null,
-
-      groupedArrayIngredients: [],
+      ...data
     };
   },
-  watch: {
-    "$store.state.showEditFoodPopUp": function (newValue) {
-      if (newValue === false) {
-        this.getSnacks();
-      } else {
-        this.scrollToTop();
-      }
-    },
-    "$store.state.showAddFoodPopUp"(newValue) {
-      if (newValue == true) {
-        this.scrollToTop();
-      }
-    },
-    "$store.state.showDeleteFoodPopUp"(newValue) {
-      if (newValue == true) {
-        this.scrollToTop();
-      }
-    },
-  },
+  mixins: [
+    watchShowEditFoodPopUps,
+  ],
   methods: {
     scrollToTop,
     getSnacks() {
