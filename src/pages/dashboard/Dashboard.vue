@@ -12,16 +12,16 @@
       <nav class="birosca-navigation-container">
         <ul class="navigations">
           <li class="navigation">
-            <router-link :to="'/dashboard/acais'">Açaís</router-link>
+            <router-link :to="'/dashboard/acai'">Açaís</router-link>
           </li>
           <li class="navigation">
-            <router-link :to="'/dashboard/snacks'">Lanches</router-link>
+            <router-link :to="'/dashboard/snack'">Lanches</router-link>
           </li>
           <li class="navigation">
-            <router-link :to="'/dashboard/diverses'">Diversos</router-link>
+            <router-link :to="'/dashboard/diverse'">Diversos</router-link>
           </li>
           <li class="navigation">
-            <router-link :to="'/dashboard/drinks'">Bebidas</router-link>
+            <router-link :to="'/dashboard/drink'">Bebidas</router-link>
           </li>
         </ul>
       </nav>

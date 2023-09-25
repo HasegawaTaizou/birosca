@@ -11,7 +11,7 @@ import Drinks from "@/pages/Drinks.vue";
 import Login from "@/pages/Login.vue";
 // DASHBOARD
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
-import DashboardSnacks from "@/pages/dashboard/Snacks.vue";
+import DashboardFoodsManagement from "@/pages/dashboard/FoodsManagement.vue";
 
 const routes = [
   {
@@ -58,11 +58,18 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
+    props: true,
     meta: { requiresAuth: true },
     children: [
       {
         path: "",
-        component: DashboardSnacks,
+        redirect: "/dashboard/snack",
+        component: DashboardFoodsManagement,
+      },
+      {
+        path: "/dashboard/:typeFood",
+        component: DashboardFoodsManagement,
+        props: true,
       },
     ],
   },
@@ -75,7 +82,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
       next("/login");
     } else {

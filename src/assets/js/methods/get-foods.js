@@ -5,6 +5,7 @@ import axios from "axios";
 
 export default function getFoods(foodType) {
   axios.get(`${BASE_URL}/foods/${foodType}`).then((response) => {
+    console.log(response.data.foods);
     this.foodData = response.data.foods;
     this.splitArray();
   });
