@@ -1,11 +1,15 @@
-"use strict";
+'use strict'
 
-export default function splitArray(array) {
-  this.groupedIngredients = [];
-  const chunkSize = 3;
+export default function splitArray() {
+  this.snackData.forEach((item) => {
+    const ingredients = item.ingredients;
+    let currentSubArray = [];
 
-  for (let i = 0; i < array.length; i += chunkSize) {
-    const chunk = array.slice(i, i + chunkSize);
-    this.groupedIngredients.push(chunk);
-  }
+    for (let i = 0; i < ingredients.length; i += 3) {
+      const subArray = ingredients.slice(i, i + 3);
+      currentSubArray.push(subArray);
+    }
+
+    this.groupedArrayIngredients.push(currentSubArray);
+  });
 }

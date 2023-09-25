@@ -57,32 +57,35 @@
     </button>
     <EditFoodPopUp
       v-if="this.$store.state.showEditFoodPopUp"
-      :accept-function="editSnack"
+      :accept-function="editFood"
       :selectedItem="snackData[snackIndex]"
     />
-    <DeleteFoodPopUpVue :acceptFunction="deleteSnack" />
-    <AddFoodPopUp :acceptFunction="addSnack" />
+    <DeleteFoodPopUpVue :acceptFunction="deleteFood" />
+    <AddFoodPopUp :acceptFunction="addFood" />
   </section>
 </template>
-    
-<script>
-//API
-import { BASE_URL } from "@/assets/js/config.js";
-import axios from "axios";
 
+<script>
 //POP UPS
 import DeleteFoodPopUpVue from "../../assets/components/DeleteFoodPopUp.vue";
 import AddFoodPopUp from "../../assets/components/AddFoodPopUp.vue";
 import EditFoodPopUp from "../../assets/components/EditFoodPopUp.vue";
 
 //METHODS
-import scrollToTop from "../../assets/js/methods/scroll-to-top.js";
+import scrollToTop from "../../assets/js/methods/popUps/scroll-to-top.js";
+import openEditPopup from "../../assets/js/methods/open-edit-popup.js";
+import splitArray from "../../assets/js/methods/split-array.js";
+import formatPrice from "../../assets/js/methods/format-price.js";
+import getFoods from "../../assets/js/methods/get-foods.js";
+import editFood from "../../assets/js/methods/edit-food.js";
+import deleteFood from "../../assets/js/methods/delete-food.js";
+import addFood from "../../assets/js/methods/add-food.js";
 
 //MIXINS
 import watchShowEditFoodPopUps from "../../assets/js/mixins/watch-show-food-popups.js";
 
 //DATA
-import foodData from '../../assets/js/data/food-data.js';
+import foodData from "../../assets/js/data/food-data.js";
 
 export default {
   name: "Snacks",
@@ -92,82 +95,24 @@ export default {
     EditFoodPopUp,
   },
   data() {
-    const data = foodData()
+    const data = foodData();
     return {
-      ...data
+      ...data,
     };
   },
-  mixins: [
-    watchShowEditFoodPopUps,
-  ],
+  mixins: [watchShowEditFoodPopUps],
   methods: {
     scrollToTop,
-    getSnacks() {
-      axios.get(`${BASE_URL}/foods/SNACK`).then((response) => {
-        this.snackData = response.data.foods;
-        this.functionSplitArray();
-      });
-    },
-    editSnack() {
-      const foodData = {
-        image: this.$store.state.foodData.image,
-        title: this.$store.state.foodData.title,
-        price: this.$store.state.foodData.price,
-        ingredients: this.$store.state.foodData.ingredients,
-      };
-      axios
-        .put(`${BASE_URL}/food-update/${this.snackId}`, foodData)
-        .then(() => {
-          this.getSnacks();
-        });
-    },
-    deleteSnack() {
-      axios.delete(`${BASE_URL}/food-delete/${this.snackId}`).then(() => {
-        this.getSnacks();
-      });
-    },
-    addSnack() {
-      const newFoodData = {
-        image: this.$store.state.newFoodData.image,
-        title: this.$store.state.newFoodData.title,
-        price: this.$store.state.newFoodData.price,
-        foodType: "SNACK",
-        ingredients: this.$store.state.newFoodData.ingredients,
-      };
-      axios.post(`${BASE_URL}/food-registration/`, newFoodData).then(() => {
-        this.getSnacks();
-      });
-    },
-    formatPrice(price) {
-      const formattedPrice = price.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
-      return formattedPrice;
-    },
-    openEditPopup(index, id) {
-      this.snackIndex = index;
-      this.snackId = id;
-      this.showEditFoodPopUp = true;
-
-      this.$store.commit("SET_SHOW_EDIT_FOOD_POP_UP", true);
-    },
-    functionSplitArray() {
-      this.snackData.forEach((item) => {
-        const ingredients = item.ingredients;
-        let currentSubArray = [];
-
-        for (let i = 0; i < ingredients.length; i += 3) {
-          const subArray = ingredients.slice(i, i + 3);
-          currentSubArray.push(subArray);
-        }
-
-        this.groupedArrayIngredients.push(currentSubArray);
-      });
-    },
+    openEditPopup,
+    splitArray,
+    formatPrice,
+    getFoods,
+    editFood,
+    deleteFood,
+    addFood,
   },
   mounted() {
-    this.getSnacks();
+    this.getFoods("SNACK");
   },
 };
 </script>

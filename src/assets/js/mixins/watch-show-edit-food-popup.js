@@ -4,7 +4,7 @@ export default {
   watch: {
     "$store.state.showEditFoodPopUp": function (newValue) {
       if (newValue === false) {
-        this.getSnacks();
+        this.getFoods("SNACK");
       } else {
         this.scrollToTop();
       }

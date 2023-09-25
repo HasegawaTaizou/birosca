@@ -107,11 +107,11 @@
   
 <script>
 //METHODS
-import uploadImage from "../js/methods/input/upload-image.js";
-import closePopUp from "../js/methods/close-popup.js";
-import executeAcceptAction from "../js/methods/execute-add-accept-action.js";
-import addIngredient from "../js/methods/input/addFoodPopUp/add-ingredient.js";
-import removeIngredient from "../js/methods/input/addFoodPopUp/remove-ingredient.js";
+import uploadImage from "../js/methods/popUps/input/upload-image.js";
+import closePopUp from "../js/methods/popUps/close-popup.js";
+import executeAcceptAction from "../js/methods/popUps/execute-add-accept-action.js";
+import addIngredient from "../js/methods/popUps/input/addFoodPopUp/add-ingredient.js";
+import removeIngredient from "../js/methods/popUps/input/addFoodPopUp/remove-ingredient.js";
 
 //DATA
 import foodData from "../js/data/popUps/add-food-data.js";

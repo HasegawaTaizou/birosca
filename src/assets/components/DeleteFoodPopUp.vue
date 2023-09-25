@@ -33,8 +33,8 @@
 </template>
   
 <script>
-import closePopUp from "../js/methods/close-popup.js";
-import executeAcceptAction from "../js/methods/execute-delete-accept-action.js";
+import closePopUp from "../js/methods/popUps/close-popup.js";
+import executeAcceptAction from "../js/methods/popUps/execute-delete-accept-action.js";
 
 export default {
   name: "DeleteFoodPopUp",
