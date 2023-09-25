@@ -89,7 +89,6 @@
 
 <script>
 //METHODS
-import scrollToTop from "../js/methods/scroll-to-top.js";
 import uploadImage from "../js/methods/input/upload-image.js";
 import fillIngredientsObject from "../js/methods/fill-ingredients-object.js";
 import splitArray from "../js/methods/split-array.js";
@@ -116,22 +115,9 @@ export default {
       required: true,
     },
   },
-  watch: {
-    teste: function(newValue, oldValue) {
-      console.log(newValue, oldValue);
-      console.log('alo');
-    },
-    "$store.state.showEditFoodPopUp"(newValue) {
-      console.log(newValue);
-      if (newValue === true) {
-        this.scrollToTop();
-      }
-    },
-  },
   data() {
     const data = foodData(this.selectedItem);
     return {
-      teste: false,
       //SHOW FOOD POPUP
       isPopUpOpen: this.$store.state.showEditFoodPopUp,
 
@@ -152,10 +138,6 @@ export default {
   },
   mounted() {
     this.mountPopUp();
-    console.log(this.$store.state.showEditFoodPopUp);
-  },
-  unmounted() {
-    console.log(this.$store.state.showEditFoodPopUp);
   },
 };
 </script>

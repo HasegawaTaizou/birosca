@@ -73,6 +73,8 @@ import DeleteFoodPopUpVue from "../../assets/components/DeleteFoodPopUp.vue";
 import AddFoodPopUp from "../../assets/components/AddFoodPopUp.vue";
 import EditFoodPopUp from "../../assets/components/EditFoodPopUp.vue";
 
+import scrollToTop from "../../assets/js/methods/scroll-to-top.js";
+
 export default {
   name: "Snacks",
   components: {
@@ -95,10 +97,13 @@ export default {
     "$store.state.showEditFoodPopUp": function (newValue) {
       if (newValue === false) {
         this.getSnacks();
+      } else {
+        this.scrollToTop()
       }
     },
   },
   methods: {
+    scrollToTop,
     getSnacks() {
       axios.get(`${BASE_URL}/foods/SNACK`).then((response) => {
         this.snackData = response.data.foods;
