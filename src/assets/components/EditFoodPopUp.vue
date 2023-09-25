@@ -149,6 +149,7 @@ export default {
     },
     closePopup() {
       this.$store.commit("SET_SHOW_EDIT_FOOD_POP_UP", false);
+      console.log(this.$store.state.showEditFoodPopUp);
     },
     executeAcceptAction() {
       this.ingredientsArray = this.ingredientsObject.map(
@@ -165,6 +166,7 @@ export default {
       console.log(foodData);
 
       this.$store.commit("SET_FOOD_DATA", foodData);
+      this.$store.commit("SET_SHOW_EDIT_FOOD_POP_UP", false);
 
       this.acceptFunction();
       this.closePopup();
@@ -271,7 +273,7 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 100%;
-  background-color: #FBFBFB;
+  background-color: #fbfbfb;
   position: absolute;
   bottom: -50px;
   right: -65px;
@@ -340,7 +342,6 @@ export default {
   font-size: 1.75rem;
   margin-top: 24px;
 }
-
 
 .ingredients-body {
   display: flex;

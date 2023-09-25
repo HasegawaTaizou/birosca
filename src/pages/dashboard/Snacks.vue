@@ -13,17 +13,11 @@
           <span class="ingredients__title">INGREDIENTES</span>
           <table class="ingredients__ingredients-table">
             <tbody class="ingredients-body">
-              <!-- <tr class="ingredients-container">
-                <td
-                  class="ingredient"
-                  v-for="(ingredient, index) in snackData[index].ingredients"
-                  :key="index"
-                  :data-ingredient-id="index"
-                >
-                  {{ ingredient }}
-                </td>
-              </tr> -->
-              <tr v-for="(ingredients, index) in groupedArrayIngredients[index]" :key="index" class="ingredients-container">
+              <tr
+                v-for="(ingredients, index) in groupedArrayIngredients[index]"
+                :key="index"
+                class="ingredients-container"
+              >
                 <td
                   class="ingredient"
                   v-for="(ingredient, index) in ingredients"
@@ -97,6 +91,15 @@ export default {
       groupedArrayIngredients: [],
     };
   },
+  watch: {
+    "$store.state.showEditFoodPopUp": function (newValue) {
+      console.log(newValue);
+      if (newValue === false) {
+        console.log("É falso!");
+        this.getSnacks();
+      }
+    },
+  },
   methods: {
     getSnacks() {
       axios.get(`${BASE_URL}/foods/SNACK`).then((response) => {
@@ -145,6 +148,9 @@ export default {
       this.snackIndex = index;
       this.snackId = id;
       this.showEditFoodPopUp = true;
+
+      this.$store.commit("SET_SHOW_EDIT_FOOD_POP_UP", true);
+      console.log(this.$store.state.showEditFoodPopUp);
     },
     functionSplitArray() {
       this.snackData.forEach((item) => {
