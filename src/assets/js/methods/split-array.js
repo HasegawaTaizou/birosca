@@ -1,7 +1,6 @@
 "use strict";
 
 export default function splitArray(array) {
-    console.log(this.groupedIngredients);
   this.groupedIngredients = [];
   const chunkSize = 3;
 

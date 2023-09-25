@@ -117,16 +117,21 @@ export default {
     },
   },
   watch: {
+    teste: function(newValue, oldValue) {
+      console.log(newValue, oldValue);
+      console.log('alo');
+    },
     "$store.state.showEditFoodPopUp"(newValue) {
-      if (newValue == true) {
+      console.log(newValue);
+      if (newValue === true) {
         this.scrollToTop();
       }
     },
   },
   data() {
     const data = foodData(this.selectedItem);
-    console.log(data.newPrice);
     return {
+      teste: false,
       //SHOW FOOD POPUP
       isPopUpOpen: this.$store.state.showEditFoodPopUp,
 
@@ -147,6 +152,10 @@ export default {
   },
   mounted() {
     this.mountPopUp();
+    console.log(this.$store.state.showEditFoodPopUp);
+  },
+  unmounted() {
+    console.log(this.$store.state.showEditFoodPopUp);
   },
 };
 </script>
