@@ -3,7 +3,7 @@
     <div class="snacks__snacks-container">
       <div v-for="(snack, index) in snackData" :key="snack.id" class="snack">
         <img
-          src="../../assets/img/snack-image.png"
+          :src="snack.image"
           alt="Snack Image"
           class="snack__image"
         />

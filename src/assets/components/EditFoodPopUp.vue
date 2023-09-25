@@ -7,19 +7,19 @@
     }"
   >
     <div class="popup__food-container">
-      <div v-if="!isSelectedImage" class="food__photo-container">
-        <input
-          type="file"
-          class="photo__label"
-          id="photo"
-          @change="uploadImage"
-        />
-        <label for="photo">
-          <i class="fas fa-camera photo__icon"></i>
-        </label>
-      </div>
-      <div v-else class="food__photo-selected-container">
+      <div class="food__photo-selected-container">
         <img :src="downloadURL" alt="Food Photo" class="photo__photo" />
+        <div class="food__photo-container">
+          <input
+            type="file"
+            class="photo__label"
+            id="photo"
+            @change="uploadImage"
+          />
+          <label for="photo">
+            <i class="far fa-edit photo__icon"></i>
+          </label>
+        </div>
       </div>
       <div class="food__title-container">
         <label for="title" class="title__label">TÍTULO</label>
@@ -84,6 +84,8 @@
 </template>
   
 <script>
+import uploadImage from "../js/methods/input/upload-image";
+
 export default {
   name: "EditFoodPopUp",
   props: {
@@ -116,9 +118,14 @@ export default {
   },
   data() {
     return {
-      isSelectedImage: false,
+      //SHOW FOOD POPUP
       isPopUpOpen: this.$store.state.showEditFoodPopUp,
-      // FOOD DATA
+
+      //FOOD IMAGE
+      isSelectedImage: true,
+      downloadURL: this.selectedItem.image,
+
+      //FOOD DATA
       newIngredient: "",
       ingredients: this.selectedItem.ingredients,
 
@@ -133,6 +140,7 @@ export default {
     };
   },
   methods: {
+    uploadImage,
     scrollToTop() {
       window.scrollTo({
         top: 0,
@@ -148,7 +156,7 @@ export default {
       );
 
       const foodData = {
-        image: "",
+        image: this.downloadURL,
         price: this.newPrice,
         title: this.newTitle,
         ingredients: this.ingredientsArray,
@@ -231,22 +239,42 @@ export default {
   grid-area: photo;
 }
 
+.food__photo-selected-container {
+  grid-area: photo;
+  max-width: 300px;
+  height: 300px;
+  width: 300px;
+  max-height: 300px;
+  margin-right: 42px;
+  position: relative;
+}
+
+.photo__photo {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+}
+
 .food__photo-container input[type="file"] {
   display: none;
 }
 
 .food__photo-container label {
-  padding: 90px 90px;
-  color: #fff;
+  padding: 24px 24px;
   border-radius: 5px;
   cursor: pointer;
   margin: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: var(--input-border);
-  position: relative;
   border-radius: 100%;
+  background-color: #FBFBFB;
+  position: absolute;
+  bottom: -50px;
+  right: -65px;
 }
 
 .food__photo-container label::after {
@@ -254,22 +282,8 @@ export default {
 }
 
 .photo__icon {
-  font-size: 2.5rem;
-}
-
-.food__photo-selected-container {
-  grid-area: photo;
-  max-width: 300px;
-  height: 300px;
-  width: 300px;
-  max-height: 300px;
-}
-
-.photo__photo {
-  width: 100%;
-  height: 100%;
-  border-radius: 100%;
-  overflow: hidden;
+  font-size: 3rem;
+  color: #262626;
 }
 
 .food__title-container {
@@ -326,6 +340,7 @@ export default {
   font-size: 1.75rem;
   margin-top: 24px;
 }
+
 
 .ingredients-body {
   display: flex;

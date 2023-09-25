@@ -2,12 +2,13 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDofRds_OjtPBMabg4-lS82cRWdLjXA4Zk",
-  authDomain: "greenworld-f2763.firebaseapp.com",
-  projectId: "greenworld-f2763",
-  storageBucket: "greenworld-f2763.appspot.com",
-  messagingSenderId: "549856611550",
-  appId: "1:549856611550:web:ca75f1092264f9d607864f",
+  apiKey: "AIzaSyAHXcSqQFgrPkPsMj79WStHWIvUsATR8EI",
+  authDomain: "birosca-3aac5.firebaseapp.com",
+  projectId: "birosca-3aac5",
+  storageBucket: "birosca-3aac5.appspot.com",
+  messagingSenderId: "324197127722",
+  appId: "1:324197127722:web:c3c6737f123576a8dd9553",
+  measurementId: "G-TPV57FXHZ9"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -22,5 +23,5 @@ export default async function uploadImage(event) {
   this.downloadURL = await getDownloadURL(storageRef);
 
   this.isSelectedImage = true;
-  this.$store.state.formData.isSelectedImage = true;
+  this.$store.commit("SET_IS_SELECTED_IMAGE", true);
 }

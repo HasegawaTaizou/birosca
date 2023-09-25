@@ -37,6 +37,11 @@
 
 .snack__image {
   grid-area: image;
+  width: 196px;
+  height: 196px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .snack__main {

@@ -20,6 +20,17 @@
       </div>
       <div v-else class="food__photo-selected-container">
         <img :src="downloadURL" alt="Food Photo" class="photo__photo" />
+        <div class="food__photo-container">
+          <input
+            type="file"
+            class="photo__label"
+            id="photo"
+            @change="uploadImage"
+          />
+          <label for="photo">
+            <i class="far fa-edit photo__icon"></i>
+          </label>
+        </div>
       </div>
       <div class="food__title-container">
         <label for="title" class="title__label">TÍTULO</label>
@@ -92,6 +103,8 @@
 </template>
   
 <script>
+import uploadImage from "../js/methods/input/upload-image";
+
 export default {
   name: "AddFoodPopUp",
   props: {
@@ -132,15 +145,22 @@ export default {
   },
   data() {
     return {
+      //SHOW FOOD POPUP
+      isPopUpOpen: this.$store.state.showAddFoodPopUp,
+
+      //FOOD IMAGE
       isSelectedImage: false,
+      downloadURL: "",
+
+      //FOOD DATA
       title: "",
       price: 0.0,
       ingredients: [],
       newIngredient: "",
-      isPopUpOpen: this.$store.state.showAddFoodPopUp,
     };
   },
   methods: {
+    uploadImage,
     scrollToTop() {
       window.scrollTo({
         top: 0,
@@ -156,11 +176,14 @@ export default {
       });
 
       const newFoodData = {
-        image: "",
+        image: this.downloadURL,
         title: this.title,
         price: this.price,
         ingredients: ingredientsArray,
       };
+
+      console.log(newFoodData);
+
       this.$store.commit("SET_NEW_FOOD_DATA", newFoodData);
 
       console.log("Ação executada");
@@ -222,17 +245,18 @@ export default {
 }
 
 .food__photo-container label {
-  padding: 90px 90px;
-  color: #fff;
+  padding: 24px 24px;
   border-radius: 5px;
   cursor: pointer;
   margin: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: var(--input-border);
-  position: relative;
   border-radius: 100%;
+  background-color: #FBFBFB;
+  position: absolute;
+  bottom: -50px;
+  right: -65px;
 }
 
 .food__photo-container label::after {
@@ -240,7 +264,8 @@ export default {
 }
 
 .photo__icon {
-  font-size: 2.5rem;
+  font-size: 3rem;
+  color: #262626;
 }
 
 .food__photo-selected-container {
@@ -249,13 +274,16 @@ export default {
   height: 300px;
   width: 300px;
   max-height: 300px;
+  position: relative;
 }
 
 .photo__photo {
   width: 100%;
   height: 100%;
-  border-radius: 100%;
   overflow: hidden;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .food__title-container {

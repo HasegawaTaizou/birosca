@@ -11,6 +11,9 @@ export default new Vuex.Store({
     //ADD FOOD POPUP STATUS
     showAddFoodPopUp: false,
 
+    //FOOD IMAGE
+    isSelectedImage: false,
+    
     //EDIT FOOD DATA
     foodData: {
       title: "",
@@ -44,5 +47,8 @@ export default new Vuex.Store({
     SET_NEW_FOOD_DATA(state, value) {
       state.newFoodData = value;
     },
+    SET_IS_SELECTED_IMAGE(state, value) {
+      state.isSelectedImage = value;
+    }
   },
 });
