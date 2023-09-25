@@ -93,9 +93,7 @@ export default {
   },
   watch: {
     "$store.state.showEditFoodPopUp": function (newValue) {
-      console.log(newValue);
       if (newValue === false) {
-        console.log("É falso!");
         this.getSnacks();
       }
     },
@@ -150,7 +148,6 @@ export default {
       this.showEditFoodPopUp = true;
 
       this.$store.commit("SET_SHOW_EDIT_FOOD_POP_UP", true);
-      console.log(this.$store.state.showEditFoodPopUp);
     },
     functionSplitArray() {
       this.snackData.forEach((item) => {
@@ -164,8 +161,6 @@ export default {
 
         this.groupedArrayIngredients.push(currentSubArray);
       });
-
-      console.log(this.groupedArrayIngredients);
     },
   },
   mounted() {

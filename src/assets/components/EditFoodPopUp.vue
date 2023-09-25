@@ -33,10 +33,29 @@
         <span class="ingredients__title">INGREDIENTES</span>
         <table class="ingredients__ingredients-table">
           <tbody class="ingredients-body">
-            <tr class="ingredients-container">
+            <!-- <tr class="ingredients-container">
               <td
                 class="ingredient-container"
                 v-for="(ingredient, index) in ingredientsObject"
+                :key="index"
+              >
+                <input class="ingredient__name" v-model="ingredient.name" />
+                <div
+                  class="ingredient__icon-container"
+                  @click="removeIngredient(ingredient.id)"
+                >
+                  <i class="fa-solid fa-x"></i>
+                </div>
+              </td>
+            </tr> -->
+            <tr
+              v-for="(ingredients, index) in groupedIngredients"
+              :key="index"
+              class="ingredients-container"
+            >
+              <td
+                class="ingredient-container"
+                v-for="(ingredient, index) in ingredients"
                 :key="index"
               >
                 <input class="ingredient__name" v-model="ingredient.name" />
@@ -82,7 +101,7 @@
     }"
   ></div>
 </template>
-  
+
 <script>
 import uploadImage from "../js/methods/input/upload-image";
 
@@ -137,6 +156,9 @@ export default {
       ingredientsObject: {},
       ingredientsArray: [],
       updatedIngredients: [],
+
+      //GROUPED INGREDIENTS
+      groupedIngredients: [],
     };
   },
   methods: {
@@ -170,6 +192,9 @@ export default {
 
       this.acceptFunction();
       this.closePopup();
+
+      //Provisorio pois nao esta atualizando os ingredients ao clicar em this.acceptFunction();
+      location.reload();
     },
     addIngredient() {
       if (this.newIngredient.trim() !== "") {
@@ -181,8 +206,11 @@ export default {
         id,
         name: ingredientName,
       }));
+
+      this.functionSplitArray(this.ingredientsObject)
     },
     removeIngredient(ingredientId) {
+      console.log(ingredientId);
       this.updatedIngredients = this.ingredientsObject.filter(
         (ingredient) => ingredient.id !== ingredientId
       );
@@ -192,7 +220,12 @@ export default {
       );
 
       this.ingredients = this.ingredientsArray;
+
+      this.functionSplitArray(this.updatedIngredients);
+
       this.ingredientsObject = this.updatedIngredients;
+
+      console.log("ingredientsObject atualizado: ", this.updatedIngredients);
     },
     fillIngredientsObject() {
       this.ingredientsObject = this.ingredients.map((ingredientName, id) => ({
@@ -200,16 +233,34 @@ export default {
         name: ingredientName,
       }));
     },
+    functionSplitArray(array) {
+      this.groupedIngredients = [];
+      const chunkSize = 3;
+
+      // for (let i = 0; i < this.ingredientsObject.length; i += chunkSize) {
+      //   const chunk = this.ingredientsObject.slice(i, i + chunkSize);
+      //   this.groupedIngredients.push(chunk);
+      // }
+
+      for (let i = 0; i < array.length; i += chunkSize) {
+        const chunk = array.slice(i, i + chunkSize);
+        this.groupedIngredients.push(chunk);
+      }
+
+      console.log("this.ingredientsObject: ", this.ingredientsObject);
+      console.log("this.groupedIngredients: ", this.groupedIngredients);
+    },
   },
   mounted() {
     this.newTitle = this.selectedItem.title;
     this.newPrice = this.selectedItem.price;
     this.ingredients = this.selectedItem.ingredients;
     this.fillIngredientsObject();
+    this.functionSplitArray(this.ingredientsObject);
   },
 };
 </script>
-    
+
 <style scoped>
 .popup-container {
   background-color: var(--card-background-color);
@@ -462,4 +513,3 @@ export default {
   z-index: 1;
 }
 </style>
-    
