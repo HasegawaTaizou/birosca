@@ -1,8 +1,8 @@
 'use strict'
 
 export default function splitArray() {
-  this.snackData.forEach((item) => {
-    const ingredients = item.ingredients;
+  this.foodData.forEach((ingredientsArray) => {
+    const ingredients = ingredientsArray.ingredients;
     let currentSubArray = [];
 
     for (let i = 0; i < ingredients.length; i += 3) {

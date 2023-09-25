@@ -1,12 +1,12 @@
 <template>
   <section class="snacks">
     <div class="snacks__snacks-container">
-      <div v-for="(snack, index) in snackData" :key="snack.id" class="snack">
-        <img :src="snack.image" alt="Snack Image" class="snack__image" />
+      <div v-for="(food, index) in foodData" :key="food.id" class="snack">
+        <img :src="food.image" alt="Snack Image" class="snack__image" />
         <div class="snack__main">
-          <span class="snack__name">{{ snack.title }}</span>
+          <span class="snack__name">{{ food.title }}</span>
           <span class="snack__price">{{
-            formatPrice(Number(snack.price))
+            formatPrice(Number(food.price))
           }}</span>
         </div>
         <div class="snack__ingredients-container">
@@ -30,19 +30,18 @@
             </tbody>
           </table>
         </div>
-
         <div class="snack__actions">
           <i
             @click="
               this.$store.commit('SET_SHOW_EDIT_FOOD_POP_UP', true);
-              openEditPopup(index, snack.id);
+              openEditPopup(index, food.id);
             "
             class="fa-solid fa-pen action__edit"
           ></i>
           <i
             @click="
               this.$store.commit('SET_SHOW_DELETE_FOOD_POP_UP', true);
-              snackId = snack.id;
+              foodId = food.id;
             "
             class="fa-solid fa-trash action__delete"
           ></i>
@@ -58,7 +57,7 @@
     <EditFoodPopUp
       v-if="this.$store.state.showEditFoodPopUp"
       :accept-function="editFood"
-      :selectedItem="snackData[snackIndex]"
+      :selectedItem="foodData[foodIndex]"
     />
     <DeleteFoodPopUpVue :acceptFunction="deleteFood" />
     <AddFoodPopUp :acceptFunction="addFood" />
@@ -85,7 +84,7 @@ import addFood from "../../assets/js/methods/add-food.js";
 import watchShowEditFoodPopUps from "../../assets/js/mixins/watch-show-food-popups.js";
 
 //DATA
-import foodData from "../../assets/js/data/food-data.js";
+import foodsData from "../../assets/js/data/foods-data.js";
 
 export default {
   name: "Snacks",
@@ -95,7 +94,7 @@ export default {
     EditFoodPopUp,
   },
   data() {
-    const data = foodData();
+    const data = foodsData();
     return {
       ...data,
     };

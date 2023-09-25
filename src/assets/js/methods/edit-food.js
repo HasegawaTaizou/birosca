@@ -10,7 +10,7 @@ export default function editFood() {
     price: this.$store.state.foodData.price,
     ingredients: this.$store.state.foodData.ingredients,
   };
-  axios.put(`${BASE_URL}/food-update/${this.snackId}`, foodData).then(() => {
+  axios.put(`${BASE_URL}/food-update/${this.foodId}`, foodData).then(() => {
     this.getFoods("SNACK");
   });
 }

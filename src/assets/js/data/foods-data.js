@@ -1,8 +1,8 @@
-export default function foodData() {
+export default function foodsData() {
   return {
-    snackData: {},
-    snackId: 0,
-    snackIndex: 0,
+    foodData: {},
+    foodId: 0,
+    foodIndex: 0,
     showEditFoodPopUp: false,
     selectedItem: null,
 
