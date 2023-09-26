@@ -1,10 +1,10 @@
 <template>
-  <Foods :foodType="typeFoodName"></Foods>
+  <FoodsDashboard :foodType="typeFoodName"></FoodsDashboard>
 </template>
 
 <script>
 //COMPONENT
-import Foods from "../../assets/components/Foods.vue";
+import FoodsDashboard from "../../assets/components/FoodsDashboard.vue";
 
 //COMPUTED
 import typeFoodName from "../../assets/js/computed/type-food-name.js";
@@ -12,7 +12,7 @@ import typeFoodName from "../../assets/js/computed/type-food-name.js";
 export default {
   name: "FoodsManagement",
   components: {
-    Foods,
+    FoodsDashboard,
   },
   computed: {
     typeFoodName,

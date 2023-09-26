@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 export default function splitArray() {
   this.foodData.forEach((ingredientsArray) => {

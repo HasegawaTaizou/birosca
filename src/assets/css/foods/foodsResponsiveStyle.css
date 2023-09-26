@@ -1,5 +1,5 @@
 @media (max-width: 1246px) {
-  .snacks__introduction-container {
+  .foods__introduction-container {
     min-height: 520px;
     height: 100%;
     align-items: center;
@@ -19,7 +19,7 @@
 }
 
 @media (max-width: 926px) {
-  .snacks__introduction-container {
+  .foods__introduction-container {
     min-height: 50vw;
   }
 }
@@ -33,31 +33,31 @@
     font-size: 1.5rem;
   }
 
-  .snack__name {
+  .food__name {
     font-size: 1.5rem;
   }
 
-  .snack__price {
+  .food__price {
     font-size: 1.625rem;
   }
 }
 
 @media (max-width: 742px) {
-  .snack {
+  .food {
     width: 346px;
     min-height: fit-content;
   }
 
-  .snack__image {
+  .food__image {
     width: 126px;
     height: 126px;
   }
 
-  .snack__name {
+  .food__name {
     font-size: 1.25rem;
   }
 
-  .snack__price {
+  .food__price {
     font-size: 1.5rem;
   }
 
@@ -84,23 +84,23 @@
     font-size: 1.25rem;
   }
 
-  .snack {
+  .food {
     width: 292px;
     padding: 24px;
     gap: 22px;
     margin: 0px 24px;
   }
 
-  .snack__image {
+  .food__image {
     width: 86px;
     height: 86px;
   }
 
-  .snack__name {
+  .food__name {
     font-size: 1rem;
   }
 
-  .snack__price {
+  .food__price {
     font-size: 1rem;
   }
 
@@ -108,7 +108,7 @@
     font-size: 0.875rem;
   }
 
-  .snack__ingredients-container {
+  .food__ingredients-container {
     gap: 12px;
   }
 
@@ -121,7 +121,7 @@
     height: 4px;
   }
 
-  .snack__logo {
+  .food__logo {
     width: 26px;
     height: 22px;
     right: 12px;
@@ -138,22 +138,22 @@
     font-size: 1rem;
   }
 
-  .snack {
+  .food {
     width: 226px;
     padding: 12px;
     gap: 22px;
   }
 
-  .snack__image {
+  .food__image {
     width: 86px;
     height: 86px;
   }
 
-  .snack__name {
+  .food__name {
     font-size: 0.875rem;
   }
 
-  .snack__price {
+  .food__price {
     font-size: 0.875rem;
   }
 
@@ -161,7 +161,7 @@
     font-size: 0.625rem;
   }
 
-  .snack__ingredients-container {
+  .food__ingredients-container {
     gap: 12px;
   }
 
@@ -174,7 +174,7 @@
     height: 4px;
   }
 
-  .snack__logo {
+  .food__logo {
     width: 26px;
     height: 22px;
     right: 12px;

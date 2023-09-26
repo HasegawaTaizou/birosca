@@ -1,130 +1,105 @@
 <template>
   <section class="foods">
+    <div class="foods__introduction-container">
+      <span class="introduction__title">Lanches</span>
+      <p class="introduction__text">
+        Descubra nossos hambúrgueres: uma fusão de sabores e texturas que vai
+        encantar o seu paladar!
+      </p>
+    </div>
     <div class="foods__foods-container">
-      <div v-for="(food, index) in foodData" :key="food.id" class="food">
-        <img :src="food.image" alt="Food Image" class="food__image" />
+      <div class="food">
+        <img
+          src="../img/snack-image.png"
+          alt="Snack Image"
+          class="food__image"
+        />
         <div class="food__main">
-          <span class="food__name">{{ food.title }}</span>
-          <span class="food__price">{{ formatPrice(Number(food.price)) }}</span>
+          <span class="food__name">Hambúrguer Double Cheddar</span>
+          <span class="food__price">R$ 19,90</span>
         </div>
         <div class="food__ingredients-container">
           <span class="ingredients__title">INGREDIENTES</span>
           <table class="ingredients__ingredients-table">
             <tbody class="ingredients-body">
-              <tr
-                v-for="(ingredients, index) in groupedArrayIngredients[index]"
-                :key="index"
-                class="ingredients-container"
-              >
-                <td
-                  class="ingredient"
-                  v-for="(ingredient, index) in ingredients"
-                  :key="index"
-                  :data-ingredient-id="index"
-                >
-                  {{ ingredient }}
-                </td>
+              <tr class="ingredients-container">
+                <td class="ingredient">Cheddar</td>
+                <td class="ingredient">2 hambúrgueres</td>
+                <td class="ingredient">Alface</td>
+              </tr>
+              <tr class="ingredients-container">
+                <td class="ingredient">Tomate</td>
+                <td class="ingredient">Cebola</td>
+                <td class="ingredient">Picles</td>
+              </tr>
+              <tr class="ingredients-container">
+                <td class="ingredient">Tomate</td>
+                <td class="ingredient">Cebola</td>
+                <td class="ingredient">Picles</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="food__actions">
-          <i
-            @click="
-              this.$store.commit('SET_SHOW_EDIT_FOOD_POP_UP', true);
-              openEditPopup(index, food.id);
-            "
-            class="fa-solid fa-pen action__edit"
-          ></i>
-          <i
-            @click="
-              this.$store.commit('SET_SHOW_DELETE_FOOD_POP_UP', true);
-              foodId = food.id;
-            "
-            class="fa-solid fa-trash action__delete"
-          ></i>
+        <img
+          src="../img/snack-hamburguer-logo.png"
+          alt="Food Logo"
+          class="food__logo"
+        />
+      </div>
+      <div v-for="(food, index) in foodData" :key="food.id" class="food">
+        <img
+          src="../img/snack-image.png"
+          alt="Snack Image"
+          class="food__image"
+        />
+        <div class="food__main">
+          <span class="food__name">{{ food.title }}</span>
+          <span class="food__price"> {{ food.price }}</span>
         </div>
+        <div class="food__ingredients-container">
+          <span class="ingredients__title">INGREDIENTES</span>
+          <table class="ingredients__ingredients-table">
+            <tbody class="ingredients-body">
+              <tr v-for="(ingredients, ingredientsIndex) in groupedArrayIngredients[index]" :key="ingredientsIndex" class="ingredients-container">
+                <td v-for="(ingredient, ingredientIndex) in ingredients" :key="ingredientIndex" class="ingredient">{{ ingredient }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <img
+          src="../img/snack-hamburguer-logo.png"
+          alt="Food Logo"
+          class="food__logo"
+        />
       </div>
     </div>
-    <button
-      @click="this.$store.commit('SET_SHOW_ADD_FOOD_POP_UP', true)"
-      class="foods__add-button"
-    >
-      ADICIONAR LANCHE
-    </button>
-    <EditFoodPopUp
-      v-if="this.$store.state.showEditFoodPopUp"
-      :accept-function="editFood"
-      :selectedItem="foodData[foodIndex]"
-    />
-    <DeleteFoodPopUpVue :acceptFunction="deleteFood" />
-    <AddFoodPopUp :acceptFunction="addFood" />
   </section>
 </template>
   
 <script>
-//POP UPS
-import DeleteFoodPopUpVue from "../../assets/components/popUps/DeleteFoodPopUp.vue";
-import AddFoodPopUp from "../../assets/components/popUps/AddFoodPopUp.vue";
-import EditFoodPopUp from "../../assets/components/popUps/EditFoodPopUp.vue";
-
-//METHODS
-import scrollToTop from "../../assets/js/methods/popUps/scroll-to-top.js";
-import openEditPopup from "../../assets/js/methods/open-edit-popup.js";
-import splitArray from "../../assets/js/methods/split-array.js";
-import formatPrice from "../../assets/js/methods/format-price.js";
-import getFoods from "../../assets/js/methods/get-foods.js";
-import editFood from "../../assets/js/methods/edit-food.js";
-import deleteFood from "../../assets/js/methods/delete-food.js";
-import addFood from "../../assets/js/methods/add-food.js";
-
-//MIXINS
-import watchShowEditFoodPopUps from "../../assets/js/mixins/watch-show-food-popups.js";
-import watchRouteParamsTypeFood from "../js/mixins/watch-route-params-type-food.js";
-
-//DATA
-import foodsData from "../../assets/js/data/foods-data.js";
-
-import { BASE_URL } from "@/assets/js/config.js";
-import axios from "axios";
+import getFoods from "../js/methods/get-foods";
+import splitArray from "../js/methods/split-array.js";
 
 export default {
   name: "Foods",
-  props: {
-    foodType: {
-      type: String,
-      required: true,
-    },
-  },
-  components: {
-    DeleteFoodPopUpVue,
-    AddFoodPopUp,
-    EditFoodPopUp,
+  methods: {
+    getFoods,
+    splitArray
   },
   data() {
-    const data = foodsData();
     return {
-      ...data,
+      foodData: [],
+      groupedArrayIngredients: []
     };
   },
-  mixins: [watchShowEditFoodPopUps, watchRouteParamsTypeFood],
-  methods: {
-    scrollToTop,
-    openEditPopup,
-    splitArray,
-    formatPrice,
-    getFoods,
-    editFood,
-    deleteFood,
-    addFood,
-  },
   mounted() {
-    this.getFoods(this.foodType);
+    this.getFoods("SNACK");
   },
 };
 </script>
-      
+  
 <style scoped>
-@import url("../../assets/css/dashboard/foods/foodsStyle.css");
+@import url("../../assets/css/foods/foodsStyle.css");
+@import url("../../assets/css/foods/foodsResponsiveStyle.css");
 </style>;
-      
+  
