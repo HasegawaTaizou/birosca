@@ -1,7 +1,7 @@
 <template>
   <section class="introduction fade-in-section active">
     <span class="introduction__text">O sabor que faz você voltar sempre</span>
-    <router-link :to="'/acai'" class="introduction__link"
+    <router-link :to="'/acais'" class="introduction__link"
       >Cardápio</router-link
     >
   </section>
