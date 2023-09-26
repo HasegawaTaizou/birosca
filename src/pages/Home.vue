@@ -1,7 +1,7 @@
 <template>
   <section class="introduction fade-in-section active">
     <span class="introduction__text">O sabor que faz você voltar sempre</span>
-    <router-link :to="'/acais'" class="introduction__link"
+    <router-link :to="'/acai'" class="introduction__link"
       >Cardápio</router-link
     >
   </section>
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function animateNumber(element) {
     const finalValue = parseInt(element.textContent);
     let currentValue = 0;
-    const duration = 5000; // Duração da animação em milissegundos
+    const duration = 5000;
     let startTime;
 
     function updateNumber(timestamp) {
