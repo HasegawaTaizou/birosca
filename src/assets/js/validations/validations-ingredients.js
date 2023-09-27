@@ -7,6 +7,9 @@ const validationsIngredients = function (value, arrayIngredients) {
 
   if (!isArrayValid) {
     this.isIngredientsInvalid = true;
+    this.$nextTick(() => {
+      this.$refs.newIngredient.focus();
+    });
   } else {
     this.isIngredientsInvalid = false;
   }

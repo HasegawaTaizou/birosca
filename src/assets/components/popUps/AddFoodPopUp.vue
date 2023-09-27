@@ -14,9 +14,15 @@
           id="photo"
           @change="uploadImage"
         />
-        <label for="photo">
-          <i class="fas fa-camera photo__icon"></i>
+        <label :class="{ error: isImageInvalid }" for="photo">
+          <i
+            :class="{ 'error-icon': isImageInvalid }"
+            class="fas fa-camera photo__icon"
+          ></i>
         </label>
+        <div v-if="isImageInvalid">
+          <p style="padding-left: 58px;" class="error-text">Preencha a foto!</p>
+        </div>
       </div>
       <div v-else class="food__photo-selected-container">
         <img :src="downloadURL" alt="Food Photo" class="photo__photo" />
@@ -92,7 +98,7 @@
                 :class="{ error: isIngredientsInvalid }"
                 class="ingredient-container"
               >
-                <input class="ingredient__name" v-model="newIngredient" />
+                <input class="ingredient__name" ref="newIngredient" v-model="newIngredient" />
                 <div class="ingredient__icon-container">
                   <i class="fa-solid fa-x"></i>
                 </div>
@@ -151,6 +157,7 @@ import mountPopUp from "../../js/methods/popUps/mount-popup.js";
 import { useVuelidate } from "@vuelidate/core";
 import validationsFood from "../../js/validations/validations-food";
 import validationsIngredients from "../../js/validations/validations-ingredients.js";
+import validationsImage from "../../js/validations/validations-image.js";
 
 export default {
   name: "EditFoodPopUp",
@@ -172,8 +179,9 @@ export default {
       //FOOD DATA
       ...data,
 
-      //INGREDIENTS VALIDATION
+      //FOOD VALIDATION
       isIngredientsInvalid: false,
+      isImageInvalid: false,
     };
   },
   validations() {
@@ -183,7 +191,6 @@ export default {
     };
   },
   methods: {
-    validationsIngredients,
     uploadImage,
     fillIngredientsObject,
     splitArray,
@@ -192,6 +199,8 @@ export default {
     mountPopUp,
     closePopUp,
     executeAcceptAction,
+    validationsIngredients,
+    validationsImage,
   },
 };
 </script>
