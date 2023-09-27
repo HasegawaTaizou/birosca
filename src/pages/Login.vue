@@ -21,7 +21,15 @@
             type="email"
             class="email__input"
             autocomplete="email"
+            :class="{ error: v$.email.$error }"
+            ref="email"
+            @blur="v$.email.$touch()"
           />
+          <div v-if="v$.email.$error">
+            <p v-if="v$.email.required" class="error-text">
+              Preencha o e-mail!
+            </p>
+          </div>
         </div>
         <div class="form__password-container">
           <label for="password" class="password__label">Senha</label>
@@ -30,6 +38,9 @@
             :type="isShowPassword ? 'text' : 'password'"
             class="password__input"
             autocomplete="current-password"
+            :class="{ error: v$.password.$error }"
+            ref="password"
+            @blur="v$.password.$touch()"
           />
           <i
             @mousedown="showPassword"
@@ -39,20 +50,34 @@
               'far fa-eye': !isShowPassword,
             }"
           ></i>
+          <div v-if="v$.password.$error">
+            <p v-if="v$.password.required" class="error-text">
+              Preencha a senha!
+            </p>
+          </div>
         </div>
-        <button type="submit" class="form__button">Entrar</button>
+        <button @click="login" type="submit" class="form__button">
+          Entrar
+        </button>
       </form>
     </div>
   </div>
 </template>
-  
+
 <script>
+//API
 import { BASE_URL } from "@/assets/js/config.js";
 import axios from "axios";
-import store from '../store/store.js'
+
+//VALIDATIONS
+import { useVuelidate } from "@vuelidate/core";
+import validationsLogin from "../assets/js/validations/validations-login.js";
 
 export default {
   name: "Login",
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       email: "",
@@ -61,21 +86,32 @@ export default {
       isShowPassword: false,
     };
   },
+  validations() {
+    const validations = validationsLogin();
+    return {
+      ...validations,
+    };
+  },
   methods: {
-    login() {
-      const adminData = {
-        email: this.email,
-        password: this.password,
-      };
-      axios
-        .post(`${BASE_URL}/login`, adminData)
-        .then((response) => {
-          localStorage.setItem('token', response.data.userData.token)
-          this.$router.push("/dashboard");
-        })
-        .catch((error) => {
-          this.showError = true;
-        });
+    async login() {
+      this.v$.$touch();
+      const isFilledFields = await this.v$.$validate();
+
+      if (isFilledFields) {
+        const adminData = {
+          email: this.email,
+          password: this.password,
+        };
+        axios
+          .post(`${BASE_URL}/login`, adminData)
+          .then((response) => {
+            localStorage.setItem("token", response.data.userData.token);
+            this.$router.push("/dashboard");
+          })
+          .catch((error) => {
+            this.showError = true;
+          });
+      }
     },
     showPassword() {
       this.isShowPassword = !this.isShowPassword;
@@ -83,8 +119,9 @@ export default {
   },
 };
 </script>
-  
+
 <style scoped>
 @import url("../assets/css/login/loginStyle.css");
-</style>;
-  
+@import url("../assets/css/validations/error.css");
+</style>
+;
