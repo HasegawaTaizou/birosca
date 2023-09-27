@@ -9,9 +9,8 @@ export default function mapButtonText() {
     { DRINK: "BEBIDA" },
     { DIVERSE: "DIVERSO" },
   ];
-
+  
   mappedNames.forEach((name) => {
-    console.log();
     if (this.foodType == Object.keys(name)) {
       mappedName = Object.values(name)[0];
     }
