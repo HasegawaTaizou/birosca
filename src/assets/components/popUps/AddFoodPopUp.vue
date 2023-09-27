@@ -21,7 +21,7 @@
           ></i>
         </label>
         <div v-if="isImageInvalid">
-          <p style="padding-left: 58px;" class="error-text">Preencha a foto!</p>
+          <p style="padding-left: 58px" class="error-text">Preencha a foto!</p>
         </div>
       </div>
       <div v-else class="food__photo-selected-container">
@@ -56,10 +56,15 @@
       </div>
       <div class="food__price-container">
         <label for="price" class="price__label">PREÇO</label>
-        <input
-          type="text"
+        <DebouncedCurrencyInput
           class="price__input"
           v-model="newPrice"
+          :options="{
+            currency: 'BRL',
+            hideCurrencySymbolOnFocus: false,
+            hideGroupingSeparatorOnFocus: false,
+            hideNegligibleDecimalDigitsOnFocus: false,
+          }"
           :class="{ error: v$.newPrice.$error }"
           ref="newPrice"
           @blur="v$.newPrice.$touch()"
@@ -98,7 +103,11 @@
                 :class="{ error: isIngredientsInvalid }"
                 class="ingredient-container"
               >
-                <input class="ingredient__name" ref="newIngredient" v-model="newIngredient" />
+                <input
+                  class="ingredient__name"
+                  ref="newIngredient"
+                  v-model="newIngredient"
+                />
                 <div class="ingredient__icon-container">
                   <i class="fa-solid fa-x"></i>
                 </div>
@@ -138,6 +147,9 @@
 </template>
     
 <script>
+//COMPONENTS
+import DebouncedCurrencyInput from "../DebouncedCurrencyInput.vue";
+
 //METHODS
 import uploadImage from "../../js/methods/popUps/input/upload-image.js";
 import fillIngredientsObject from "../../js/methods/popUps/fill-ingredients-object.js";
@@ -169,6 +181,9 @@ export default {
       type: Function,
       required: true,
     },
+  },
+  components: {
+    DebouncedCurrencyInput,
   },
   data() {
     const data = foodData();
