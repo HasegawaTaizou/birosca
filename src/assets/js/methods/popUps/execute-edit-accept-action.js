@@ -27,7 +27,7 @@ export default async function executeAcceptAction() {
 
   //PROVISORIO pois nao esta atualizando os ingredients ao clicar em this.acceptFunction();
   //FAZER NO POPUP DE ADD TAMBEM PORQUE TA DANDO O MESMO ERRO
-  // location.reload();
+  location.reload();
 } else {
   for (const field of fieldsFood) {
     if (this.v$[field.key].$error) {

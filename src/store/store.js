@@ -13,7 +13,11 @@ export default new Vuex.Store({
 
     //FOOD IMAGE
     isSelectedImage: false,
-    
+
+    //FOOD MANIPULATION
+    foodId: 0,
+    foodIndex: 0,
+
     //EDIT FOOD DATA
     foodData: {
       title: "",
@@ -49,6 +53,12 @@ export default new Vuex.Store({
     },
     SET_IS_SELECTED_IMAGE(state, value) {
       state.isSelectedImage = value;
-    }
+    },
+    SET_FOOD_ID(state, value) {
+      state.foodId = value;
+    },
+    SET_FOOD_INDEX(state, value) {
+      state.foodIndex = value;
+    },
   },
 });

@@ -1,6 +1,7 @@
 'use strict'
 
 export default function foodData(selectedItem) {
+  console.log(selectedItem);
   return {
     //FOOD IMAGE
     isSelectedImage: true,

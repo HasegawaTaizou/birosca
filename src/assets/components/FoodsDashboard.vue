@@ -12,7 +12,7 @@
     <EditFoodPopUp
       v-if="this.$store.state.showEditFoodPopUp"
       :accept-function="editFood"
-      :selectedItem="foodData[foodIndex]"
+      :selectedItem="this.$store.state.foodData[this.$store.state.foodIndex]"
     />
     <DeleteFoodPopUpVue :acceptFunction="deleteFood" />
     <AddFoodPopUp :acceptFunction="addFood" />
@@ -80,6 +80,7 @@ export default {
   },
   mounted() {
     this.mapButtonText();
+    console.log(this.$store.state.foodData[this.foodIndex]);
   },
   
 };

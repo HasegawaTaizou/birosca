@@ -6,6 +6,9 @@ import axios from "axios";
 export default function getFoods(foodType) {
   axios.get(`${BASE_URL}/foods/${foodType.toUpperCase()}`).then((response) => {
     this.foodData = response.data.foods;
+    
+    console.log(this.foodData);
+    this.$store.commit("SET_FOOD_DATA", this.foodData);
     this.splitArray();
   });
 }
