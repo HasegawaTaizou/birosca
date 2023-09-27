@@ -1,6 +1,6 @@
 <template>
   <div v-for="(food, index) in foodData" :key="food.id" class="food">
-    <img src="../img/snack-image.png" alt="Snack Image" class="food__image" />
+    <img :src="food.image" alt="Food Image" class="food__image" />
     <div class="food__main">
       <span class="food__name">{{ food.title }}</span>
       <span class="food__price"> {{ food.price }}</span>

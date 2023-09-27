@@ -78,6 +78,11 @@
 
 .food__image {
   grid-area: image;
+  width: 196px;
+  height: 196px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .food__main {
@@ -149,9 +154,11 @@
 }
 
 /* TRANSITIONS STYLE */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
