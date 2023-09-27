@@ -1,5 +1,6 @@
 <template>
-  <section class="foods">
+  <transition name="fade">
+  <section v-if="showTransition" class="foods">
     <div :style="styleBackgroundDiverses" class="foods__introduction-container">
       <span class="introduction__title">Diversos</span>
       <p class="introduction__text">
@@ -11,6 +12,7 @@
       <Food :foodType="'DIVERSE'" :foodIcon="diverseIcon"></Food>
     </div>
   </section>
+</transition>
 </template>
   
 <script>
@@ -32,7 +34,11 @@ export default {
         backgroundImage: `url(${backgroundDiverses})`,
       },
       diverseIcon,
+      showTransition: false,
     };
+  },
+  mounted() {
+    this.showTransition = true;
   },
 };
 </script>

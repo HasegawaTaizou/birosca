@@ -1,5 +1,6 @@
 <template>
-  <section class="foods">
+  <transition name="fade">
+  <section v-if="showTransition" class="foods">
     <div :style="styleBackgroundDrinks" class="foods__introduction-container">
       <span class="introduction__title">Bebidas</span>
       <p class="introduction__text">
@@ -11,6 +12,7 @@
       <Food :foodType="'DRINK'" :foodIcon="drinkIcon"></Food>
     </div>
   </section>
+</transition>
 </template>
   
 <script>
@@ -32,7 +34,11 @@ export default {
         backgroundImage: `url(${backgroundDrinks})`,
       },
       drinkIcon,
+      showTransition: false,
     };
+  },
+  mounted() {
+    this.showTransition = true;
   },
 };
 </script>
