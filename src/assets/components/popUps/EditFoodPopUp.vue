@@ -8,6 +8,9 @@
   >
     <div class="popup__food-container">
       <div class="food__photo-selected-container">
+        <div v-if="!isSelectedImage">
+          <img src="../../img/snack-hamburguer-logo.png" alt="Carregando..." />
+        </div>
         <img :src="downloadURL" alt="Food Photo" class="photo__photo" />
         <div class="food__photo-container">
           <input
@@ -80,7 +83,11 @@
                 :class="{ error: isIngredientsInvalid }"
                 class="ingredient-container"
               >
-                <input class="ingredient__name" ref="newIngredient" v-model="newIngredient" />
+                <input
+                  class="ingredient__name"
+                  ref="newIngredient"
+                  v-model="newIngredient"
+                />
                 <div class="ingredient__icon-container">
                   <i class="fa-solid fa-x"></i>
                 </div>
@@ -99,7 +106,10 @@
       </div>
     </div>
     <div class="popup__buttons">
-      <button class="button__deny" @click="closePopUp('SET_SHOW_EDIT_FOOD_POP_UP')">
+      <button
+        class="button__deny"
+        @click="closePopUp('SET_SHOW_EDIT_FOOD_POP_UP')"
+      >
         <span class="deny__text">Cancelar</span>
       </button>
       <button class="button__accept" @click="executeAcceptAction">

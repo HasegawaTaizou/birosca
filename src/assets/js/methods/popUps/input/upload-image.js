@@ -15,6 +15,9 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
 export default async function uploadImage(event) {
+  this.isSelectedImage = false;
+  this.$store.commit("SET_IS_SELECTED_IMAGE", false);
+
   const file = event.target.files[0];
   const storageRef = ref(storage, "images/" + file.name);
 
