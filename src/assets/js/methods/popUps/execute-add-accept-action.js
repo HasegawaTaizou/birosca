@@ -6,6 +6,8 @@ export default async function executeAcceptAction() {
   this.v$.$touch();
   const isFilledFields = await this.v$.$validate();
 
+  this.validationsIngredients(this.newIngredient, this.ingredients);
+
   if (isFilledFields) {
     this.ingredientsArray = this.ingredientsObject.map(
       (ingredient) => ingredient.name

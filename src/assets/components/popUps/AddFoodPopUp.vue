@@ -50,7 +50,19 @@
       </div>
       <div class="food__price-container">
         <label for="price" class="price__label">PREÇO</label>
-        <input type="text" class="price__input" v-model="newPrice" />
+        <input
+          type="text"
+          class="price__input"
+          v-model="newPrice"
+          :class="{ error: v$.newPrice.$error }"
+          ref="newPrice"
+          @blur="v$.newPrice.$touch()"
+        />
+        <div v-if="v$.newPrice.$error">
+          <p v-if="v$.newPrice.required" class="error-text">
+            Preencha o preço!
+          </p>
+        </div>
       </div>
       <div class="food__ingredients-container">
         <span class="ingredients__title">INGREDIENTES</span>
@@ -76,12 +88,18 @@
               </td>
             </tr>
             <tr class="ingredients-container">
-              <td class="ingredient-container">
+              <td
+                :class="{ error: isIngredientsInvalid }"
+                class="ingredient-container"
+              >
                 <input class="ingredient__name" v-model="newIngredient" />
                 <div class="ingredient__icon-container">
                   <i class="fa-solid fa-x"></i>
                 </div>
               </td>
+              <div v-if="isIngredientsInvalid">
+                <p class="error-text">Preencha ao menos um ingrediente!</p>
+              </div>
               <td class="ingredient-add">
                 <button class="add__button" @click="addIngredient">
                   Adicionar
@@ -113,7 +131,7 @@
   ></div>
 </template>
     
-    <script>
+<script>
 //METHODS
 import uploadImage from "../../js/methods/popUps/input/upload-image.js";
 import fillIngredientsObject from "../../js/methods/popUps/fill-ingredients-object.js";
@@ -132,6 +150,7 @@ import mountPopUp from "../../js/methods/popUps/mount-popup.js";
 //VALIDATIONS
 import { useVuelidate } from "@vuelidate/core";
 import validationsFood from "../../js/validations/validations-food";
+import validationsIngredients from "../../js/validations/validations-ingredients.js";
 
 export default {
   name: "EditFoodPopUp",
@@ -152,6 +171,9 @@ export default {
 
       //FOOD DATA
       ...data,
+
+      //INGREDIENTS VALIDATION
+      isIngredientsInvalid: false,
     };
   },
   validations() {
@@ -161,6 +183,7 @@ export default {
     };
   },
   methods: {
+    validationsIngredients,
     uploadImage,
     fillIngredientsObject,
     splitArray,

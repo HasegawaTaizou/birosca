@@ -2,7 +2,8 @@
 
 const fieldsFood = [
   { key: "newTitle", ref: "newTitle" },
-//   { key: "inputPrice", ref: "inputPrice" },
+  { key: "newPrice", ref: "newPrice" },
+  { key: "newIngredient", ref: "newIngredient" },
 ];
 
 export default fieldsFood;
