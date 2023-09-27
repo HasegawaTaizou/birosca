@@ -5,7 +5,6 @@ const validationsIngredients = function (value, arrayIngredients) {
     Array.isArray(arrayIngredients) && arrayIngredients.length > 0;
 
   if (!isArrayValid) {
-    console.log('entrou aqui');
     this.isIngredientsInvalid = true;
     this.$nextTick(() => {
       this.$refs.newIngredient.focus();

@@ -1,7 +1,7 @@
 "use strict";
 
 const validationsImage = function () {
-  console.log(!this.isSelectedImage);
+  (!this.isSelectedImage);
   if (!this.isSelectedImage) {
     this.isImageInvalid = true;
   } else {
