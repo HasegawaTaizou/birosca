@@ -34,7 +34,19 @@
       </div>
       <div class="food__title-container">
         <label for="title" class="title__label">TÍTULO</label>
-        <input type="text" class="title__input" v-model="newTitle" />
+        <input
+          type="text"
+          class="title__input"
+          v-model="newTitle"
+          :class="{ error: v$.newTitle.$error }"
+          ref="newTitle"
+          @blur="v$.newTitle.$touch()"
+        />
+        <div v-if="v$.newTitle.$error">
+          <p v-if="v$.newTitle.required" class="error-text">
+            Preencha o título!
+          </p>
+        </div>
       </div>
       <div class="food__price-container">
         <label for="price" class="price__label">PREÇO</label>
@@ -117,8 +129,15 @@ import foodData from "../../js/data/popUps/add-food-data.js";
 //MOUNT
 import mountPopUp from "../../js/methods/popUps/mount-popup.js";
 
+//VALIDATIONS
+import { useVuelidate } from "@vuelidate/core";
+import validationsFood from "../../js/validations/validations-food";
+
 export default {
   name: "EditFoodPopUp",
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: {
     acceptFunction: {
       type: Function,
@@ -133,6 +152,12 @@ export default {
 
       //FOOD DATA
       ...data,
+    };
+  },
+  validations() {
+    const validations = validationsFood();
+    return {
+      ...validations,
     };
   },
   methods: {
@@ -150,5 +175,6 @@ export default {
 
 <style scoped>
 @import url("../../css/components/popUps/addFoodPopUpStyle.css");
+@import url("../../css/validations/error.css");
 </style>
     

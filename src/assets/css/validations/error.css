@@ -1,0 +1,12 @@
+.error {
+  border: 1px solid var(--error-color) !important;
+}
+
+.error-icon {
+  color: var(--error-color) !important;
+}
+
+.error-text {
+  color: var(--error-color) !important;
+  font-size: 1.125rem !important;
+}
