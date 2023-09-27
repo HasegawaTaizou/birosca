@@ -1,0 +1,21 @@
+"use strict";
+
+export default function mapButtonText() {
+  let mappedName = "";
+
+  const mappedNames = [
+    { ACAI: "ACAÍ" },
+    { SNACK: "LANCHE" },
+    { DRINK: "BEBIDA" },
+    { DIVERSE: "DIVERSO" },
+  ];
+
+  mappedNames.forEach((name) => {
+    console.log();
+    if (this.foodType == Object.keys(name)) {
+      mappedName = Object.values(name)[0];
+    }
+  });
+
+  return mappedName;
+}

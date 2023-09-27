@@ -50,7 +50,7 @@
       @click="this.$store.commit('SET_SHOW_ADD_FOOD_POP_UP', true)"
       class="foods__add-button"
     >
-      ADICIONAR LANCHE
+      ADICIONAR {{ this.mapButtonText() }}
     </button>
     <EditFoodPopUp
       v-if="this.$store.state.showEditFoodPopUp"
@@ -61,7 +61,7 @@
     <AddFoodPopUp :acceptFunction="addFood" />
   </section>
 </template>
-  
+
 <script>
 //POP UPS
 import DeleteFoodPopUpVue from "./popUps/DeleteFoodPopUp.vue";
@@ -77,6 +77,7 @@ import getFoods from "../js/methods/get-foods.js";
 import editFood from "../js/methods/edit-food.js";
 import deleteFood from "../js/methods/delete-food.js";
 import addFood from "../js/methods/add-food.js";
+import mapButtonText from '../js/methods/map-button-text.js'
 
 //MIXINS
 import watchShowEditFoodPopUps from "../js/mixins/watch-show-food-popups.js";
@@ -106,6 +107,7 @@ export default {
   },
   mixins: [watchShowEditFoodPopUps, watchRouteParamsTypeFood],
   methods: {
+    mapButtonText,
     scrollToTop,
     openEditPopup,
     splitArray,
@@ -117,11 +119,12 @@ export default {
   },
   mounted() {
     this.getFoods(this.foodType);
+    this.mapButtonText();
   },
 };
 </script>
-      
+
 <style scoped>
 @import url("../../assets/css/dashboard/foods/foodsStyle.css");
-</style>;
-      
+</style>
+;
