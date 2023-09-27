@@ -37,7 +37,6 @@
       <i
         @click="
           this.$store.commit('SET_SHOW_DELETE_FOOD_POP_UP', true);
-          // foodId = food.id;
           this.$store.commit('SET_FOOD_ID', food.id);
         "
         class="fa-solid fa-trash action__delete"

@@ -25,6 +25,7 @@
         </div>
       </div>
       <div class="food__title-container">
+        <label for="title" class="title__label">TÍTULO</label>
         <input
           type="text"
           class="title__input"
@@ -41,10 +42,15 @@
       </div>
       <div class="food__price-container">
         <label for="price" class="price__label">PREÇO</label>
-        <input
-          type="text"
+        <DebouncedCurrencyInput
           class="price__input"
           v-model="newPrice"
+          :options="{
+            currency: 'BRL',
+            hideCurrencySymbolOnFocus: false,
+            hideGroupingSeparatorOnFocus: false,
+            hideNegligibleDecimalDigitsOnFocus: false,
+          }"
           :class="{ error: v$.newPrice.$error }"
           ref="newPrice"
           @blur="v$.newPrice.$touch()"
@@ -127,6 +133,9 @@
 </template>
 
 <script>
+//COMPONENTS
+import DebouncedCurrencyInput from "../DebouncedCurrencyInput.vue";
+
 //METHODS
 import uploadImage from "../../js/methods/popUps/input/upload-image.js";
 import fillIngredientsObject from "../../js/methods/popUps/fill-ingredients-object.js";
@@ -161,6 +170,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  components: {
+    DebouncedCurrencyInput,
   },
   data() {
     const data = foodData(this.selectedItem);
