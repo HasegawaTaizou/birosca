@@ -4,7 +4,7 @@ export default function mapButtonText() {
   let mappedName = "";
 
   const mappedNames = [
-    { ACAI: "ACAÍ" },
+    { ACAI: "AÇAÍ" },
     { SNACK: "LANCHE" },
     { DRINK: "BEBIDA" },
     { DIVERSE: "DIVERSO" },

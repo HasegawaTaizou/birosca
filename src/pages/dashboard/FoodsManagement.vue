@@ -1,5 +1,10 @@
 <template>
-  <FoodsDashboard :foodType="typeFoodName"></FoodsDashboard>
+  <transition name="fade" mode="out-in">
+    <FoodsDashboard
+      :key="typeFoodName"
+      :foodType="typeFoodName"
+    ></FoodsDashboard>
+  </transition>
 </template>
 
 <script>
@@ -20,3 +25,14 @@ export default {
   props: ["typeFood"],
 };
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+</style>

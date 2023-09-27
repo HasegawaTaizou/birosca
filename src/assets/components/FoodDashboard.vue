@@ -1,48 +1,48 @@
 <template>
-  <div v-for="(food, index) in foodData" :key="food.id" class="food">
-    <img :src="food.image" alt="Food Image" class="food__image" />
-    <div class="food__main">
-      <span class="food__name">{{ food.title }}</span>
-      <span class="food__price">{{ formatPrice(Number(food.price)) }}</span>
-    </div>
-    <div class="food__ingredients-container">
-      <span class="ingredients__title">INGREDIENTES</span>
-      <table class="ingredients__ingredients-table">
-        <tbody class="ingredients-body">
-          <tr
-            v-for="(ingredients, index) in groupedArrayIngredients[index]"
-            :key="index"
-            class="ingredients-container"
-          >
-            <td
-              class="ingredient"
-              v-for="(ingredient, index) in ingredients"
+    <div v-for="(food, index) in foodData" :key="food.id" class="food">
+      <img :src="food.image" alt="Food Image" class="food__image" />
+      <div class="food__main">
+        <span class="food__name">{{ food.title }}</span>
+        <span class="food__price">{{ formatPrice(Number(food.price)) }}</span>
+      </div>
+      <div class="food__ingredients-container">
+        <span class="ingredients__title">INGREDIENTES</span>
+        <table class="ingredients__ingredients-table">
+          <tbody class="ingredients-body">
+            <tr
+              v-for="(ingredients, index) in groupedArrayIngredients[index]"
               :key="index"
-              :data-ingredient-id="index"
+              class="ingredients-container"
             >
-              {{ ingredient }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <td
+                class="ingredient"
+                v-for="(ingredient, index) in ingredients"
+                :key="index"
+                :data-ingredient-id="index"
+              >
+                {{ ingredient }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="food__actions">
+        <i
+          @click="
+            this.$store.commit('SET_SHOW_EDIT_FOOD_POP_UP', true);
+            openEditPopup(index, food.id);
+          "
+          class="fa-solid fa-pen action__edit"
+        ></i>
+        <i
+          @click="
+            this.$store.commit('SET_SHOW_DELETE_FOOD_POP_UP', true);
+            this.$store.commit('SET_FOOD_ID', food.id);
+          "
+          class="fa-solid fa-trash action__delete"
+        ></i>
+      </div>
     </div>
-    <div class="food__actions">
-      <i
-        @click="
-          this.$store.commit('SET_SHOW_EDIT_FOOD_POP_UP', true);
-          openEditPopup(index, food.id);
-        "
-        class="fa-solid fa-pen action__edit"
-      ></i>
-      <i
-        @click="
-          this.$store.commit('SET_SHOW_DELETE_FOOD_POP_UP', true);
-          this.$store.commit('SET_FOOD_ID', food.id);
-        "
-        class="fa-solid fa-trash action__delete"
-      ></i>
-    </div>
-  </div>
 </template>
 
 <script>

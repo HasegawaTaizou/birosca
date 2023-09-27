@@ -80,9 +80,7 @@ export default {
   },
   mounted() {
     this.mapButtonText();
-    console.log(this.$store.state.foodData[this.foodIndex]);
   },
-  
 };
 </script>
 
