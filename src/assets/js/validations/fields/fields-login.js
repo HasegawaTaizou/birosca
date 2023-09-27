@@ -1,8 +1,8 @@
 'use strict'
 
 const fieldsLogin = [
-  { key: "email", ref: "email" },
-  { key: "email", ref: "password" },
+  { key: "inputEmail", ref: "inputEmail" },
+  { key: "inputPassword", ref: "inputPassword" },
 ];
 
 export default fieldsLogin;

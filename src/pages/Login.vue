@@ -17,16 +17,16 @@
         <div class="form__email-container">
           <label for="email" class="email__label">E-mail</label>
           <input
-            v-model="email"
+            v-model="inputEmail"
             type="email"
             class="email__input"
             autocomplete="email"
-            :class="{ error: v$.email.$error }"
-            ref="email"
-            @blur="v$.email.$touch()"
+            :class="{ error: v$.inputEmail.$error }"
+            ref="inputEmail"
+            @blur="v$.inputEmail.$touch()"
           />
-          <div v-if="v$.email.$error">
-            <p v-if="v$.email.required" class="error-text">
+          <div v-if="v$.inputEmail.$error">
+            <p v-if="v$.inputEmail.required" class="error-text">
               Preencha o e-mail!
             </p>
           </div>
@@ -34,13 +34,13 @@
         <div class="form__password-container">
           <label for="password" class="password__label">Senha</label>
           <input
-            v-model="password"
+            v-model="inputPassword"
             :type="isShowPassword ? 'text' : 'password'"
             class="password__input"
             autocomplete="current-password"
-            :class="{ error: v$.password.$error }"
-            ref="password"
-            @blur="v$.password.$touch()"
+            :class="{ error: v$.inputPassword.$error }"
+            ref="inputPassword"
+            @blur="v$.inputPassword.$touch()"
           />
           <i
             @mousedown="showPassword"
@@ -50,8 +50,8 @@
               'far fa-eye': !isShowPassword,
             }"
           ></i>
-          <div v-if="v$.password.$error">
-            <p v-if="v$.password.required" class="error-text">
+          <div v-if="v$.inputPassword.$error">
+            <p v-if="v$.inputPassword.required" class="error-text">
               Preencha a senha!
             </p>
           </div>
@@ -72,6 +72,7 @@ import axios from "axios";
 //VALIDATIONS
 import { useVuelidate } from "@vuelidate/core";
 import validationsLogin from "../assets/js/validations/validations-login.js";
+import fieldsLogin from "../assets/js/validations/fields/fields-login";
 
 export default {
   name: "Login",
@@ -80,8 +81,8 @@ export default {
   },
   data() {
     return {
-      email: "",
-      password: "",
+      inputEmail: "",
+      inputPassword: "",
       showError: false,
       isShowPassword: false,
     };
@@ -99,8 +100,8 @@ export default {
 
       if (isFilledFields) {
         const adminData = {
-          email: this.email,
-          password: this.password,
+          email: this.inputEmail,
+          password: this.inputPassword,
         };
         axios
           .post(`${BASE_URL}/login`, adminData)
@@ -111,6 +112,15 @@ export default {
           .catch((error) => {
             this.showError = true;
           });
+      } else {
+        for (const field of fieldsLogin) {
+          if (this.v$[field.key].$error) {
+            this.$nextTick(() => {
+              this.$refs[field.ref].focus();
+            });
+            break;
+          }
+        }
       }
     },
     showPassword() {
