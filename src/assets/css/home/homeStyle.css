@@ -128,13 +128,11 @@
 }
 
 /* TRANSITIONS STYLES */
-.fade-in-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s, transform 0.5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-
-.fade-in-section.active {
-  opacity: 1;
-  transform: translateY(0);
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }

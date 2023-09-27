@@ -1,64 +1,82 @@
 <template>
-  <section class="introduction fade-in-section active">
-    <span class="introduction__text">O sabor que faz você voltar sempre</span>
-    <router-link :to="'/acais'" class="introduction__link"
-      >Cardápio</router-link
-    >
-  </section>
-  <section class="statistics fade-in-section active">
-    <div class="stat">
-      <div class="stat__number-container">
-        <i class="fa-solid fa-plus number__icon"></i>
-        <span class="number__text">1000</span>
-      </div>
-      <span class="stat__text">Seguidores no Instagram</span>
+  <transition name="fade">
+    <div v-if="showTransition" id="main-wrapper">
+      <section
+        v-if="showTransition"
+        class="introduction fade-in-section active"
+      >
+        <span class="introduction__text"
+          >O sabor que faz você voltar sempre</span
+        >
+        <router-link :to="'/acais'" class="introduction__link"
+          >Cardápio</router-link
+        >
+      </section>
+      <section class="statistics fade-in-section active">
+        <div class="stat">
+          <div class="stat__number-container">
+            <i class="fa-solid fa-plus number__icon"></i>
+            <span class="number__text">1000</span>
+          </div>
+          <span class="stat__text">Seguidores no Instagram</span>
+        </div>
+        <div class="stat">
+          <div class="stat__number-container">
+            <i class="fa-solid fa-plus number__icon"></i>
+            <span class="number__text">3000</span>
+          </div>
+          <span class="stat__text">Pedidos de Clientes </span>
+        </div>
+        <div class="stat">
+          <div class="stat__number-container">
+            <i class="fa-solid fa-plus number__icon"></i>
+            <span class="number__text">30</span>
+          </div>
+          <span class="stat__text">Variedades Culinárias</span>
+        </div>
+      </section>
+      <section class="instagram fade-in-section">
+        <span class="instagram__title"> Acompanhe-nos no instagram </span>
+        <img
+          src="../assets/img/instragram-1-image.png"
+          alt="Instagram Image 1"
+          class="instagram__image1"
+        />
+        <img
+          src="../assets/img/instragram-2-image.png"
+          alt="Instagram Image 2"
+          class="instagram__image2"
+        />
+        <img
+          src="../assets/img/instragram-3-image.png"
+          alt="Instagram Image 3"
+          class="instagram__image3"
+        />
+        <div class="instagram__birosca-image">
+          <img
+            src="../assets/img/instagram-birosca-image.png"
+            alt="Birosca Image"
+            class="birosca-image__image"
+          />
+          <span class="birosca-image__text">@biroscadoacai</span>
+        </div>
+      </section>
     </div>
-    <div class="stat">
-      <div class="stat__number-container">
-        <i class="fa-solid fa-plus number__icon"></i>
-        <span class="number__text">3000</span>
-      </div>
-      <span class="stat__text">Pedidos de Clientes </span>
-    </div>
-    <div class="stat">
-      <div class="stat__number-container">
-        <i class="fa-solid fa-plus number__icon"></i>
-        <span class="number__text">30</span>
-      </div>
-      <span class="stat__text">Variedades Culinárias</span>
-    </div>
-  </section>
-  <section class="instagram fade-in-section">
-    <span class="instagram__title"> Acompanhe-nos no instagram </span>
-    <img
-      src="../assets/img/instragram-1-image.png"
-      alt="Instagram Image 1"
-      class="instagram__image1"
-    />
-    <img
-      src="../assets/img/instragram-2-image.png"
-      alt="Instagram Image 2"
-      class="instagram__image2"
-    />
-    <img
-      src="../assets/img/instragram-3-image.png"
-      alt="Instagram Image 3"
-      class="instagram__image3"
-    />
-    <div class="instagram__birosca-image">
-      <img
-        src="../assets/img/instagram-birosca-image.png"
-        alt="Birosca Image"
-        class="birosca-image__image"
-      />
-      <span class="birosca-image__text">@biroscadoacai</span>
-    </div>
-  </section>
+  </transition>
 </template>
 
 <script>
 export default {
   name: "Home",
+  data() {
+    return {
+      showTransition: false,
+    };
+  },
+  mounted() {
+    console.log('mountou');
+    this.showTransition = true;
+  },
 };
 document.addEventListener("DOMContentLoaded", function () {
   function animateNumber(element) {
