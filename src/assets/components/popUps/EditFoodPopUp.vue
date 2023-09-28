@@ -8,9 +8,6 @@
   >
     <div class="popup__food-container">
       <div class="food__photo-selected-container">
-        <div v-if="!isSelectedImage">
-          <img src="../../img/snack-hamburguer-logo.png" alt="Carregando..." />
-        </div>
         <img :src="downloadURL" alt="Food Photo" class="photo__photo" />
         <div class="food__photo-container">
           <input

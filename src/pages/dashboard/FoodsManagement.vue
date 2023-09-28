@@ -26,13 +26,6 @@ export default {
 };
 </script>
 
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
-}
+<style scoped>
+@import url('../../assets/css/dashboard/foodsManagement/foodsManagementStyle.css');
 </style>
