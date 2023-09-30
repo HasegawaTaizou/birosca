@@ -3,7 +3,7 @@
     <img :src="food.image" alt="Food Image" class="food__image" />
     <div class="food__main">
       <span class="food__name">{{ food.title }}</span>
-      <span class="food__price"> {{ food.price }}</span>
+      <span class="food__price">{{ formatPrice(food.price) }}</span>
     </div>
     <div class="food__ingredients-container">
       <span class="ingredients__title">INGREDIENTES</span>
@@ -27,23 +27,21 @@
         </tbody>
       </table>
     </div>
-    <img
-      :src="foodIcon"
-      alt="Food Logo"
-      class="food__logo"
-    />
+    <img :src="foodIcon" alt="Food Logo" class="food__logo" />
   </div>
 </template>
 
 <script>
 import getFoods from "../js/methods/get-foods";
 import splitArray from "../js/methods/split-array.js";
+import formatPrice from '../js/methods/format-price.js';
 
 export default {
   name: "Food",
   methods: {
     getFoods,
     splitArray,
+    formatPrice,
   },
   props: {
     foodType: {
@@ -52,8 +50,8 @@ export default {
     },
     foodIcon: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
