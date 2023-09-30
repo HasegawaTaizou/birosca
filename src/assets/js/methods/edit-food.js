@@ -10,7 +10,14 @@ export default function editFood() {
     price: this.$store.state.foodData.price,
     ingredients: this.$store.state.foodData.ingredients,
   };
-  axios.put(`${BASE_URL}/food-update/${this.$store.state.foodId}`, foodData).then(() => {
-    this.getFoods(this.foodType);
-  });
+  axios
+    .put(`${BASE_URL}/food-update/${this.$store.state.foodId}`, foodData)
+    .then(() => {
+      //PROVISORIO pois nao esta atualizando os ingredients ao clicar em this.acceptFunction();
+      location.reload();
+      this.getFoods(this.foodType);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }

@@ -11,7 +11,14 @@ export default function addFood() {
     foodType: this.foodType,
     ingredients: this.$store.state.newFoodData.ingredients,
   };
-  axios.post(`${BASE_URL}/food-registration/`, newFoodData).then(() => {
-    this.getFoods(this.foodType);
-  });
+  axios
+    .post(`${BASE_URL}/food-registration/`, newFoodData)
+    .then(() => {
+      //PROVISORIO pois nao esta atualizando os ingredients ao clicar em this.acceptFunction();
+      location.reload();
+      this.getFoods(this.foodType);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
