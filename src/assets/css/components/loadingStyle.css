@@ -1,28 +1,3 @@
-<template>
-  <div class="loading-container" v-if="isLoading">
-    <span class="loading__text">Aguarde...</span>
-    <div class="loading__dots">
-      <div class="dot" v-for="index in 4" :key="index"></div>
-    </div>
-    <div v-if="!isLoading">
-      <h1>CARREGOU</h1>
-    </div>
-  </div>
-  <div v-if="isLoading" class="loading-background"></div>
-</template>
-    
-  <script>
-export default {
-  name: "Animacao",
-  computed: {
-    isLoading() {
-      return this.$store.state.showLoading;
-    },
-  },
-};
-</script>
-    
-<style scoped>
 .loading-container {
   position: absolute;
   display: grid;
@@ -94,5 +69,3 @@ export default {
   backdrop-filter: blur(8px);
   z-index: -1;
 }
-</style>;
-    
