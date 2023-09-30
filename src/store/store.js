@@ -36,7 +36,7 @@ export default new Vuex.Store({
     },
 
     //LOADING
-    showLoading: true,
+    showLoading: false,
   },
   mutations: {
     SET_SHOW_EDIT_FOOD_POP_UP(state, value) {

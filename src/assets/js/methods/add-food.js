@@ -4,6 +4,8 @@ import { BASE_URL } from "@/assets/js/config.js";
 import axios from "axios";
 
 export default function addFood() {
+  this.$store.commit("SET_SHOW_LOADING", true);
+
   const newFoodData = {
     image: this.$store.state.newFoodData.image,
     title: this.$store.state.newFoodData.title,
@@ -20,5 +22,7 @@ export default function addFood() {
     })
     .catch((error) => {
       console.log(error);
+    }).finally(() => {
+      this.$store.commit("SET_SHOW_LOADING", false);
     });
 }
