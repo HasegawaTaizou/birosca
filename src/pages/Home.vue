@@ -74,7 +74,6 @@ export default {
     };
   },
   mounted() {
-    console.log('mountou');
     this.showTransition = true;
   },
 };

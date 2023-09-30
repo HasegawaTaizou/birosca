@@ -50,9 +50,9 @@
           }"
           :class="{ error: v$.newPrice.$error }"
           ref="newPrice"
-          @blur="v$.newPrice.$touch()"
+          @blur="v$.newPrice.$touch() || validationsPrice()"
         />
-        <div v-if="v$.newPrice.$error">
+        <div v-if="v$.newPrice.$error || isPriceInvalid">
           <p v-if="v$.newPrice.required" class="error-text">
             Preencha o preço!
           </p>
@@ -152,6 +152,7 @@ import mountPopUp from "../../js/methods/popUps/mount-popup.js";
 import { useVuelidate } from "@vuelidate/core";
 import validationsFood from "../../js/validations/validations-food";
 import validationsIngredients from "../../js/validations/validations-ingredients.js";
+import validationsPrice from "../../js/validations/validations-price.js";
 
 export default {
   name: "EditFoodPopUp",
@@ -182,6 +183,7 @@ export default {
 
       //FOOD VALIDATION
       isIngredientsInvalid: false,
+      isPriceInvalid: false,
     };
   },
   validations() {
@@ -200,6 +202,7 @@ export default {
     closePopUp,
     executeAcceptAction,
     validationsIngredients,
+    validationsPrice
   },
   mounted() {
     this.mountPopUp();

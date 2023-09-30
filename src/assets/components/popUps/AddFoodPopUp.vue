@@ -65,11 +65,11 @@
             hideGroupingSeparatorOnFocus: false,
             hideNegligibleDecimalDigitsOnFocus: false,
           }"
-          :class="{ error: v$.newPrice.$error }"
+          :class="{ error: v$.newPrice.$error || isPriceInvalid }"
           ref="newPrice"
-          @blur="v$.newPrice.$touch()"
+          @blur="v$.newPrice.$touch() || validationsPrice()"
         />
-        <div v-if="v$.newPrice.$error">
+        <div v-if="v$.newPrice.$error || isPriceInvalid">
           <p v-if="v$.newPrice.required" class="error-text">
             Preencha o preço!
           </p>
@@ -170,6 +170,7 @@ import { useVuelidate } from "@vuelidate/core";
 import validationsFood from "../../js/validations/validations-food";
 import validationsIngredients from "../../js/validations/validations-ingredients.js";
 import validationsImage from "../../js/validations/validations-image.js";
+import validationsPrice from "../../js/validations/validations-price.js";
 
 export default {
   name: "EditFoodPopUp",
@@ -197,6 +198,7 @@ export default {
       //FOOD VALIDATION
       isIngredientsInvalid: false,
       isImageInvalid: false,
+      isPriceInvalid: false,
     };
   },
   validations() {
@@ -216,6 +218,7 @@ export default {
     executeAcceptAction,
     validationsIngredients,
     validationsImage,
+    validationsPrice,
   },
 };
 </script>

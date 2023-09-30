@@ -7,6 +7,7 @@ export default async function executeAcceptAction() {
   const isFilledFields = await this.v$.$validate();
 
   this.validationsImage();
+  this.validationsPrice();
   this.validationsIngredients(this.newIngredient, this.ingredientsObject);
 
   if (isFilledFields && this.validationsIngredients(this.newIngredient, this.ingredientsObject)) {
