@@ -34,6 +34,9 @@ export default new Vuex.Store({
       foodType: "",
       ingredients: [],
     },
+
+    //LOADING
+    loading: true,
   },
   mutations: {
     SET_SHOW_EDIT_FOOD_POP_UP(state, value) {
@@ -59,6 +62,9 @@ export default new Vuex.Store({
     },
     SET_FOOD_INDEX(state, value) {
       state.foodIndex = value;
+    },
+    SET_LOADING(state, value) {
+      state.loading = value;
     },
   },
 });

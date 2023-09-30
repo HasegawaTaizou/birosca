@@ -13,6 +13,8 @@ import Login from "@/pages/Login.vue";
 import Dashboard from "@/pages/dashboard/Dashboard.vue";
 import DashboardFoodsManagement from "@/pages/dashboard/FoodsManagement.vue";
 
+import Animacao from "@/pages/Animacao.vue"
+
 const routes = [
   {
     path: "/:catchAll(.*)",
@@ -72,6 +74,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/animacao",
+    name: "Animacao",
+    component: Animacao,
+  }
 ];
 
 const router = createRouter({
