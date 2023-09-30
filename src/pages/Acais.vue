@@ -3,7 +3,7 @@
     <section v-if="showTransition" class="foods">
       <div :style="styleBackgroundAcais" class="foods__introduction-container">
         <span class="introduction__title">Açaís</span>
-        <p style="margin-left: 52px" class="introduction__text">
+        <p class="acai-introduction__text">
           Experimente nossos açaís: uma harmonia de cremosidade e frescor que
           conquistará o seu paladar em cada delicioso momento!
         </p>
@@ -46,5 +46,8 @@ export default {
 <style scoped>
 @import url("../assets/css/foods/foodsStyle.css");
 @import url("../assets/css/foods/foodsResponsiveStyle.css");
+
+
+
 </style>;
   

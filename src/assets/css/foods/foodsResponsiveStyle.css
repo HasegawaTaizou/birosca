@@ -16,6 +16,10 @@
   .introduction__text {
     margin: 0;
   }
+
+  .acai-introduction__text {
+    margin: 0;
+  }
 }
 
 @media (max-width: 926px) {
@@ -30,6 +34,10 @@
   }
 
   .introduction__text {
+    font-size: 1.5rem;
+  }
+
+  .acai-introduction__text {
     font-size: 1.5rem;
   }
 
@@ -84,6 +92,10 @@
     font-size: 1.25rem;
   }
 
+  .acai-introduction__text {
+    font-size: 1.25rem;
+  }
+
   .food {
     width: 292px;
     padding: 24px;
@@ -135,6 +147,10 @@
   }
 
   .introduction__text {
+    font-size: 1rem;
+  }
+
+  .acai-introduction__text {
     font-size: 1rem;
   }
 
