@@ -5,12 +5,14 @@ import fieldsFood from "../../validations/fields/fields-food";
 export default async function executeAcceptAction() {
   this.v$.$touch();
   const isFilledFields = await this.v$.$validate();
+  const isImageValid = this.validationsImage();
+  const isPriceValid = this.validationsPrice();
+  const isIngredientsValid = this.validationsIngredients(
+    this.newIngredient,
+    this.ingredientsObject
+  );
 
-  this.validationsImage();
-  this.validationsPrice();
-  this.validationsIngredients(this.newIngredient, this.ingredientsObject);
-
-  if (isFilledFields && this.validationsIngredients(this.newIngredient, this.ingredientsObject)) {
+  if (isFilledFields && isImageValid && isPriceValid && isIngredientsValid) {
     this.ingredientsArray = this.ingredientsObject.map(
       (ingredient) => ingredient.name
     );
